@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+<title>Gestor de Torneos Deportivos</title>
+  <link rel="stylesheet" href="estilos.css">
+</head>
+<body>
+<h1>Gestor de Torneos</h1>
+
+  <section>
+<h2>Registrar Equipo</h2>
+    <form id="form-equipo">
+      <input type="text" placeholder="ID del Equipo" id="idEquipo" required>
+      <input type="text" placeholder="Nombre del Equipo" id="nombreEquipo" required>
+      <input type="text" placeholder="Deporte (Fútbol, Baloncesto, Tenis)" id="deporte" required>
+      <input type="text" placeholder="Ciudad" id="ciudad" required>
+      <input type="number" placeholder="Número de Jugadores" id="numJugadores" required>
+      <button type="submit">Agregar Equipo</button>
+    </form>
+  </section>
+
+  <section>
+<h2>Registrar Partido</h2>
+    <form id="form-partido">
+      <input type="text" placeholder="ID del Partido" id="idPartido" required>
+      <input type="text" placeholder="Equipo A" id="equipoA" required>
+      <input type="text" placeholder="Equipo B" id="equipoB" required>
+      <input type="datetime-local" id="fechaHora" required>
+      <input type="text" placeholder="Resultado" id="resultado">
+      <button type="submit">Agregar Partido</button>
+    </form>
+  </section>
+
+  <section>
+<h2>Datos Guardados</h2>
+    <pre id="salida"></pre>
+  </section>
+
+  <script src="Main.js"></script>
+</body>
+</html>
