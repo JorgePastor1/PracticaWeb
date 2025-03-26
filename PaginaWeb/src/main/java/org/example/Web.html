@@ -3,13 +3,42 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Gestión de Torneos</title>
+  <title>Torneos 360</title>
   <link rel="stylesheet" href="style.css">
-  <script defer src="script.js"></script>
+  <script defer>
+    const ciudadesPorPais = {
+      espana: ['Madrid', 'Barcelona', 'Valencia', 'Sevilla', 'Bilbao'],
+      francia: ['París', 'Lyon', 'Marsella', 'Niza', 'Toulouse'],
+      italia: ['Roma', 'Milán', 'Nápoles', 'Turín', 'Florencia']
+    };
+
+    function actualizarCiudades() {
+      const pais = document.getElementById('paisSelect').value;
+      const ciudadSelect = document.getElementById('ciudadSelect');
+
+      // Limpiar las ciudades anteriores
+      ciudadSelect.innerHTML = '';
+
+      // Añadir las ciudades del país seleccionado
+      const ciudades = ciudadesPorPais[pais];
+      ciudades.forEach(ciudad => {
+        const option = document.createElement('option');
+        option.value = ciudad.toLowerCase();
+        option.textContent = ciudad;
+        ciudadSelect.appendChild(option);
+      });
+    }
+
+    function mostrarVentana(ventana) {
+      const ventanas = document.querySelectorAll('.ventana');
+      ventanas.forEach(v => v.classList.remove('activa'));
+      document.getElementById(ventana).classList.add('activa');
+    }
+  </script>
 </head>
 <body>
 <header>
-  <img src="logo.png" alt="Logo Torneos" class="logo">
+  <img src="logo.png" alt="Logo Torneos 360" class="logo">
   <nav>
     <ul>
       <li><a href="#home" onclick="mostrarVentana('home')">Inicio</a></li>
@@ -24,7 +53,7 @@
 
 <main>
   <section id="home" class="ventana activa">
-    <h1>Bienvenido al Gestor de Torneos</h1>
+    <h1>Bienvenido a Torneos 360</h1>
     <p>Organiza tus torneos fácilmente.</p>
   </section>
 
@@ -62,6 +91,11 @@
     <form id="formRegistro">
       <input type="text" name="equipo" placeholder="Nombre del equipo" required>
       <input type="text" name="capitan" placeholder="Nombre del capitán" required>
+      <select name="deporte">
+        <option value="padel">Pádel</option>
+        <option value="futbol">Fútbol</option>
+        <option value="tenis">Tenis</option>
+      </select>
       <button type="submit">Registrar</button>
     </form>
   </section>
@@ -70,10 +104,18 @@
     <h2>Inscripciones a Torneos</h2>
     <form id="formInscripcion">
       <input type="text" name="equipo" placeholder="Nombre del equipo" required>
-      <select name="torneo">
+      <select id="paisSelect" name="pais" onchange="actualizarCiudades()">
+        <option value="espana">España</option>
+        <option value="francia">Francia</option>
+        <option value="italia">Italia</option>
+      </select>
+      <select id="ciudadSelect" name="ciudad">
+        <!-- Las ciudades se llenarán dinámicamente -->
+      </select>
+      <select name="deporte">
         <option value="futbol">Fútbol</option>
-        <option value="baloncesto">Baloncesto</option>
-        <option value="voleibol">Voleibol</option>
+        <option value="padel">Pádel</option>
+        <option value="tenis">Tenis</option>
       </select>
       <button type="submit">Inscribirse</button>
     </form>
