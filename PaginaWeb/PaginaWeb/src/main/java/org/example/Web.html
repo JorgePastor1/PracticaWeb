@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Gestión de Torneos</title>
+  <link rel="stylesheet" href="style.css">
+  <script defer src="script.js"></script>
+</head>
+<body>
+<header>
+  <img src="logo.png" alt="Logo Torneos" class="logo">
+  <nav>
+    <ul>
+      <li><a href="#home" onclick="mostrarVentana('home')">Inicio</a></li>
+      <li><a href="#about" onclick="mostrarVentana('about')">Sobre Nosotros</a></li>
+      <li><a href="#registro" onclick="mostrarVentana('registro')">Registrar Equipo</a></li>
+      <li><a href="#torneos" onclick="mostrarVentana('torneos')">Inscribirse</a></li>
+      <li><a href="#verinscripciones" onclick="mostrarVentana('verinscripciones')">Ver Inscripciones</a></li>
+      <li><a href="#login" onclick="mostrarVentana('login')">Login</a></li>
+    </ul>
+  </nav>
+</header>
+
+<main>
+  <section id="home" class="ventana activa">
+    <h1>Bienvenido al Gestor de Torneos</h1>
+    <p>Organiza tus torneos fácilmente.</p>
+  </section>
+
+  <section id="about" class="ventana">
+    <h2>Sobre Nosotros</h2>
+    <p>Somos un equipo apasionado por el deporte y la tecnología.</p>
+  </section>
+
+  <section id="registro" class="ventana">
+    <h2>Registrar Equipo</h2>
+    <form id="formRegistro">
+      <input type="text" name="equipo" placeholder="Nombre del equipo" required>
+      <input type="text" name="capitan" placeholder="Nombre del capitán" required>
+      <button type="submit">Registrar</button>
+    </form>
+  </section>
+
+  <section id="torneos" class="ventana">
+    <h2>Inscripciones a Torneos</h2>
+    <form id="formInscripcion">
+      <input type="text" name="equipo" placeholder="Nombre del equipo" required>
+      <select name="torneo">
+        <option value="futbol">Fútbol</option>
+        <option value="baloncesto">Baloncesto</option>
+        <option value="voleibol">Voleibol</option>
+      </select>
+      <button type="submit">Inscribirse</button>
+    </form>
+  </section>
+
+  <section id="verinscripciones" class="ventana">
+    <h2>Ver Inscripciones de Equipo</h2>
+    <input type="text" id="equipoConsulta" placeholder="Nombre del equipo">
+    <button onclick="verInscripcionesEquipo()">Consultar</button>
+    <ul id="listaInscripciones"></ul>
+  </section>
+
+  <section id="login" class="ventana">
+    <h2>Iniciar Sesión</h2>
+    <form id="formLogin">
+      <input type="text" placeholder="Usuario" required>
+      <input type="password" placeholder="Contraseña" required>
+      <button type="submit">Entrar</button>
+    </form>
+  </section>
+</main>
+</body>
+</html>
