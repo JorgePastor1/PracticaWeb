@@ -1,23 +1,29 @@
 body {
-  font-family: Arial, sans-serif;
+  font-family: 'Poppins', sans-serif;
   margin: 0;
   padding: 0;
   background-color: #f4f4f4;
 }
 
+/* Encabezado */
 header {
-  background-color: #333;
+  background-color: #222;
   color: #fff;
-  padding: 1em;
+  padding: 1em 1.5em;
   display: flex;
   justify-content: space-between;
   align-items: center;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.2);
 }
 
+/* Logo */
 .logo {
-  width: 50px;
+  width: 60px;
+  height: auto;
+  object-fit: contain;
 }
 
+/* Navegación */
 nav ul {
   list-style: none;
   display: flex;
@@ -29,22 +35,38 @@ nav ul {
 nav a {
   color: white;
   text-decoration: none;
+  padding: 0.5em 0.8em;
+  border-radius: 8px;
+  transition: background-color 0.3s;
 }
 
+nav a:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+/* Ventanas */
 .ventana {
   display: none;
   padding: 2em;
+  opacity: 0;
+  transition: opacity 0.3s ease;
 }
 
 .activa {
   display: block;
+  opacity: 1;
 }
 
+/* Formularios */
 form {
   display: flex;
   flex-direction: column;
   gap: 1em;
   max-width: 300px;
+  background: white;
+  padding: 2em;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
 }
 
 input, select, button {
@@ -53,12 +75,39 @@ input, select, button {
 }
 
 button {
-  background-color: #007BFF;
+  background-color: #ff4500;
   color: white;
   border: none;
   cursor: pointer;
+  padding: 0.7em 1.2em;
+  font-weight: bold;
+  border-radius: 8px;
+  transition: background-color 0.3s;
 }
 
 button:hover {
-  background-color: #0056b3;
+  background-color: #e63e00;
+}
+
+/* Estilos de la sección de inicio */
+#home {
+  text-align: center;
+  background-image: url('fondo-bandera.jpg');
+  background-size: cover;
+  background-position: center;
+  padding: 6em 2em;
+  color: white;
+}
+
+#home h1 {
+  font-size: 2.8em;
+  margin-bottom: 0.5em;
+  text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.6);
+}
+
+#home p {
+  font-size: 1.4em;
+  text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.6);
+  max-width: 800px;
+  margin: 0 auto;
 }
