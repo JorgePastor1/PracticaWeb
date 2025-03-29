@@ -80,6 +80,24 @@
 
   <section id="registro" class="ventana">
     <h2>Registrar Equipo</h2>
+    <p>¿Tienes un equipo y quieres participar en nuestros torneos? ¡Es muy fácil! Completa el formulario y únete a la comunidad de deportistas que ya están compitiendo en <b>Torneos360</b>.</p>
+
+    <h3>¿Por qué registrar tu equipo?</h3>
+    <ul>
+      <li>✅ Participa en torneos oficiales de fútbol, pádel y tenis.</li>
+      <li>✅ Accede a un panel personalizado para gestionar tus partidos y resultados.</li>
+      <li>✅ Recibe notificaciones sobre nuevos torneos y eventos en tu ciudad.</li>
+      <li>✅ Conecta con otros equipos y jugadores para organizar partidos amistosos.</li>
+    </ul>
+
+    <h3>Requisitos para registrarte</h3>
+    <p>Solo necesitas:</p>
+    <ul>
+      <li>📌 Nombre de tu equipo.</li>
+      <li>📌 Nombre del capitán responsable.</li>
+      <li>📌 Elegir el deporte en el que competirás.</li>
+    </ul>
+
     <form id="formRegistro">
       <input type="text" name="equipo" placeholder="Nombre del equipo" required>
       <input type="text" name="capitan" placeholder="Nombre del capitán" required>
@@ -90,10 +108,31 @@
       </select>
       <button type="submit">Registrar</button>
     </form>
+    <p id="mensajeRegistro" style="color: green; margin-top: 10px;"></p>
+
+    <h3>¿Ya tienes un equipo registrado?</h3>
+    <p>Puedes inscribirte directamente en nuestros torneos desde el apartado <b>Inscribirse</b> del menú.</p>
   </section>
 
   <section id="torneos" class="ventana">
     <h2>Inscripciones a Torneos</h2>
+    <p>¿Quieres que tu equipo compita en nuestros torneos? Una vez registrado tu equipo, debes inscribirte en los torneos activos para poder participar y demostrar quién es el mejor.</p>
+
+    <h3>¿Cómo funciona la inscripción?</h3>
+    <ul>
+      <li>📍 Elige el país y la ciudad donde quieres competir.</li>
+      <li>⚽ Selecciona el deporte al que pertenece tu equipo.</li>
+      <li>📝 Introduce el nombre exacto de tu equipo (debe estar previamente registrado).</li>
+    </ul>
+
+    <h3>Ventajas de inscribirte</h3>
+    <ul>
+      <li>✅ Acceso a los torneos oficiales organizados por <b>Torneos360</b>.</li>
+      <li>✅ Seguimiento de partidos, resultados y clasificaciones en tiempo real.</li>
+      <li>✅ Posibilidad de ganar premios y reconocimiento local.</li>
+      <li>✅ Conocer y competir contra otros equipos de tu ciudad.</li>
+    </ul>
+
     <form id="formInscripcion">
       <input type="text" name="equipo" placeholder="Nombre del equipo" required>
       <select id="paisSelect" name="pais" onchange="actualizarCiudades()">
@@ -111,13 +150,36 @@
       </select>
       <button type="submit">Inscribirse</button>
     </form>
+
+    <p id="mensajeInscripcion" style="color: green; margin-top: 10px;"></p>
+
+    <h3>¿Aún no has registrado tu equipo?</h3>
+    <p>Debes hacerlo antes de poder inscribirte. Ve al apartado <b>Registrar Equipo</b> y completa el formulario.</p>
   </section>
 
   <section id="verinscripciones" class="ventana">
     <h2>Ver Inscripciones de Equipo</h2>
+    <p>¿Quieres consultar en qué torneos está inscrito tu equipo? Aquí puedes hacerlo de forma rápida y sencilla.</p>
+
+    <h3>¿Cómo funciona?</h3>
+    <ul>
+      <li>📝 Escribe el nombre exacto de tu equipo.</li>
+      <li>🔍 Pulsa en "Consultar" y te mostraremos todas las inscripciones registradas.</li>
+    </ul>
+
+    <h3>¿Qué información vas a ver?</h3>
+    <ul>
+      <li>📍 Ciudad y país donde tu equipo está inscrito.</li>
+      <li>⚽ El deporte en el que participa.</li>
+    </ul>
+
     <input type="text" id="equipoConsulta" placeholder="Nombre del equipo">
     <button onclick="verInscripcionesEquipo()">Consultar</button>
+    <p id="mensajeConsulta" style="color: green; margin-top: 10px;"></p>
     <ul id="listaInscripciones"></ul>
+
+    <h3>¿Aún no te has inscrito?</h3>
+    <p>Primero debes inscribir a tu equipo en un torneo desde el apartado <b>Inscribirse</b>.</p>
   </section>
 
   <section id="login" class="ventana">
@@ -129,5 +191,79 @@
     </form>
   </section>
 </main>
+
+<script>
+  const formRegistro = document.getElementById('formRegistro');
+  const mensajeRegistro = document.getElementById('mensajeRegistro');
+
+  formRegistro.addEventListener('submit', function (e) {
+    e.preventDefault();
+
+    mensajeRegistro.textContent = '✅ Equipo registrado con éxito';
+    formRegistro.reset();
+
+    setTimeout(() => {
+      mensajeRegistro.textContent = '';
+    }, 3000);
+  });
+
+  const formInscripcion = document.getElementById('formInscripcion');
+  const mensajeInscripcion = document.getElementById('mensajeInscripcion');
+
+  formInscripcion.addEventListener('submit', function (e) {
+    e.preventDefault();
+
+    mensajeInscripcion.textContent = '✅ Inscripción realizada con éxito';
+    formInscripcion.reset();
+
+    setTimeout(() => {
+      mensajeInscripcion.textContent = '';
+    }, 3000);
+  });
+
+  function verInscripcionesEquipo() {
+    const equipo = document.getElementById('equipoConsulta').value.trim();
+    const lista = document.getElementById('listaInscripciones');
+    const mensaje = document.getElementById('mensajeConsulta');
+
+    lista.innerHTML = '';
+    mensaje.textContent = '';
+
+    if (equipo === '') {
+      mensaje.textContent = '❗ Por favor, escribe un nombre de equipo.';
+      mensaje.style.color = 'red';
+      return;
+    }
+
+    const inscripcionesEjemplo = {
+      'los tigres': [
+        { ciudad: 'Madrid', pais: 'España', deporte: 'Fútbol' },
+        { ciudad: 'Barcelona', pais: 'España', deporte: 'Pádel' }
+      ],
+      'equipo estrella': [
+        { ciudad: 'Roma', pais: 'Italia', deporte: 'Tenis' }
+      ]
+    };
+
+    const inscripciones = inscripcionesEjemplo[equipo.toLowerCase()];
+
+    if (inscripciones) {
+      mensaje.textContent = `🔍 Estas son las inscripciones del equipo "${equipo}":`;
+      mensaje.style.color = 'green';
+      inscripciones.forEach(inscripcion => {
+        const li = document.createElement('li');
+        li.textContent = `${inscripcion.deporte} en ${inscripcion.ciudad}, ${inscripcion.pais}`;
+        lista.appendChild(li);
+      });
+    } else {
+      mensaje.textContent = `❗ No hay inscripciones registradas para el equipo "${equipo}".`;
+      mensaje.style.color = 'red';
+    }
+
+    setTimeout(() => {
+      document.getElementById('equipoConsulta').value = '';
+    }, 3000);
+  }
+</script>
 </body>
 </html>
