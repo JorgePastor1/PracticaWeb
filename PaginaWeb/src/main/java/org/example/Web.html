@@ -68,10 +68,10 @@
     </ul>
     <h2>¿Para quién es esta plataforma?</h2>
     <ul>
-      <li>🎾 Tenistas que buscan mejorar su nivel compitiendo.</li>
-      <li>⚽ Aficionados al fútbol que quieren organizar torneos con amigos o comunidades locales.</li>
-      <li>🏓 Jugadores de pádel que buscan retos constantes.</li>
-      <li>🏆 Organizadores y clubes deportivos que desean digitalizar y simplificar la gestión de competiciones.</li>
+      <li> Tenistas que buscan mejorar su nivel compitiendo.</li>
+      <li> Aficionados al fútbol que quieren organizar torneos con amigos o comunidades locales.</li>
+      <li> Jugadores de pádel que buscan retos constantes.</li>
+      <li> Organizadores y clubes deportivos que desean digitalizar y simplificar la gestión de competiciones.</li>
     </ul>
     <h2>Únete a la experiencia</h2>
     <p>Si eres un apasionado del deporte y te encanta la emoción de la competición, <span class="highlight">TorneoSpain</span> es tu lugar. Regístrate hoy y comienza a disfrutar del juego como nunca antes.</p>
@@ -84,18 +84,18 @@
 
     <h3>¿Por qué registrar tu equipo?</h3>
     <ul>
-      <li>✅ Participa en torneos oficiales de fútbol, pádel y tenis.</li>
-      <li>✅ Accede a un panel personalizado para gestionar tus partidos y resultados.</li>
-      <li>✅ Recibe notificaciones sobre nuevos torneos y eventos en tu ciudad.</li>
-      <li>✅ Conecta con otros equipos y jugadores para organizar partidos amistosos.</li>
+      <li> Participa en torneos oficiales de fútbol, pádel y tenis.</li>
+      <li> Accede a un panel personalizado para ver tus partidos y resultados.</li>
+      <li> Recibe notificaciones sobre nuevos torneos y eventos en tu ciudad.</li>
+      <li> Conecta con otros equipos y jugadores para organizar partidos amistosos.</li>
     </ul>
 
     <h3>Requisitos para registrarte</h3>
     <p>Solo necesitas:</p>
     <ul>
-      <li>📌 Nombre de tu equipo.</li>
-      <li>📌 Nombre del capitán responsable.</li>
-      <li>📌 Elegir el deporte en el que competirás.</li>
+      <li> Nombre de tu equipo.</li>
+      <li> Nombre del capitán responsable.</li>
+      <li> Elegir el deporte en el que competirás.</li>
     </ul>
 
     <form id="formRegistro">
@@ -120,17 +120,17 @@
 
     <h3>¿Cómo funciona la inscripción?</h3>
     <ul>
-      <li>📍 Elige el país y la ciudad donde quieres competir.</li>
-      <li>⚽ Selecciona el deporte al que pertenece tu equipo.</li>
-      <li>📝 Introduce el nombre exacto de tu equipo (debe estar previamente registrado).</li>
+      <li> Elige el país y la ciudad donde quieres competir.</li>
+      <li> Selecciona el deporte al que pertenece tu equipo.</li>
+      <li> Introduce el nombre exacto de tu equipo (debe estar previamente registrado).</li>
     </ul>
 
     <h3>Ventajas de inscribirte</h3>
     <ul>
-      <li>✅ Acceso a los torneos oficiales organizados por <b>Torneos360</b>.</li>
-      <li>✅ Seguimiento de partidos, resultados y clasificaciones en tiempo real.</li>
-      <li>✅ Posibilidad de ganar premios y reconocimiento local.</li>
-      <li>✅ Conocer y competir contra otros equipos de tu ciudad.</li>
+      <li> Acceso a los torneos oficiales organizados por <b>Torneos360</b>.</li>
+      <li> Seguimiento de partidos, resultados y clasificaciones en tiempo real.</li>
+      <li> Posibilidad de ganar premios y reconocimiento local.</li>
+      <li> Conocer y competir contra otros equipos de tu ciudad.</li>
     </ul>
 
     <form id="formInscripcion">
@@ -163,14 +163,14 @@
 
     <h3>¿Cómo funciona?</h3>
     <ul>
-      <li>📝 Escribe el nombre exacto de tu equipo.</li>
-      <li>🔍 Pulsa en "Consultar" y te mostraremos todas las inscripciones registradas.</li>
+      <li> Escribe el nombre exacto de tu equipo.</li>
+      <li> Pulsa en "Consultar" y te mostraremos todas las inscripciones registradas.</li>
     </ul>
 
     <h3>¿Qué información vas a ver?</h3>
     <ul>
-      <li>📍 Ciudad y país donde tu equipo está inscrito.</li>
-      <li>⚽ El deporte en el que participa.</li>
+      <li> Ciudad y país donde tu equipo está inscrito.</li>
+      <li> El deporte en el que participa.</li>
     </ul>
 
     <input type="text" id="equipoConsulta" placeholder="Nombre del equipo">
@@ -199,7 +199,7 @@
   formRegistro.addEventListener('submit', function (e) {
     e.preventDefault();
 
-    mensajeRegistro.textContent = '✅ Equipo registrado con éxito';
+    mensajeRegistro.textContent = ' Equipo registrado con éxito';
     formRegistro.reset();
 
     setTimeout(() => {
@@ -213,7 +213,7 @@
   formInscripcion.addEventListener('submit', function (e) {
     e.preventDefault();
 
-    mensajeInscripcion.textContent = '✅ Inscripción realizada con éxito';
+    mensajeInscripcion.textContent = ' Inscripción realizada con éxito';
     formInscripcion.reset();
 
     setTimeout(() => {
@@ -230,7 +230,7 @@
     mensaje.textContent = '';
 
     if (equipo === '') {
-      mensaje.textContent = '❗ Por favor, escribe un nombre de equipo.';
+      mensaje.textContent = ' Por favor, escribe un nombre de equipo.';
       mensaje.style.color = 'red';
       return;
     }
@@ -248,7 +248,7 @@
     const inscripciones = inscripcionesEjemplo[equipo.toLowerCase()];
 
     if (inscripciones) {
-      mensaje.textContent = `🔍 Estas son las inscripciones del equipo "${equipo}":`;
+      mensaje.textContent = ` Estas son las inscripciones del equipo "${equipo}":`;
       mensaje.style.color = 'green';
       inscripciones.forEach(inscripcion => {
         const li = document.createElement('li');
@@ -256,7 +256,7 @@
         lista.appendChild(li);
       });
     } else {
-      mensaje.textContent = `❗ No hay inscripciones registradas para el equipo "${equipo}".`;
+      mensaje.textContent = ` No hay inscripciones registradas para el equipo "${equipo}".`;
       mensaje.style.color = 'red';
     }
 
