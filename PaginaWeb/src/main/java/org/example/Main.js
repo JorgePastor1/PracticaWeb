@@ -93,3 +93,35 @@ function verInscripcionesEquipo() {
     lista.appendChild(li);
   }
 }
+
+// Función para actualizar las ciudades dependiendo del país seleccionado (para inscripciones y creación de torneos)
+const ciudadesPorPais = {
+  espana: ['Madrid', 'Barcelona', 'Valencia', 'Sevilla', 'Bilbao'],
+  francia: ['París', 'Lyon', 'Marsella', 'Niza', 'Toulouse'],
+  italia: ['Roma', 'Milán', 'Nápoles', 'Turín', 'Florencia']
+};
+
+function actualizarCiudades() {
+  const pais = document.getElementById('paisSelect').value;
+  const ciudadSelect = document.getElementById('ciudadSelect');
+  ciudadSelect.innerHTML = '';
+  const ciudades = ciudadesPorPais[pais];
+  ciudades.forEach(ciudad => {
+    const option = document.createElement('option');
+    option.value = ciudad.toLowerCase();
+    option.textContent = ciudad;
+    ciudadSelect.appendChild(option);
+  });
+
+  const ciudadSelectTorneo = document.getElementById('ciudadSelectTorneo');
+  ciudadSelectTorneo.innerHTML = '';
+  ciudades.forEach(ciudad => {
+    const option = document.createElement('option');
+    option.value = ciudad.toLowerCase();
+    option.textContent = ciudad;
+    ciudadSelectTorneo.appendChild(option);
+  });
+}
+
+// Inicializa la función de actualización de ciudades al seleccionar un país para crear torneos
+document.getElementById('paisSelectTorneo').addEventListener('change', actualizarCiudades);
