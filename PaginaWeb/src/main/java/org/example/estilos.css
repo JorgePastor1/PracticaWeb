@@ -10,8 +10,8 @@ body {
   background-color: #222;
   color: white;
   display: flex;
-  justify-content: flex-end; /* Alinea los enlaces a la derecha */
-  gap: 1.5em; /* Espaciado entre los enlaces */
+  justify-content: flex-end;
+  gap: 1.5em;
   padding: 10px 20px;
 }
 
@@ -20,7 +20,7 @@ body {
   text-decoration: none;
   padding: 3px 8px;
   border-radius: 5px;
-  font-size: 0.85em; /* Letra más pequeña */
+  font-size: 0.85em;
   transition: background-color 0.3s;
 }
 
@@ -77,27 +77,27 @@ nav a:hover {
   opacity: 1;
 }
 
-/* Mantener el estilo de los formularios y cuadros */
+/* Cuadros de las secciones */
 #verinscripciones, #creartorneo, #registro, #torneos, #login {
-  display: inline-block;
-  width: 48%;
+  display: block;
+  margin: 2em auto;
   padding: 2em;
-  margin: 1%;
-  vertical-align: top;
   background: white;
   border-radius: 12px;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  max-width: 400px;
+  width: 100%;
 }
 
 form {
   display: flex;
   flex-direction: column;
   gap: 1em;
-  max-width: 300px;
+  max-width: 400px;
   background: white;
   padding: 2em;
   border-radius: 12px;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
 }
 
 input, select, button {
@@ -120,6 +120,45 @@ button:hover {
   background-color: #e63e00;
 }
 
+/* Estilos de la sección de ayuda */
+.help-box {
+  display: flex;
+  align-items: center;
+  padding: 1em;
+  margin-bottom: 1.5em;
+  border-radius: 8px;
+  color: #333;
+}
+
+.help-icon {
+  font-size: 2em;
+  margin-right: 1em;
+  background-color: #fff;
+  border-radius: 50%;
+  padding: 10px;
+  border: 2px solid #ccc;
+}
+
+.help-yellow {
+  background-color: #f9f5e1;
+  border: 2px solid #e3d03b;
+}
+
+.help-gray {
+  background-color: #f4f4f4;
+  border: 2px solid #ccc;
+}
+
+.help-link {
+  color: #e8590c;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.help-link:hover {
+  text-decoration: underline;
+}
+
 /* Estilos de la sección de inicio */
 #home {
   text-align: center;
@@ -138,7 +177,4 @@ button:hover {
 
 #home p {
   font-size: 1.4em;
-  text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.6);
-  max-width: 800px;
-  margin: 0 auto;
-}
+  text-shadow:
