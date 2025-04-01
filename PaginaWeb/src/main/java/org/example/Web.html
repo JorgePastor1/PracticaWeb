@@ -24,6 +24,15 @@
         option.textContent = ciudad;
         ciudadSelect.appendChild(option);
       });
+
+      const ciudadSelectTorneo = document.getElementById('ciudadSelectTorneo');
+      ciudadSelectTorneo.innerHTML = '';
+      ciudades.forEach(ciudad => {
+        const option = document.createElement('option');
+        option.value = ciudad.toLowerCase();
+        option.textContent = ciudad;
+        ciudadSelectTorneo.appendChild(option);
+      });
     }
 
     function mostrarVentana(ventana) {
@@ -57,7 +66,26 @@
 
   <section id="about" class="ventana">
     <h1>Sobre Nosotros</h1>
-    <p>Bienvenido a <span class="highlight">TorneosURJC</span>, el lugar donde la pasión por la competición cobra vida...</p>
+    <p>Bienvenido a <span class="highlight">TorneosURJC</span>, el lugar donde la pasión por la competición cobra vida. Nuestra plataforma está diseñada para que jugadores de todos los niveles puedan crear y unirse a torneos de fútbol, pádel y tenis de manera sencilla y rápida.</p>
+    <h2>Nuestra Misión</h2>
+    <p>En <span class="highlight">TorneosURJC</span>, creemos que el deporte une a las personas y fomenta valores como la disciplina, el compañerismo y la superación personal...</p>
+    <h2>¿Qué ofrecemos?</h2>
+    <ul>
+      <li><b>Creación de torneos:</b> Diseña y gestiona torneos personalizados con reglas, formatos y niveles de dificultad adaptados a tu comunidad.</li>
+      <li><b>Inscripción fácil:</b> Encuentra torneos cerca de ti y únete con solo unos clics.</li>
+      <li><b>Gestión automatizada:</b> Nuestro sistema se encarga de clasificaciones, emparejamientos y seguimiento de resultados en tiempo real.</li>
+      <li><b>Conexión con la comunidad:</b> Comparte tu experiencia, encuentra nuevos rivales y haz crecer tu red deportiva.</li>
+    </ul>
+    <h2>¿Para quién es esta plataforma?</h2>
+    <ul>
+      <li> Tenistas que buscan mejorar su nivel compitiendo.</li>
+      <li> Aficionados al fútbol que quieren organizar torneos con amigos o comunidades locales.</li>
+      <li> Jugadores de pádel que buscan retos constantes.</li>
+      <li> Organizadores y clubes deportivos que desean digitalizar y simplificar la gestión de competiciones.</li>
+    </ul>
+    <h2>Únete a la experiencia</h2>
+    <p>Si eres un apasionado del deporte y te encanta la emoción de la competición, <span class="highlight">TorneoSpain</span> es tu lugar. Regístrate hoy y comienza a disfrutar del juego como nunca antes.</p>
+    <h2>📅 Crea. Compite. Gana.</h2>
   </section>
 
   <section id="registro" class="ventana">
@@ -131,34 +159,6 @@
   </section>
 </main>
 
-<script>
-  const ciudadesPorPais = {
-    espana: ['Madrid', 'Barcelona', 'Valencia', 'Sevilla', 'Bilbao'],
-    francia: ['París', 'Lyon', 'Marsella', 'Niza', 'Toulouse'],
-    italia: ['Roma', 'Milán', 'Nápoles', 'Turín', 'Florencia']
-  };
-
-  function actualizarCiudades() {
-    const pais = document.getElementById('paisSelect').value;
-    const ciudadSelect = document.getElementById('ciudadSelect');
-    ciudadSelect.innerHTML = '';
-    const ciudades = ciudadesPorPais[pais];
-    ciudades.forEach(ciudad => {
-      const option = document.createElement('option');
-      option.value = ciudad.toLowerCase();
-      option.textContent = ciudad;
-      ciudadSelect.appendChild(option);
-    });
-  }
-
-  // Actualizar ciudades al crear torneo
-  document.getElementById('paisSelectTorneo').addEventListener('change', actualizarCiudades);
-
-  function mostrarVentana(ventana) {
-    const ventanas = document.querySelectorAll('.ventana');
-    ventanas.forEach(v => v.classList.remove('activa'));
-    document.getElementById(ventana).classList.add('activa');
-  }
-</script>
+<script src="script.js"></script>
 </body>
 </html>
