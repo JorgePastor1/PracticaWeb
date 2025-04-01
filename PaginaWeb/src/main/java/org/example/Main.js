@@ -1,6 +1,7 @@
 let xmlDocGlobal = document.implementation.createDocument('', 'datos', null);
 let rootGlobal = xmlDocGlobal.documentElement;
 
+// Función para mostrar la ventana activa
 function mostrarVentana(id) {
   document.querySelectorAll('.ventana').forEach(section => {
     section.classList.remove('activa');
@@ -8,6 +9,7 @@ function mostrarVentana(id) {
   document.getElementById(id).classList.add('activa');
 }
 
+// Crear un equipo
 document.getElementById('formRegistro').addEventListener('submit', function(e) {
   e.preventDefault();
   const equipo = this.equipo.value;
@@ -27,10 +29,11 @@ document.getElementById('formRegistro').addEventListener('submit', function(e) {
   actualizarBotonDescarga();
 });
 
+// Crear inscripción
 document.getElementById('formInscripcion').addEventListener('submit', function(e) {
   e.preventDefault();
-  const equipo = this.equipo.value;
-  const torneo = this.torneo.value;
+  const equipo = this.equipoInscripcion.value;
+  const torneo = this.torneoInscripcion.value;
 
   const inscripcion = xmlDocGlobal.createElement('inscripcionTorneo');
   const equipoNode = xmlDocGlobal.createElement('equipo');
@@ -46,6 +49,7 @@ document.getElementById('formInscripcion').addEventListener('submit', function(e
   actualizarBotonDescarga();
 });
 
+// Función para actualizar el botón de descarga XML
 function actualizarBotonDescarga() {
   const serializer = new XMLSerializer();
   const xmlStr = serializer.serializeToString(xmlDocGlobal);
@@ -69,10 +73,11 @@ function actualizarBotonDescarga() {
   botonDescarga.download = 'datos_torneos.xml';
 }
 
+// Ver inscripciones de un equipo
 function verInscripcionesEquipo() {
   const equipoBuscado = document.getElementById('equipoConsulta').value.trim();
   const lista = document.getElementById('listaInscripciones');
-  lista.innerHTML = '';
+  lista.innerHTML = ''; // Limpiar lista
 
   const inscripciones = xmlDocGlobal.getElementsByTagName('inscripcionTorneo');
 
@@ -94,7 +99,7 @@ function verInscripcionesEquipo() {
   }
 }
 
-// Función para actualizar las ciudades dependiendo del país seleccionado (para inscripciones y creación de torneos)
+// Función para actualizar las ciudades dependiendo del país seleccionado
 const ciudadesPorPais = {
   espana: ['Madrid', 'Barcelona', 'Valencia', 'Sevilla', 'Bilbao'],
   francia: ['París', 'Lyon', 'Marsella', 'Niza', 'Toulouse'],
@@ -123,5 +128,28 @@ function actualizarCiudades() {
   });
 }
 
-// Inicializa la función de actualización de ciudades al seleccionar un país para crear torneos
+// Inicializa la función de actualización de ciudades al seleccionar un país
 document.getElementById('paisSelectTorneo').addEventListener('change', actualizarCiudades);
+
+// Operación PATCH para actualizar una inscripción
+document.getElementById('formActualizarInscripcion').addEventListener('submit', function(e) {
+  e.preventDefault();
+  const idInscripcion = this.idInscripcion.value;
+  const equipo = this.nuevoEquipo.value;
+  const torneo = this.nuevoTorneo.value;
+
+  const inscripciones = xmlDocGlobal.getElementsByTagName('inscripcionTorneo');
+  for (let i = 0; i < inscripciones.length; i++) {
+    const inscripcion = inscripciones[i];
+    const idNode = inscripcion.getElementsByTagName('id')[0];
+    if (idNode && idNode.textContent === idInscripcion) {
+      inscripcion.getElementsByTagName('equipo')[0].textContent = equipo;
+      inscripcion.getElementsByTagName('torneo')[0].textContent = torneo;
+      alert('Inscripción actualizada correctamente.');
+      this.reset();
+      actualizarBotonDescarga();
+      return;
+    }
+  }
+  alert('Inscripción no encontrada.');
+});
