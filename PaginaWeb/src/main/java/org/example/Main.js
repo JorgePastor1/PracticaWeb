@@ -1,5 +1,9 @@
-let xmlDocGlobal = document.implementation.createDocument('', 'datos', null);
-let rootGlobal = xmlDocGlobal.documentElement;
+// Mapa para almacenar los datos en memoria
+let datos = {
+  equipos: [],
+  torneos: [],
+  inscripciones: []
+};
 
 // Función para mostrar la ventana activa
 function mostrarVentana(id) {
@@ -15,14 +19,8 @@ document.getElementById('formRegistro').addEventListener('submit', function(e) {
   const equipo = this.equipo.value;
   const capitan = this.capitan.value;
 
-  const registro = xmlDocGlobal.createElement('registroEquipo');
-  const equipoNode = xmlDocGlobal.createElement('equipo');
-  const capitanNode = xmlDocGlobal.createElement('capitan');
-  equipoNode.textContent = equipo;
-  capitanNode.textContent = capitan;
-  registro.appendChild(equipoNode);
-  registro.appendChild(capitanNode);
-  rootGlobal.appendChild(registro);
+  // Agregar el equipo al mapa
+  datos.equipos.push({ equipo, capitan });
 
   alert('Equipo registrado correctamente.');
   this.reset();
@@ -35,32 +33,25 @@ document.getElementById('formInscripcion').addEventListener('submit', function(e
   const equipo = this.equipoInscripcion.value;
   const torneo = this.torneoInscripcion.value;
 
-  const inscripcion = xmlDocGlobal.createElement('inscripcionTorneo');
-  const equipoNode = xmlDocGlobal.createElement('equipo');
-  const torneoNode = xmlDocGlobal.createElement('torneo');
-  equipoNode.textContent = equipo;
-  torneoNode.textContent = torneo;
-  inscripcion.appendChild(equipoNode);
-  inscripcion.appendChild(torneoNode);
-  rootGlobal.appendChild(inscripcion);
+  // Agregar inscripción al mapa
+  datos.inscripciones.push({ equipo, torneo });
 
   alert('Inscripción realizada correctamente.');
   this.reset();
   actualizarBotonDescarga();
 });
 
-// Función para actualizar el botón de descarga XML
+// Función para actualizar el botón de descarga JSON
 function actualizarBotonDescarga() {
-  const serializer = new XMLSerializer();
-  const xmlStr = serializer.serializeToString(xmlDocGlobal);
-  const blob = new Blob([xmlStr], { type: 'application/xml' });
+  const jsonStr = JSON.stringify(datos, null, 2); // Convertir datos a JSON
+  const blob = new Blob([jsonStr], { type: 'application/json' });
   const url = URL.createObjectURL(blob);
 
-  let botonDescarga = document.getElementById('descargarXML');
+  let botonDescarga = document.getElementById('descargarJSON');
   if (!botonDescarga) {
     botonDescarga = document.createElement('a');
-    botonDescarga.id = 'descargarXML';
-    botonDescarga.textContent = 'Descargar XML';
+    botonDescarga.id = 'descargarJSON';
+    botonDescarga.textContent = 'Descargar JSON';
     botonDescarga.style.display = 'inline-block';
     botonDescarga.style.margin = '20px';
     botonDescarga.style.background = '#28a745';
@@ -70,7 +61,7 @@ function actualizarBotonDescarga() {
     document.body.appendChild(botonDescarga);
   }
   botonDescarga.href = url;
-  botonDescarga.download = 'datos_torneos.xml';
+  botonDescarga.download = 'datos_torneos.json';
 }
 
 // Ver inscripciones de un equipo
@@ -79,23 +70,43 @@ function verInscripcionesEquipo() {
   const lista = document.getElementById('listaInscripciones');
   lista.innerHTML = ''; // Limpiar lista
 
-  const inscripciones = xmlDocGlobal.getElementsByTagName('inscripcionTorneo');
+  // Filtrar las inscripciones que corresponden al equipo buscado
+  const inscripciones = datos.inscripciones.filter(inscripcion => inscripcion.equipo.toLowerCase() === equipoBuscado.toLowerCase());
 
-  for (let i = 0; i < inscripciones.length; i++) {
-    const equipo = inscripciones[i].getElementsByTagName('equipo')[0].textContent;
-    const torneo = inscripciones[i].getElementsByTagName('torneo')[0].textContent;
-
-    if (equipo.toLowerCase() === equipoBuscado.toLowerCase()) {
+  if (inscripciones.length > 0) {
+    inscripciones.forEach((inscripcion, index) => {
       const li = document.createElement('li');
-      li.textContent = torneo;
-      lista.appendChild(li);
-    }
-  }
+      li.textContent = `Torneo: ${inscripcion.torneo}`;
+      
+      // Crear botón de eliminar
+      const eliminarBtn = document.createElement('button');
+      eliminarBtn.textContent = 'Eliminar';
+      eliminarBtn.style.backgroundColor = '#e8590c';
+      eliminarBtn.style.color = 'white';
+      eliminarBtn.style.border = 'none';
+      eliminarBtn.style.cursor = 'pointer';
+      eliminarBtn.style.marginLeft = '10px';
+      
+      // Agregar el evento para eliminar la inscripción
+      eliminarBtn.addEventListener('click', () => eliminarInscripcion(index));
 
-  if (lista.childElementCount === 0) {
+      li.appendChild(eliminarBtn);
+      lista.appendChild(li);
+    });
+  } else {
     const li = document.createElement('li');
     li.textContent = 'No hay inscripciones encontradas para este equipo.';
     lista.appendChild(li);
+  }
+}
+
+// Eliminar inscripción de la lista
+function eliminarInscripcion(index) {
+  if (confirm('¿Estás seguro de que quieres eliminar esta inscripción?')) {
+    datos.inscripciones.splice(index, 1);  // Eliminar inscripción por índice
+    actualizarBotonDescarga();  // Actualizar el botón de descarga JSON
+    verInscripcionesEquipo();  // Volver a mostrar las inscripciones actualizadas
+    alert('Inscripción eliminada correctamente.');
   }
 }
 
@@ -138,18 +149,15 @@ document.getElementById('formActualizarInscripcion').addEventListener('submit', 
   const equipo = this.nuevoEquipo.value;
   const torneo = this.nuevoTorneo.value;
 
-  const inscripciones = xmlDocGlobal.getElementsByTagName('inscripcionTorneo');
-  for (let i = 0; i < inscripciones.length; i++) {
-    const inscripcion = inscripciones[i];
-    const idNode = inscripcion.getElementsByTagName('id')[0];
-    if (idNode && idNode.textContent === idInscripcion) {
-      inscripcion.getElementsByTagName('equipo')[0].textContent = equipo;
-      inscripcion.getElementsByTagName('torneo')[0].textContent = torneo;
-      alert('Inscripción actualizada correctamente.');
-      this.reset();
-      actualizarBotonDescarga();
-      return;
-    }
+  // Buscar la inscripción por su ID
+  const inscripcionIndex = datos.inscripciones.findIndex(inscripcion => inscripcion.id === idInscripcion);
+  if (inscripcionIndex !== -1) {
+    datos.inscripciones[inscripcionIndex].equipo = equipo;
+    datos.inscripciones[inscripcionIndex].torneo = torneo;
+    alert('Inscripción actualizada correctamente.');
+    this.reset();
+    actualizarBotonDescarga();
+  } else {
+    alert('Inscripción no encontrada.');
   }
-  alert('Inscripción no encontrada.');
 });
