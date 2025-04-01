@@ -43,6 +43,7 @@
       <li><a href="#registro" onclick="mostrarVentana('registro')">Registrar Equipo</a></li>
       <li><a href="#torneos" onclick="mostrarVentana('torneos')">Inscribirse</a></li>
       <li><a href="#verinscripciones" onclick="mostrarVentana('verinscripciones')">Ver Inscripciones</a></li>
+      <li><a href="#creartorneo" onclick="mostrarVentana('creartorneo')">Crear Torneo</a></li>
       <li><a href="#login" onclick="mostrarVentana('login')">Login</a></li>
     </ul>
   </nav>
@@ -56,48 +57,11 @@
 
   <section id="about" class="ventana">
     <h1>Sobre Nosotros</h1>
-    <p>Bienvenido a <span class="highlight">TorneosURJC</span>, el lugar donde la pasión por la competición cobra vida. Nuestra plataforma está diseñada para que jugadores de todos los niveles puedan crear y unirse a torneos de fútbol, pádel y tenis de manera sencilla y rápida.</p>
-    <h2>Nuestra Misión</h2>
-    <p>En <span class="highlight">TorneosURJC</span>, creemos que el deporte une a las personas y fomenta valores como la disciplina, el compañerismo y la superación personal...</p>
-    <h2>¿Qué ofrecemos?</h2>
-    <ul>
-      <li><b>Creación de torneos:</b> Diseña y gestiona torneos personalizados con reglas, formatos y niveles de dificultad adaptados a tu comunidad.</li>
-      <li><b>Inscripción fácil:</b> Encuentra torneos cerca de ti y únete con solo unos clics.</li>
-      <li><b>Gestión automatizada:</b> Nuestro sistema se encarga de clasificaciones, emparejamientos y seguimiento de resultados en tiempo real.</li>
-      <li><b>Conexión con la comunidad:</b> Comparte tu experiencia, encuentra nuevos rivales y haz crecer tu red deportiva.</li>
-    </ul>
-    <h2>¿Para quién es esta plataforma?</h2>
-    <ul>
-      <li> Tenistas que buscan mejorar su nivel compitiendo.</li>
-      <li> Aficionados al fútbol que quieren organizar torneos con amigos o comunidades locales.</li>
-      <li> Jugadores de pádel que buscan retos constantes.</li>
-      <li> Organizadores y clubes deportivos que desean digitalizar y simplificar la gestión de competiciones.</li>
-    </ul>
-    <h2>Únete a la experiencia</h2>
-    <p>Si eres un apasionado del deporte y te encanta la emoción de la competición, <span class="highlight">TorneoSpain</span> es tu lugar. Regístrate hoy y comienza a disfrutar del juego como nunca antes.</p>
-    <h2>📅 Crea. Compite. Gana.</h2>
+    <p>Bienvenido a <span class="highlight">TorneosURJC</span>, el lugar donde la pasión por la competición cobra vida...</p>
   </section>
 
   <section id="registro" class="ventana">
     <h2>Registrar Equipo</h2>
-    <p>¿Tienes un equipo y quieres participar en nuestros torneos? ¡Es muy fácil! Completa el formulario y únete a la comunidad de deportistas que ya están compitiendo en <b>Torneos360</b>.</p>
-
-    <h3>¿Por qué registrar tu equipo?</h3>
-    <ul>
-      <li> Participa en torneos oficiales de fútbol, pádel y tenis.</li>
-      <li> Accede a un panel personalizado para ver tus partidos y resultados.</li>
-      <li> Recibe notificaciones sobre nuevos torneos y eventos en tu ciudad.</li>
-      <li> Conecta con otros equipos y jugadores para organizar partidos amistosos.</li>
-    </ul>
-
-    <h3>Requisitos para registrarte</h3>
-    <p>Solo necesitas:</p>
-    <ul>
-      <li> Nombre de tu equipo.</li>
-      <li> Nombre del capitán responsable.</li>
-      <li> Elegir el deporte en el que competirás.</li>
-    </ul>
-
     <form id="formRegistro">
       <input type="text" name="equipo" placeholder="Nombre del equipo" required>
       <input type="text" name="capitan" placeholder="Nombre del capitán" required>
@@ -108,31 +72,10 @@
       </select>
       <button type="submit">Registrar</button>
     </form>
-    <p id="mensajeRegistro" style="color: green; margin-top: 10px;"></p>
-
-    <h3>¿Ya tienes un equipo registrado?</h3>
-    <p>Puedes inscribirte directamente en nuestros torneos desde el apartado <b>Inscribirse</b> del menú.</p>
   </section>
 
   <section id="torneos" class="ventana">
     <h2>Inscripciones a Torneos</h2>
-    <p>¿Quieres que tu equipo compita en nuestros torneos? Una vez registrado tu equipo, debes inscribirte en los torneos activos para poder participar y demostrar quién es el mejor.</p>
-
-    <h3>¿Cómo funciona la inscripción?</h3>
-    <ul>
-      <li> Elige el país y la ciudad donde quieres competir.</li>
-      <li> Selecciona el deporte al que pertenece tu equipo.</li>
-      <li> Introduce el nombre exacto de tu equipo (debe estar previamente registrado).</li>
-    </ul>
-
-    <h3>Ventajas de inscribirte</h3>
-    <ul>
-      <li> Acceso a los torneos oficiales organizados por <b>Torneos360</b>.</li>
-      <li> Seguimiento de partidos, resultados y clasificaciones en tiempo real.</li>
-      <li> Posibilidad de ganar premios y reconocimiento local.</li>
-      <li> Conocer y competir contra otros equipos de tu ciudad.</li>
-    </ul>
-
     <form id="formInscripcion">
       <input type="text" name="equipo" placeholder="Nombre del equipo" required>
       <select id="paisSelect" name="pais" onchange="actualizarCiudades()">
@@ -140,9 +83,7 @@
         <option value="francia">Francia</option>
         <option value="italia">Italia</option>
       </select>
-      <select id="ciudadSelect" name="ciudad">
-        <!-- Las ciudades se llenarán dinámicamente -->
-      </select>
+      <select id="ciudadSelect" name="ciudad"></select>
       <select name="deporte">
         <option value="futbol">Fútbol</option>
         <option value="padel">Pádel</option>
@@ -150,36 +91,34 @@
       </select>
       <button type="submit">Inscribirse</button>
     </form>
-
-    <p id="mensajeInscripcion" style="color: green; margin-top: 10px;"></p>
-
-    <h3>¿Aún no has registrado tu equipo?</h3>
-    <p>Debes hacerlo antes de poder inscribirte. Ve al apartado <b>Registrar Equipo</b> y completa el formulario.</p>
   </section>
 
   <section id="verinscripciones" class="ventana">
     <h2>Ver Inscripciones de Equipo</h2>
-    <p>¿Quieres consultar en qué torneos está inscrito tu equipo? Aquí puedes hacerlo de forma rápida y sencilla.</p>
-
-    <h3>¿Cómo funciona?</h3>
-    <ul>
-      <li> Escribe el nombre exacto de tu equipo.</li>
-      <li> Pulsa en "Consultar" y te mostraremos todas las inscripciones registradas.</li>
-    </ul>
-
-    <h3>¿Qué información vas a ver?</h3>
-    <ul>
-      <li> Ciudad y país donde tu equipo está inscrito.</li>
-      <li> El deporte en el que participa.</li>
-    </ul>
-
     <input type="text" id="equipoConsulta" placeholder="Nombre del equipo">
     <button onclick="verInscripcionesEquipo()">Consultar</button>
-    <p id="mensajeConsulta" style="color: green; margin-top: 10px;"></p>
     <ul id="listaInscripciones"></ul>
+  </section>
 
-    <h3>¿Aún no te has inscrito?</h3>
-    <p>Primero debes inscribir a tu equipo en un torneo desde el apartado <b>Inscribirse</b>.</p>
+  <section id="creartorneo" class="ventana">
+    <h2>Crear Torneo</h2>
+    <form id="formCrearTorneo">
+      <input type="text" name="nombreTorneo" placeholder="Nombre del torneo" required>
+      <input type="date" name="fecha" required>
+      <select name="pais">
+        <option value="espana">España</option>
+        <option value="francia">Francia</option>
+        <option value="italia">Italia</option>
+      </select>
+      <select name="ciudad" id="ciudadSelectTorneo"></select>
+      <select name="deporte">
+        <option value="futbol">Fútbol</option>
+        <option value="padel">Pádel</option>
+        <option value="tenis">Tenis</option>
+      </select>
+      <button type="submit">Crear Torneo</button>
+    </form>
+    <p id="mensajeTorneo" style="color: green; margin-top: 10px;"></p>
   </section>
 
   <section id="login" class="ventana">
@@ -193,76 +132,32 @@
 </main>
 
 <script>
-  const formRegistro = document.getElementById('formRegistro');
-  const mensajeRegistro = document.getElementById('mensajeRegistro');
+  const ciudadesPorPais = {
+    espana: ['Madrid', 'Barcelona', 'Valencia', 'Sevilla', 'Bilbao'],
+    francia: ['París', 'Lyon', 'Marsella', 'Niza', 'Toulouse'],
+    italia: ['Roma', 'Milán', 'Nápoles', 'Turín', 'Florencia']
+  };
 
-  formRegistro.addEventListener('submit', function (e) {
-    e.preventDefault();
+  function actualizarCiudades() {
+    const pais = document.getElementById('paisSelect').value;
+    const ciudadSelect = document.getElementById('ciudadSelect');
+    ciudadSelect.innerHTML = '';
+    const ciudades = ciudadesPorPais[pais];
+    ciudades.forEach(ciudad => {
+      const option = document.createElement('option');
+      option.value = ciudad.toLowerCase();
+      option.textContent = ciudad;
+      ciudadSelect.appendChild(option);
+    });
+  }
 
-    mensajeRegistro.textContent = ' Equipo registrado con éxito';
-    formRegistro.reset();
+  // Actualizar ciudades al crear torneo
+  document.getElementById('paisSelectTorneo').addEventListener('change', actualizarCiudades);
 
-    setTimeout(() => {
-      mensajeRegistro.textContent = '';
-    }, 3000);
-  });
-
-  const formInscripcion = document.getElementById('formInscripcion');
-  const mensajeInscripcion = document.getElementById('mensajeInscripcion');
-
-  formInscripcion.addEventListener('submit', function (e) {
-    e.preventDefault();
-
-    mensajeInscripcion.textContent = ' Inscripción realizada con éxito';
-    formInscripcion.reset();
-
-    setTimeout(() => {
-      mensajeInscripcion.textContent = '';
-    }, 3000);
-  });
-
-  function verInscripcionesEquipo() {
-    const equipo = document.getElementById('equipoConsulta').value.trim();
-    const lista = document.getElementById('listaInscripciones');
-    const mensaje = document.getElementById('mensajeConsulta');
-
-    lista.innerHTML = '';
-    mensaje.textContent = '';
-
-    if (equipo === '') {
-      mensaje.textContent = ' Por favor, escribe un nombre de equipo.';
-      mensaje.style.color = 'red';
-      return;
-    }
-
-    const inscripcionesEjemplo = {
-      'los tigres': [
-        { ciudad: 'Madrid', pais: 'España', deporte: 'Fútbol' },
-        { ciudad: 'Barcelona', pais: 'España', deporte: 'Pádel' }
-      ],
-      'equipo estrella': [
-        { ciudad: 'Roma', pais: 'Italia', deporte: 'Tenis' }
-      ]
-    };
-
-    const inscripciones = inscripcionesEjemplo[equipo.toLowerCase()];
-
-    if (inscripciones) {
-      mensaje.textContent = ` Estas son las inscripciones del equipo "${equipo}":`;
-      mensaje.style.color = 'green';
-      inscripciones.forEach(inscripcion => {
-        const li = document.createElement('li');
-        li.textContent = `${inscripcion.deporte} en ${inscripcion.ciudad}, ${inscripcion.pais}`;
-        lista.appendChild(li);
-      });
-    } else {
-      mensaje.textContent = ` No hay inscripciones registradas para el equipo "${equipo}".`;
-      mensaje.style.color = 'red';
-    }
-
-    setTimeout(() => {
-      document.getElementById('equipoConsulta').value = '';
-    }, 3000);
+  function mostrarVentana(ventana) {
+    const ventanas = document.querySelectorAll('.ventana');
+    ventanas.forEach(v => v.classList.remove('activa'));
+    document.getElementById(ventana).classList.add('activa');
   }
 </script>
 </body>
