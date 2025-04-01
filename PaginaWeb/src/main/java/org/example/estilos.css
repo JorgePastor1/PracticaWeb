@@ -5,14 +5,37 @@ body {
   background-color: #f4f4f4;
 }
 
-header {
+/* Estilos para la parte superior */
+.header-top {
   background-color: #222;
-  color: #fff;
-  padding: 1em 1.5em;
+  color: white;
+  display: flex;
+  justify-content: flex-end; /* Alinea los enlaces a la derecha */
+  gap: 1.5em; /* Espaciado entre los enlaces */
+  padding: 10px 20px;
+}
+
+.header-top a {
+  color: white;
+  text-decoration: none;
+  padding: 3px 8px;
+  border-radius: 5px;
+  font-size: 0.85em; /* Letra más pequeña */
+  transition: background-color 0.3s;
+}
+
+.header-top a:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+/* Estilos para el logo y navegación */
+.logo-nav {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+  padding: 1em 2em;
+  background-color: #222;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
 }
 
 .logo {
@@ -41,6 +64,7 @@ nav a:hover {
   background-color: rgba(255, 255, 255, 0.1);
 }
 
+/* Estilos para las ventanas */
 .ventana {
   display: none;
   padding: 2em;
@@ -53,7 +77,8 @@ nav a:hover {
   opacity: 1;
 }
 
-#verinscripciones, #creartorneo {
+/* Mantener el estilo de los formularios y cuadros */
+#verinscripciones, #creartorneo, #registro, #torneos, #login {
   display: inline-block;
   width: 48%;
   padding: 2em;
@@ -95,6 +120,7 @@ button:hover {
   background-color: #e63e00;
 }
 
+/* Estilos de la sección de inicio */
 #home {
   text-align: center;
   background-image: url('fondo-bandera.jpg');
