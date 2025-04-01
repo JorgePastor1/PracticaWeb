@@ -5,7 +5,6 @@ body {
   background-color: #f4f4f4;
 }
 
-/* Encabezado */
 header {
   background-color: #222;
   color: #fff;
@@ -16,14 +15,12 @@ header {
   box-shadow: 0 2px 6px rgba(0,0,0,0.2);
 }
 
-/* Logo */
 .logo {
   width: 60px;
   height: auto;
   object-fit: contain;
 }
 
-/* Navegación */
 nav ul {
   list-style: none;
   display: flex;
@@ -44,7 +41,6 @@ nav a:hover {
   background-color: rgba(255, 255, 255, 0.1);
 }
 
-/* Ventanas */
 .ventana {
   display: none;
   padding: 2em;
@@ -57,7 +53,17 @@ nav a:hover {
   opacity: 1;
 }
 
-/* Formularios */
+#verinscripciones, #creartorneo {
+  display: inline-block;
+  width: 48%;
+  padding: 2em;
+  margin: 1%;
+  vertical-align: top;
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
 form {
   display: flex;
   flex-direction: column;
@@ -89,7 +95,6 @@ button:hover {
   background-color: #e63e00;
 }
 
-/* Estilos de la sección de inicio */
 #home {
   text-align: center;
   background-image: url('fondo-bandera.jpg');
