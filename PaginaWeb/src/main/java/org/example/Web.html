@@ -1,183 +1,164 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Torneos 360</title>
   <link rel="stylesheet" href="estilos.css">
   <script defer>
-    const ciudadesPorPais = {
-      espana: ['Madrid', 'Barcelona', 'Valencia', 'Sevilla', 'Bilbao'],
-      francia: ['París', 'Lyon', 'Marsella', 'Niza', 'Toulouse'],
-      italia: ['Roma', 'Milán', 'Nápoles', 'Turín', 'Florencia']
-    };
-
-    function actualizarCiudades() {
-      const pais = document.getElementById('paisSelect').value;
-      const ciudadSelect = document.getElementById('ciudadSelect');
-      ciudadSelect.innerHTML = '';
-      const ciudades = ciudadesPorPais[pais];
-      ciudades.forEach(ciudad => {
-        const option = document.createElement('option');
-        option.value = ciudad.toLowerCase();
-        option.textContent = ciudad;
-        ciudadSelect.appendChild(option);
+    // Función para mostrar la ventana activa
+    function mostrarVentana(id) {
+      document.querySelectorAll('.ventana').forEach(section => {
+        section.classList.remove('activa');
       });
-
-      const ciudadSelectTorneo = document.getElementById('ciudadSelectTorneo');
-      ciudadSelectTorneo.innerHTML = '';
-      ciudades.forEach(ciudad => {
-        const option = document.createElement('option');
-        option.value = ciudad.toLowerCase();
-        option.textContent = ciudad;
-        ciudadSelectTorneo.appendChild(option);
-      });
-    }
-
-    function mostrarVentana(ventana) {
-      const ventanas = document.querySelectorAll('.ventana');
-      ventanas.forEach(v => v.classList.remove('activa'));
-      document.getElementById(ventana).classList.add('activa');
+      document.getElementById(id).classList.add('activa');
     }
   </script>
 </head>
 <body>
-<header>
-  <div class="header-top">
-    <a href="#acercaDe" onclick="mostrarVentana('acercaDe')">Acerca de</a>
-    <a href="#ayuda" onclick="mostrarVentana('ayuda')">Ayuda</a>
-    <a href="#contacto" onclick="mostrarVentana('contacto')">Contacto</a>
-  </div>
-  <div class="logo-nav">
-    <img src="WhatsApp Image 2025-03-26 at 20.52.06.jpeg" alt="Logo Torneos 360" class="logo">
-    <nav>
-      <ul>
-        <li><a href="#home" onclick="mostrarVentana('home')">Inicio</a></li>
-        <li><a href="#registro" onclick="mostrarVentana('registro')">Registrar Equipo</a></li>
-        <li><a href="#torneos" onclick="mostrarVentana('torneos')">Inscribirse</a></li>
-        <li><a href="#verinscripciones" onclick="mostrarVentana('verinscripciones')">Ver Inscripciones</a></li>
-        <li><a href="#creartorneo" onclick="mostrarVentana('creartorneo')">Crear Torneo</a></li>
-        <li><a href="#login" onclick="mostrarVentana('login')">Login</a></li>
-      </ul>
-    </nav>
-  </div>
-</header>
-
-<main>
-  <section id="home" class="ventana activa">
-    <h1>Bienvenidos a Torneos360</h1>
-    <p>Somos una plataforma digital que se encarga de organizar todo tipo de torneos en España, Italia y Francia.</p>
-  </section>
-
-  <section id="acercaDe" class="ventana">
-    <h1>Acerca de</h1>
-    <p>Bienvenido a <span class="highlight">TorneosURJC</span>, el lugar donde la pasión por la competición cobra vida. Nuestra plataforma está diseñada para que jugadores de todos los niveles puedan crear y unirse a torneos de fútbol, pádel y tenis de manera sencilla y rápida.</p>
-    <h2>Nuestra Misión</h2>
-    <p>En <span class="highlight">TorneosURJC</span>, creemos que el deporte une a las personas y fomenta valores como la disciplina, el compañerismo y la superación personal...</p>
-    <h2>¿Qué ofrecemos?</h2>
-    <ul>
-      <li><b>Creación de torneos:</b> Diseña y gestiona torneos personalizados con reglas, formatos y niveles de dificultad adaptados a tu comunidad.</li>
-      <li><b>Inscripción fácil:</b> Encuentra torneos cerca de ti y únete con solo unos clics.</li>
-      <li><b>Gestión automatizada:</b> Nuestro sistema se encarga de clasificaciones, emparejamientos y seguimiento de resultados en tiempo real.</li>
-      <li><b>Conexión con la comunidad:</b> Comparte tu experiencia, encuentra nuevos rivales y haz crecer tu red deportiva.</li>
-    </ul>
-    <h2>¿Para quién es esta plataforma?</h2>
-    <ul>
-      <li> Tenistas que buscan mejorar su nivel compitiendo.</li>
-      <li> Aficionados al fútbol que quieren organizar torneos con amigos o comunidades locales.</li>
-      <li> Jugadores de pádel que buscan retos constantes.</li>
-      <li> Organizadores y clubes deportivos que desean digitalizar y simplificar la gestión de competiciones.</li>
-    </ul>
-    <h2>Únete a la experiencia</h2>
-    <p>Si eres un apasionado del deporte y te encanta la emoción de la competición, <span class="highlight">TorneoSpain</span> es tu lugar. Regístrate hoy y comienza a disfrutar del juego como nunca antes.</p>
-    <h2>📅 Crea. Compite. Gana.</h2>
-  </section>
-
-  <section id="ayuda" class="ventana">
-    <h2>Ayuda</h2>
-    <div class="help-box help-yellow">
-      <span class="help-icon">ℹ️</span>
-      <p>¿Necesitas ayuda? ¿Algo no funciona? Avísanos en <a href="mailto:support@example.com" class="help-link">escribiendo a soporte</a> y lo solucionaremos lo más rápido posible.</p>
+  <header>
+    <div class="header-top">
+      <a href="#acercaDe" onclick="mostrarVentana('acercaDe')">Acerca de</a>
+      <a href="#ayuda" onclick="mostrarVentana('ayuda')">Ayuda</a>
+      <a href="#contacto" onclick="mostrarVentana('contacto')">Contacto</a>
     </div>
-    <div class="help-box help-gray">
-      <span class="help-icon">💬</span>
-      <p>Recuerda que siempre puedes <a href="mailto:contact@example.com" class="help-link">ponerte en contacto con nosotros</a> para cualquier consulta (¡o para saludar!).</p>
-    </div>
-  </section>
+    <h1>Gestión de Torneos 360</h1>
+  </header>
 
-  <section id="registro" class="ventana">
-    <h2>Registrar Equipo</h2>
-    <form id="formRegistro">
-      <input type="text" name="equipo" placeholder="Nombre del equipo" required>
-      <input type="text" name="capitan" placeholder="Nombre del capitán" required>
-      <select name="deporte">
-        <option value="padel">Pádel</option>
-        <option value="futbol">Fútbol</option>
-        <option value="tenis">Tenis</option>
-      </select>
-      <button type="submit">Registrar</button>
-    </form>
-  </section>
+  <nav>
+    <ul>
+      <li><a href="#home" onclick="mostrarVentana('home')">Inicio</a></li>
+      <li><a href="#registro" onclick="mostrarVentana('registro')">Registrar Equipo</a></li>
+      <li><a href="#torneos" onclick="mostrarVentana('torneos')">Registrar Torneo</a></li>
+      <li><a href="#inscripciones" onclick="mostrarVentana('inscripciones')">Inscribir Equipo</a></li>
+      <li><a href="#verinscripciones" onclick="mostrarVentana('verinscripciones')">Ver Inscripciones</a></li>
+      <li><a href="#actualizarinscripcion" onclick="mostrarVentana('actualizarinscripcion')">Actualizar Inscripción</a></li>
+      <li><a href="#login" onclick="mostrarVentana('login')">Login</a></li>
+    </ul>
+  </nav>
 
-  <section id="torneos" class="ventana">
-    <h2>Inscripciones a Torneos</h2>
-    <form id="formInscripcion">
-      <input type="text" name="equipo" placeholder="Nombre del equipo" required>
-      <select id="paisSelect" name="pais" onchange="actualizarCiudades()">
-        <option value="espana">España</option>
-        <option value="francia">Francia</option>
-        <option value="italia">Italia</option>
-      </select>
-      <select id="ciudadSelect" name="ciudad"></select>
-      <select name="deporte">
-        <option value="futbol">Fútbol</option>
-        <option value="padel">Pádel</option>
-        <option value="tenis">Tenis</option>
-      </select>
-      <button type="submit">Inscribirse</button>
-    </form>
-  </section>
+  <main>
+    <!-- Sección de Inicio -->
+    <section id="home" class="ventana activa">
+      <h2>Bienvenidos a Torneos360</h2>
+      <p>Gestiona equipos, torneos e inscripciones de manera sencilla.</p>
+    </section>
 
-  <section id="verinscripciones" class="ventana">
-    <h2>Ver Inscripciones de Equipo</h2>
-    <input type="text" id="equipoConsulta" placeholder="Nombre del equipo">
-    <button onclick="verInscripcionesEquipo()">Consultar</button>
-    <ul id="listaInscripciones"></ul>
-  </section>
+    <!-- Sección de Acerca de -->
+   <section id="acercaDe" class="ventana">
+  <h2>Acerca de</h2>
+  <p>Bienvenido a <span class="highlight">Torneos360</span>, la plataforma digital líder para gestionar y organizar torneos deportivos de manera sencilla y eficiente. Si eres un apasionado del deporte y te gustaría organizar, gestionar o unirte a torneos de fútbol, pádel o tenis, ¡estás en el lugar adecuado!</p>
+  
+  <h3>Nuestra Visión</h3>
+  <p>En <span class="highlight">Torneos360</span>, creemos que el deporte no solo fomenta la salud, sino también el trabajo en equipo, la superación personal y el compañerismo. Nuestra misión es proporcionar a los jugadores y organizadores una plataforma intuitiva y accesible para organizar competiciones, gestionar equipos, llevar el seguimiento de los resultados y hacer crecer una comunidad deportiva sólida. Queremos que todo el proceso sea lo más fácil y divertido posible para todos los involucrados, desde aficionados hasta profesionales.</p>
+  
+  <h3>¿Cómo Funciona?</h3>
+  <p><span class="highlight">Torneos360</span> está diseñada para ser intuitiva y accesible a todos los usuarios, sin importar su experiencia tecnológica. El proceso para crear o unirse a un torneo es simple:</p>
+  <ul>
+    <li><b>Registro de equipos:</b> Los equipos se pueden registrar fácilmente proporcionando el nombre del equipo y los datos del capitán. Cada equipo tiene un perfil donde se almacenan los detalles de su participación en los torneos.</li>
+    <li><b>Inscripción en torneos:</b> Los equipos registrados pueden inscribirse en torneos organizados por otros usuarios o entidades deportivas. Solo necesitan elegir el torneo, el deporte y la ubicación, ¡y listo!</li>
+    <li><b>Seguimiento y resultados:</b> Una vez inscrito en el torneo, podrás seguir el progreso del equipo, ver los enfrentamientos, resultados, clasificaciones y estadísticas de manera en tiempo real.</li>
+    <li><b>Interacción con otros jugadores:</b> Además de participar, los equipos pueden interactuar con otros jugadores, compartir experiencias, organizar amistosos y expandir su red deportiva.</li>
+  </ul>
+  
+  <h3>Servicios que Ofrecemos</h3>
+  <ul>
+    <li><b>Organización de torneos:</b> Los organizadores pueden crear torneos personalizados con diversas modalidades, reglas, fechas y categorías. Todo el proceso se automatiza, lo que facilita la gestión de inscripciones, horarios y resultados.</li>
+    <li><b>Plataforma de estadísticas y resultados:</b> Seguimiento en tiempo real de los torneos y resultados de los partidos. Los jugadores y equipos tienen acceso a sus estadísticas, comparativas y clasificaciones, lo que les permite mejorar y competir de manera justa.</li>
+    <li><b>Red social deportiva:</b> Conecta con otros jugadores, intercambia estrategias, organiza encuentros amistosos o simplemente disfruta de la comunidad de Torneos360.</li>
+    <li><b>Notificaciones:</b> Los usuarios reciben notificaciones automáticas sobre el inicio de los torneos, el estado de sus inscripciones, los resultados de los partidos y otros eventos importantes dentro de la plataforma.</li>
+  </ul>
+  
+  <h3>¿Quiénes Somos?</h3>
+  <p>Somos un equipo de apasionados del deporte, con el objetivo de revolucionar la forma en la que los torneos deportivos se organizan y gestionan. Nos basamos en la simplicidad, la accesibilidad y la innovación para crear una plataforma que pueda ser utilizada tanto por principiantes como por jugadores más experimentados. Nuestra misión es brindar una experiencia de usuario única, donde la tecnología se pone al servicio del deporte y la comunidad.</p>
+  
+  <h3>Únete a Nosotros</h3>
+  <p>En <span class="highlight">Torneos360</span>, siempre estamos buscando mejorar y expandir nuestra plataforma. Si eres organizador de torneos, club deportivo, o simplemente un jugador que quiere disfrutar de más competiciones, regístrate hoy mismo y forma parte de nuestra comunidad.</p>
+  <p>¡Juntos podemos hacer crecer la pasión por el deporte!</p>
 
-  <section id="creartorneo" class="ventana">
-    <h2>Crear Torneo</h2>
-    <form id="formCrearTorneo">
-      <input type="text" name="nombreTorneo" placeholder="Nombre del torneo" required>
-      <input type="date" name="fecha" required>
-      <select name="pais">
-        <option value="espana">España</option>
-        <option value="francia">Francia</option>
-        <option value="italia">Italia</option>
-      </select>
-      <select name="ciudad" id="ciudadSelectTorneo"></select>
-      <select name="deporte">
-        <option value="futbol">Fútbol</option>
-        <option value="padel">Pádel</option>
-        <option value="tenis">Tenis</option>
-      </select>
-      <button type="submit">Crear Torneo</button>
-    </form>
-    <p id="mensajeTorneo" style="color: green; margin-top: 10px;"></p>
-  </section>
+  <h3>📅 Crea. Compite. Gana.</h3>
+</section>
 
-  <section id="login" class="ventana">
-    <h2>Iniciar Sesión</h2>
-    <form id="formLogin">
-      <input type="text" placeholder="Usuario" required>
-      <input type="password" placeholder="Contraseña" required>
-      <button type="submit">Entrar</button>
-    </form>
-  </section>
+    <!-- Sección de Login -->
+    <section id="login" class="ventana">
+      <h2>Iniciar Sesión</h2>
+      <form id="formLogin">
+        <input type="text" placeholder="Usuario" required />
+        <input type="password" placeholder="Contraseña" required />
+        <button type="submit">Entrar</button>
+      </form>
+    </section>
 
-</main>
+    <!-- Sección de Actualizar Inscripción -->
+    <section id="actualizarinscripcion" class="ventana">
+      <h2>Actualizar Inscripción</h2>
+      <form id="formActualizarInscripcion">
+        <input type="text" id="idInscripcion" placeholder="ID Inscripción" required />
+        <input type="text" id="nuevoEquipo" placeholder="Nuevo Nombre del Equipo" required />
+        <input type="text" id="nuevoTorneo" placeholder="Nuevo Nombre del Torneo" required />
+        <button type="submit">Actualizar Inscripción</button>
+      </form>
+    </section>
 
-<script src="script.js"></script>
+    <!-- Sección de Ver Inscripciones -->
+    <section id="verinscripciones" class="ventana">
+      <h2>Ver Inscripciones</h2>
+      <p>Aquí puedes consultar las inscripciones de tus equipos en los torneos.</p>
+      <input type="text" id="equipoConsulta" placeholder="Nombre del equipo" />
+      <button onclick="verInscripcionesEquipo()">Consultar</button>
+      <ul id="listaInscripciones"></ul>
+    </section>
+
+    <!-- Sección de Contacto -->
+    <section id="contacto" class="ventana">
+      <h2>Contacto</h2>
+      <p>Si tienes alguna duda, no dudes en ponerte en contacto con nosotros.</p>
+    </section>
+
+    <!-- Sección de Ayuda -->
+    <section id="ayuda" class="ventana">
+      <h2>Ayuda</h2>
+      <div class="help-box help-yellow">
+        <span class="help-icon">💡</span>
+        <p>¿Necesitas ayuda? Si algo no funciona correctamente, avísanos por <a href="mailto:support@example.com" class="help-link">correo electrónico</a> y lo solucionaremos lo más rápido posible.</p>
+      </div>
+      <div class="help-box help-gray">
+        <span class="help-icon">☁️</span>
+        <p>Recuerda que siempre puedes <a href="mailto:contact@example.com" class="help-link">ponerte en contacto con nosotros</a> para cualquier consulta.</p>
+      </div>
+    </section>
+
+    <!-- Sección de Registrar Equipo -->
+    <section id="registro" class="ventana">
+      <h2>Registrar Equipo</h2>
+      <form id="formRegistro">
+        <input type="text" name="equipo" placeholder="Nombre del equipo" required />
+        <input type="text" name="capitan" placeholder="Nombre del capitán" required />
+        <button type="submit">Registrar</button>
+      </form>
+    </section>
+
+    <!-- Sección de Registrar Torneo -->
+    <section id="torneos" class="ventana">
+      <h2>Registrar Torneo</h2>
+      <form id="formTorneo">
+        <input type="text" name="nombreTorneo" placeholder="Nombre del torneo" required />
+        <input type="date" name="fecha" required />
+        <button type="submit">Registrar Torneo</button>
+      </form>
+    </section>
+
+    <!-- Sección de Inscribir Equipo -->
+    <section id="inscripciones" class="ventana">
+      <h2>Inscribir Equipo en Torneo</h2>
+      <form id="formInscripcion">
+        <input type="text" name="equipo" placeholder="Nombre del equipo" required />
+        <button type="submit">Inscribir</button>
+      </form>
+    </section>
+
+  </main>
+
+  <script src="script.js"></script>
 </body>
 </html>
