@@ -44,18 +44,24 @@
 </head>
 <body>
 <header>
-  <img src="WhatsApp Image 2025-03-26 at 20.52.06.jpeg" alt="Logo Torneos 360" class="logo">
-  <nav>
-    <ul>
-      <li><a href="#home" onclick="mostrarVentana('home')">Inicio</a></li>
-      <li><a href="#acercaDe" onclick="mostrarVentana('acercaDe')">Acerca de</a></li>
-      <li><a href="#registro" onclick="mostrarVentana('registro')">Registrar Equipo</a></li>
-      <li><a href="#torneos" onclick="mostrarVentana('torneos')">Inscribirse</a></li>
-      <li><a href="#verinscripciones" onclick="mostrarVentana('verinscripciones')">Ver Inscripciones</a></li>
-      <li><a href="#creartorneo" onclick="mostrarVentana('creartorneo')">Crear Torneo</a></li>
-      <li><a href="#login" onclick="mostrarVentana('login')">Login</a></li>
-    </ul>
-  </nav>
+  <div class="header-top">
+    <a href="#acercaDe" onclick="mostrarVentana('acercaDe')">Acerca de</a>
+    <a href="#ayuda" onclick="mostrarVentana('ayuda')">Ayuda</a>
+    <a href="#contacto" onclick="mostrarVentana('contacto')">Contacto</a>
+  </div>
+  <div class="logo-nav">
+    <img src="WhatsApp Image 2025-03-26 at 20.52.06.jpeg" alt="Logo Torneos 360" class="logo">
+    <nav>
+      <ul>
+        <li><a href="#home" onclick="mostrarVentana('home')">Inicio</a></li>
+        <li><a href="#registro" onclick="mostrarVentana('registro')">Registrar Equipo</a></li>
+        <li><a href="#torneos" onclick="mostrarVentana('torneos')">Inscribirse</a></li>
+        <li><a href="#verinscripciones" onclick="mostrarVentana('verinscripciones')">Ver Inscripciones</a></li>
+        <li><a href="#creartorneo" onclick="mostrarVentana('creartorneo')">Crear Torneo</a></li>
+        <li><a href="#login" onclick="mostrarVentana('login')">Login</a></li>
+      </ul>
+    </nav>
+  </div>
 </header>
 
 <main>
@@ -86,6 +92,18 @@
     <h2>Únete a la experiencia</h2>
     <p>Si eres un apasionado del deporte y te encanta la emoción de la competición, <span class="highlight">TorneoSpain</span> es tu lugar. Regístrate hoy y comienza a disfrutar del juego como nunca antes.</p>
     <h2>📅 Crea. Compite. Gana.</h2>
+  </section>
+
+  <section id="ayuda" class="ventana">
+    <h2>Ayuda</h2>
+    <div class="help-box help-yellow">
+      <span class="help-icon">ℹ️</span>
+      <p>¿Necesitas ayuda? ¿Algo no funciona? Avísanos en <a href="mailto:support@example.com" class="help-link">escribiendo a soporte</a> y lo solucionaremos lo más rápido posible.</p>
+    </div>
+    <div class="help-box help-gray">
+      <span class="help-icon">💬</span>
+      <p>Recuerda que siempre puedes <a href="mailto:contact@example.com" class="help-link">ponerte en contacto con nosotros</a> para cualquier consulta (¡o para saludar!).</p>
+    </div>
   </section>
 
   <section id="registro" class="ventana">
@@ -157,6 +175,7 @@
       <button type="submit">Entrar</button>
     </form>
   </section>
+
 </main>
 
 <script src="script.js"></script>
