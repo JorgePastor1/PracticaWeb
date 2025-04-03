@@ -161,3 +161,21 @@ document.getElementById('formActualizarInscripcion').addEventListener('submit', 
     alert('Inscripción no encontrada.');
   }
 });
+
+// Mostrar el formulario de contacto cuando se hace clic en el correo electrónico
+function mostrarFormularioContacto() {
+  const form = document.getElementById('formularioContacto');
+  form.style.display = 'block'; // Mostrar el formulario
+}
+
+// Función para enviar el mensaje (simulado)
+function enviarMensaje() {
+  const mensaje = document.getElementById('mensaje').value;
+  if (mensaje.trim()) {
+    alert('Mensaje enviado: ' + mensaje);
+    document.getElementById('formularioContacto').style.display = 'none'; // Ocultar el formulario después de enviar
+    document.getElementById('mensaje').value = ''; // Limpiar el campo de mensaje
+  } else {
+    alert('Por favor, escribe un mensaje.');
+  }
+}
