@@ -112,19 +112,28 @@
       <p>Si tienes alguna duda o sugerencia, ponte en contacto con nosotros y te responderemos lo antes posible.</p>
     </section>
 
-    <!-- Sección de Ayuda -->
-    <section id="ayuda" class="ventana">
-      <h2>Ayuda</h2>
-      <div class="help-box help-yellow">
-        <span class="help-icon">💡</span>
-        <p>¿Necesitas ayuda? Si algo no funciona correctamente, avísanos por <a href="mailto:support@example.com" class="help-link">correo electrónico</a>.</p>
-      </div>
-      <div class="help-box help-gray">
-        <span class="help-icon">☁️</span>
-        <p>También puedes <a href="mailto:contact@example.com" class="help-link">ponerte en contacto con nosotros</a> para cualquier consulta.</p>
-      </div>
-    </section>
+ <!-- Sección de Ayuda -->
+<section id="ayuda" class="ventana">
+  <h2>Ayuda</h2>
+  <div class="help-box help-yellow">
+    <span class="help-icon">💡</span>
+    <p>¿Necesitas ayuda? Si algo no funciona correctamente, avísanos por 
+      <a href="javascript:void(0);" onclick="mostrarFormularioContacto()" class="help-link">correo electrónico</a>.
+    </p>
+  </div>
+  <div class="help-box help-gray">
+    <span class="help-icon">☁️</span>
+    <p>También puedes <a href="#contacto" onclick="mostrarVentana('contacto')" class="help-link">ponerte en contacto con nosotros</a> para cualquier consulta.</p>
+  </div>
+</section>
 
+   <!-- Formulario de contacto emergente -->
+<section id="formularioContacto" style="display: none;">
+  <h2>Formulario de Contacto</h2>
+  <textarea id="mensaje" placeholder="Escribe tu mensaje aquí..." rows="5" required></textarea>
+  <button onclick="enviarMensaje()">Enviar</button>
+</section>
+    
     <!-- Sección de Registrar Equipo -->
     <section id="registro" class="ventana">
       <h2>Registrar Equipo</h2>
