@@ -106,11 +106,31 @@
       <ul id="listaInscripciones"></ul>
     </section>
 
-    <!-- Sección de Contacto -->
-    <section id="contacto" class="ventana">
-      <h2>Contacto</h2>
-      <p>Si tienes alguna duda o sugerencia, ponte en contacto con nosotros y te responderemos lo antes posible.</p>
-    </section>
+<!-- Sección de Contacto -->
+<section id="contacto" class="ventana">
+  <h2>Contacto</h2>
+  <p>Ponte en contacto con nosotros usando el formulario:</p>
+  <form id="formContacto">
+    <div class="campo">
+      <label for="nombre">Nombre *</label>
+      <input type="text" id="nombre" placeholder="Nombre" required>
+      <input type="text" id="apellidos" placeholder="Apellidos" required>
+    </div>
+    <div class="campo">
+      <label for="email">Correo electrónico *</label>
+      <input type="email" id="email" placeholder="Correo electrónico" required>
+    </div>
+    <div class="campo">
+      <label for="asunto">Asunto *</label>
+      <input type="text" id="asunto" placeholder="Asunto" required>
+    </div>
+    <div class="campo">
+      <label for="mensaje">Comentario o mensaje *</label>
+      <textarea id="mensaje" placeholder="Escribe tu mensaje aquí..." rows="4" required></textarea>
+    </div>
+    <button type="submit">Enviar</button>
+  </form>
+</section>
 
  <!-- Sección de Ayuda -->
 <section id="ayuda" class="ventana">
@@ -127,12 +147,14 @@
   </div>
 </section>
 
-   <!-- Formulario de contacto emergente -->
+<!-- Formulario de contacto emergente -->
 <section id="formularioContacto" style="display: none;">
-  <h2>Formulario de Contacto</h2>
+  <h2>Escribir mensaje</h2>
   <textarea id="mensaje" placeholder="Escribe tu mensaje aquí..." rows="5" required></textarea>
   <button onclick="enviarMensaje()">Enviar</button>
+  <button onclick="cerrarFormulario()">Cerrar</button> <!-- Botón para cerrar el formulario -->
 </section>
+
     
     <!-- Sección de Registrar Equipo -->
     <section id="registro" class="ventana">
