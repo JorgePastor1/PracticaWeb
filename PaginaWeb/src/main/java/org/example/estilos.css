@@ -68,24 +68,13 @@ nav a:hover {
 }
 
 /* Estilos generales para todas las secciones con cuadros */
-#registro, #torneos, #inscripciones, #verinscripciones, #actualizarinscripcion, #login {
+#registro, #torneos, #inscripciones, #verinscripciones, #actualizarinscripcion, #login, #home, #ayuda, #acercaDe, #contacto {
   display: block;
   margin: 2em auto;
   padding: 2em;
-  background: blue;
+  background: white;
   border-radius: 12px;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-  max-width: 500px;
-  width: 100%;
-}
-
-/* Estilos específicos para las secciones de Ayuda, Acerca de y Contacto */
-#home, #ayuda, #acercaDe, #contacto {
-  background-color: white; /* Fondo blanco para estas secciones */
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-  border-radius: 12px;
-  padding: 2em;
-  margin: 2em auto;
   max-width: 500px;
   width: 100%;
 }
