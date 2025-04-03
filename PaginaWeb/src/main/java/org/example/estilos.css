@@ -177,3 +177,32 @@ button:hover {
 .help-link:hover {
   text-decoration: underline;
 }
+
+/* Formulario de Contacto emergente */
+#formularioContacto {
+  display: none;
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  max-width: 400px;
+  margin: 0 auto;
+}
+
+textarea {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 20px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+}
+
+button {
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  padding: 10px 15px;
+  font-weight: bold;
+  border-radius: 8px;
+  cursor: pointer;
+}
