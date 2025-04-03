@@ -178,13 +178,15 @@ button:hover {
   text-decoration: underline;
 }
 
-/* Formulario de Contacto emergente */
+/* ===========================
+   FORMULARIO DE CONTACTO EMERGENTE
+=========================== */
 #formularioContacto {
   display: none;
   background-color: #fff;
   padding: 20px;
   border-radius: 8px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 1);
   max-width: 400px;
   margin: 0 auto;
 }
@@ -205,4 +207,97 @@ button {
   font-weight: bold;
   border-radius: 8px;
   cursor: pointer;
+}
+
+/* ===========================
+   FORMULARIO DE CONTACTO
+=========================== */
+#formContacto {
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  max-width: 500px;
+  margin: 0 auto;
+}
+
+.campo {
+  margin-bottom: 15px;
+}
+
+.campo label {
+  font-size: 1rem;
+  margin-bottom: 5px;
+  display: block;
+}
+
+.campo input,
+.campo textarea {
+  width: 100%;
+  padding: 10px;
+  font-size: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+textarea {
+  resize: vertical;
+}
+
+button {
+  background-color: #28a745;
+  color: white;
+  border: none;
+  padding: 12px 20px;
+  font-size: 1rem;
+  cursor: pointer;
+  border-radius: 8px;
+  transition: background-color 0.3s;
+  width: 100%;
+}
+
+button:hover {
+  background-color: #218838;
+}
+
+/* ===========================
+   VENTANA DE VER INSCRIPCIONES
+=========================== */
+#verinscripciones .campo {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5em;
+  width: 100%;
+  max-width: 400px; /* Limitar el tamaño a un máximo razonable */
+  margin: 0 auto; /* Centrar el formulario */
+  padding: 20px;
+  background: white;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+#equipoConsulta {
+  padding: 0.5em;
+  font-size: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  width: 100%;
+  margin-bottom: 10px;
+}
+
+button {
+  background-color: #28a745;
+  color: white;
+  border: none;
+  cursor: pointer;
+  padding: 0.7em 1.2em;
+  font-size: 1rem;
+  font-weight: bold;
+  border-radius: 8px;
+  transition: background-color 0.3s;
+  width: 100%; /* Hace que el botón tenga el mismo ancho que el campo de texto */
+}
+
+button:hover {
+  background-color: #218838;
 }
