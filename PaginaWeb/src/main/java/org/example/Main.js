@@ -168,6 +168,12 @@ function mostrarFormularioContacto() {
   form.style.display = 'block'; // Mostrar el formulario
 }
 
+// Función para cerrar el formulario de contacto
+function cerrarFormulario() {
+  const form = document.getElementById('formularioContacto');
+  form.style.display = 'none'; // Ocultar el formulario
+}
+
 // Función para enviar el mensaje (simulado)
 function enviarMensaje() {
   const mensaje = document.getElementById('mensaje').value;
