@@ -23,7 +23,7 @@ public class TorneoController {
     @GetMapping("/nuevo")
     public String mostrarFormulario(Model model) {
         model.addAttribute("torneo", new Torneo());
-        return "FormularioTorneo";
+        return "FormularioTorneos";
     }
 
     @PostMapping
@@ -31,4 +31,5 @@ public class TorneoController {
         torneoService.guardar(torneo);
         return "redirect:/torneos";
     }
+
 }

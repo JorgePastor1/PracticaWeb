@@ -23,7 +23,7 @@ public class EquipoController {
     @GetMapping("/nuevo")
     public String mostrarFormulario(Model model) {
         model.addAttribute("equipo", new Equipo());
-        return "equipos/formulario";
+        return "FormularioEquipo";
     }
 
     @PostMapping
@@ -31,4 +31,5 @@ public class EquipoController {
         equipoService.guardar(equipo);
         return "redirect:/equipos";
     }
+
 }
