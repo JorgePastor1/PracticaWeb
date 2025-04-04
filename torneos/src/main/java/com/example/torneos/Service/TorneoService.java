@@ -32,4 +32,19 @@ public class TorneoService {
     public Torneo buscarPorId(Long id) {
         return torneos.stream().filter(t -> t.getId().equals(id)).findFirst().orElse(null);
     }
+
+    // ✅ Método para actualizar torneo
+    public void actualizar(Torneo torneoActualizado) {
+        for (int i = 0; i < torneos.size(); i++) {
+            if (torneos.get(i).getId().equals(torneoActualizado.getId())) {
+                torneos.set(i, torneoActualizado);
+                return;
+            }
+        }
+    }
+
+    // ❌ Método para eliminar torneo
+    public void eliminar(Long id) {
+        torneos.removeIf(t -> t.getId().equals(id));
+    }
 }

@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="es">
+<head th:replace="fragments/header :: head('Editar Equipo')"></head>
+<body>
+<div th:replace="fragments/header :: header"></div>
+
+<main style="max-width: 800px; margin: 40px auto; background: white; padding: 40px; border-radius: 10px;">
+    <h2>Editar Equipo</h2>
+
+    <form th:action="@{/equipos/actualizar}" th:object="${equipo}" method="post">
+        <input type="hidden" th:field="*{id}" />
+
+        <label for="nombre">Nombre del equipo:</label><br>
+        <input type="text" th:field="*{nombre}" required><br><br>
+
+        <label for="categoria">Categoría:</label><br>
+        <input type="text" th:field="*{categoria}" required><br><br>
+
+        <label for="ciudad">Ciudad:</label><br>
+        <input type="text" th:field="*{ciudad}" required><br><br>
+
+        <label for="numJugadores">Número de jugadores:</label><br>
+        <input type="number" th:field="*{numJugadores}" min="1" required><br><br>
+
+        <label for="nombreCapitan">Nombre del capitán:</label><br>
+        <input type="text" th:field="*{nombreCapitan}" required><br><br>
+
+        <button type="submit">Actualizar Equipo</button>
+    </form>
+
+    <p style="margin-top: 20px;">
+        <a th:href="@{/equipos}">← Volver a la lista de equipos</a>
+    </p>
+</main>
+
+<div th:replace="fragments/footer :: footer"></div>
+</body>
+</html>

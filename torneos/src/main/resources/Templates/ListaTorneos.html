@@ -15,6 +15,7 @@
                 <th>Ciudad</th>
                 <th>Coste Inscripción</th>
                 <th>Clasificación</th>
+                <th>Acciones</th>
             </tr>
         </thead>
         <tbody>
@@ -25,12 +26,23 @@
                 <td th:text="${torneo.ciudad}"></td>
                 <td th:text="${torneo.costeInscripcion} + ' €'"></td>
                 <td th:text="${torneo.clasificacion}"></td>
+                <td>
+                    <a th:href="@{'/torneos/editar/' + ${torneo.id}}" style="margin-right: 10px; color: #2980b9;">Editar</a>
+                    <a th:href="@{'/torneos/eliminar/' + ${torneo.id}}"
+                       onclick="return confirm('¿Estás seguro de que deseas eliminar este torneo?');"
+                       style="color: red;">Eliminar</a>
+                </td>
             </tr>
         </tbody>
     </table>
+
+    <div style="margin-top: 30px;">
+        <a th:href="@{/torneos/nuevo}" style="background-color: #3498db; color: white; padding: 10px 20px; border-radius: 5px; text-decoration: none;">
+            + Crear nuevo torneo
+        </a>
+    </div>
 </main>
 
 <div th:replace="fragments/footer :: footer"></div>
 </body>
 </html>
-    

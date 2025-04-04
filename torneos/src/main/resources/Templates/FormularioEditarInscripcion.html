@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="es">
+<head th:replace="fragments/header :: head('Editar Inscripción')"></head>
+<body>
+<div th:replace="fragments/header :: header"></div>
+
+<main style="max-width: 800px; margin: 40px auto; background: white; padding: 40px; border-radius: 10px;">
+    <h2>Editar Inscripción</h2>
+
+    <form th:action="@{/inscripciones/actualizar}" th:object="${inscripcion}" method="post">
+        <input type="hidden" th:field="*{id}" />
+
+        <label for="equipo">Equipo:</label><br>
+        <select id="equipo" th:field="*{equipo}" required>
+            <option th:each="equipo : ${equipos}" th:value="${equipo.id}" th:text="${equipo.nombre}"></option>
+        </select><br><br>
+
+        <label for="torneo">Torneo:</label><br>
+        <select id="torneo" th:field="*{torneo}" required>
+            <option th:each="torneo : ${torneos}" th:value="${torneo.id}" th:text="${torneo.deporte}"></option>
+        </select><br><br>
+
+        <label for="fechaInscripcion">Fecha de Inscripción:</label><br>
+        <input type="date" id="fechaInscripcion" th:field="*{fechaInscripcion}" required><br><br>
+
+        <label for="estado">Estado:</label><br>
+        <input type="text" id="estado" th:field="*{estado}" value="Pendiente"><br><br>
+
+        <button type="submit">Actualizar Inscripción</button>
+    </form>
+
+    <p style="margin-top: 20px;">
+        <a th:href="@{/inscripciones}">← Volver a la lista de inscripciones</a>
+    </p>
+</main>
+
+<div th:replace="fragments/footer :: footer"></div>
+</body>
+</html>

@@ -32,4 +32,28 @@ public class TorneoController {
         return "redirect:/torneos";
     }
 
+    // 🔄 Mostrar formulario de edición
+    @GetMapping("/editar/{id}")
+    public String mostrarFormularioEdicion(@PathVariable Long id, Model model) {
+        Torneo torneo = torneoService.buscarPorId(id);
+        if (torneo != null) {
+            model.addAttribute("torneo", torneo);
+            return "FormularioEditarTorneo";
+        }
+        return "redirect:/torneos";
+    }
+
+    // ✅ Procesar actualización
+    @PostMapping("/actualizar")
+    public String actualizarTorneo(@ModelAttribute Torneo torneo) {
+        torneoService.actualizar(torneo);
+        return "redirect:/torneos";
+    }
+
+    // ❌ Eliminar torneo
+    @GetMapping("/eliminar/{id}")
+    public String eliminarTorneo(@PathVariable Long id) {
+        torneoService.eliminar(id);
+        return "redirect:/torneos";
+    }
 }

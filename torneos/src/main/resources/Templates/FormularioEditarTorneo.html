@@ -1,13 +1,15 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" lang="es">
-<head th:replace="fragments/header :: head('Nuevo Torneo')"></head>
+<head th:replace="fragments/header :: head('Editar Torneo')"></head>
 <body>
 <div th:replace="fragments/header :: header"></div>
 
 <main style="max-width: 800px; margin: 40px auto; background: white; padding: 40px; border-radius: 10px;">
-    <h2>Crear Nuevo Torneo</h2>
+    <h2>Editar Torneo</h2>
 
-    <form th:action="@{/torneos}" th:object="${torneo}" method="post">
+    <form th:action="@{/torneos/actualizar}" th:object="${torneo}" method="post">
+        <input type="hidden" th:field="*{id}" />
+
         <label for="fecha">Fecha:</label><br>
         <input type="date" id="fecha" th:field="*{fecha}" required><br><br>
 
@@ -23,7 +25,7 @@
         <label for="clasificacion">Clasificación:</label><br>
         <input type="text" id="clasificacion" th:field="*{clasificacion}" value="Sin clasificar"><br><br>
 
-        <button type="submit">Guardar Torneo</button>
+        <button type="submit">Actualizar Torneo</button>
     </form>
 
     <p style="margin-top: 20px;">

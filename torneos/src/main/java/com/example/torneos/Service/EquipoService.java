@@ -26,6 +26,22 @@ public class EquipoService {
     }
 
     public Equipo buscarPorId(Long id) {
-        return equipos.stream().filter(e -> e.getId().equals(id)).findFirst().orElse(null);
+        return equipos.stream()
+                .filter(e -> e.getId().equals(id))
+                .findFirst()
+                .orElse(null);
+    }
+
+    public void actualizar(Equipo equipoActualizado) {
+        for (int i = 0; i < equipos.size(); i++) {
+            if (equipos.get(i).getId().equals(equipoActualizado.getId())) {
+                equipos.set(i, equipoActualizado);
+                return;
+            }
+        }
+    }
+
+    public void eliminar(Long id) {
+        equipos.removeIf(e -> e.getId().equals(id));
     }
 }
