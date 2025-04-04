@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="es">
+<head th:replace="fragments/header :: head('Lista de Torneos')"></head>
+<body>
+<div th:replace="fragments/header :: header"></div>
+
+<main style="max-width: 900px; margin: 40px auto; padding: 20px; background: white; border-radius: 10px;">
+    <h2>📋 Lista de Torneos</h2>
+    <table border="1" width="100%" style="border-collapse: collapse; margin-top: 20px;">
+        <thead style="background-color: #ecf0f1;">
+            <tr>
+                <th>ID</th>
+                <th>Fecha</th>
+                <th>Deporte</th>
+                <th>Ciudad</th>
+                <th>Coste Inscripción</th>
+                <th>Clasificación</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="torneo : ${torneos}">
+                <td th:text="${torneo.id}"></td>
+                <td th:text="${torneo.fecha}"></td>
+                <td th:text="${torneo.deporte}"></td>
+                <td th:text="${torneo.ciudad}"></td>
+                <td th:text="${torneo.costeInscripcion} + ' €'"></td>
+                <td th:text="${torneo.clasificacion}"></td>
+            </tr>
+        </tbody>
+    </table>
+</main>
+
+<div th:replace="fragments/footer :: footer"></div>
+</body>
+</html>
+    

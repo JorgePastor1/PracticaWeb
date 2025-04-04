@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="es">
+<head th:replace="fragments/header :: head('Inicio - Torneos 360')"></head>
+<body>
+    <div th:replace="fragments/header :: header"></div>
+
+    <main style="max-width: 900px; margin: 40px auto; background: white; padding: 40px; border-radius: 10px; box-shadow: 0 4px 10px rgba(0,0,0,0.05);">
+        <h2>Bienvenido a Torneos 360</h2>
+        <p>Esta plataforma te permite gestionar torneos deportivos de forma sencilla y eficiente. A continuación, te explicamos qué puedes hacer:</p>
+
+        <section style="margin-top: 30px;">
+            <h3>🏆 Crear Torneos</h3>
+            <p>Desde la opción <strong><a th:href="@{/torneos/nuevo}">"Nuevo Torneo"</a></strong> puedes registrar torneos indicando la fecha, deporte, ciudad, coste de inscripción y más.</p>
+        </section>
+
+        <section style="margin-top: 30px;">
+            <h3>👥 Añadir Equipos</h3>
+            <p>En la sección <strong><a th:href="@{/equipos/nuevo}">"Nuevo Equipo"</a></strong> puedes dar de alta equipos, incluyendo su nombre, categoría, ciudad, número de jugadores y el nombre del capitán.</p>
+        </section>
+
+        <section style="margin-top: 30px;">
+            <h3>📝 Inscribir Equipos en Torneos</h3>
+            <p>Usa <strong><a th:href="@{/inscripciones/nueva}">"Inscribir Equipo"</a></strong> para vincular un equipo a un torneo existente. Se registrará la fecha de inscripción y su estado.</p>
+        </section>
+
+        <section style="margin-top: 30px;">
+            <h3>📋 Ver Listas</h3>
+            <ul>
+                <li><a th:href="@{/equipos}">Lista de Equipos</a> — Visualiza todos los equipos registrados.</li>
+                <li><a th:href="@{/torneos}">Lista de Torneos</a> — Consulta los torneos creados, con sus detalles.</li>
+                <li><a th:href="@{/inscripciones}">Lista de Inscripciones</a> — Revisa qué equipos están inscritos en qué torneos.</li>
+            </ul>
+        </section>
+
+        <section style="margin-top: 40px;">
+            <p>¡Explora las funcionalidades desde el menú superior y empieza a organizar tus torneos de forma profesional!</p>
+        </section>
+    </main>
+
+    <div th:replace="fragments/footer :: footer"></div>
+</body>
+</html>

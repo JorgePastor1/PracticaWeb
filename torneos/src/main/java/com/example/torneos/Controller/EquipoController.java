@@ -1,28 +1,22 @@
 package com.example.torneos.Controller;
 
+import com.example.torneos.Service.EquipoService;
 import com.example.torneos.model.Equipo;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.ArrayList;
-import java.util.List;
 
 @Controller
 @RequestMapping("/equipos")
 public class EquipoController {
 
-    private List<Equipo> equipos = new ArrayList<>();
-    private Long siguienteId = 1L;
-
-    public EquipoController() {
-        // Ejemplo de equipo inicial
-        equipos.add(new Equipo(siguienteId++, "Los Tigres", "Juvenil", "Barcelona", 11, "Carlos Pérez"));
-    }
+    @Autowired
+    private EquipoService equipoService;
 
     @GetMapping
     public String listarEquipos(Model model) {
-        model.addAttribute("equipos", equipos);
+        model.addAttribute("equipos", equipoService.obtenerTodos());
         return "equipos/lista";
     }
 
@@ -34,8 +28,7 @@ public class EquipoController {
 
     @PostMapping
     public String guardarEquipo(@ModelAttribute Equipo equipo) {
-        equipo.setId(siguienteId++);
-        equipos.add(equipo);
+        equipoService.guardar(equipo);
         return "redirect:/equipos";
     }
 }
