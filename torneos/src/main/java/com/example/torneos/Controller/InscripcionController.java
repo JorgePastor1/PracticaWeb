@@ -1,4 +1,4 @@
-package com.example.torneos.controller;
+package com.example.torneos.Controller;
 
 import com.example.torneos.model.Equipo;
 import com.example.torneos.model.Inscripcion;
