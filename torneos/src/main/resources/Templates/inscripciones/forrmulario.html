@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Nueva Inscripción</title>
+    <link rel="stylesheet" href="/css/inscripciones.css">
+</head>
+<body>
+<div th:replace="fragments/header :: header"></div>
+<div class="container">
+    <h1>Nueva Inscripción</h1>
+
+    <!-- Mostrar el mensaje de error en caso de que no se encuentren los datos -->
+    <div th:if="${error}" class="error-message" style="color: red;">
+        <p th:text="${error}"></p>
+    </div>
+
+    <form th:action="@{/inscripciones}" method="post">
+        <label for="equipoId">Equipo:</label>
+        <select id="equipoId" name="equipoId" required>
+            <option value="" disabled selected>Selecciona un equipo</option>
+            <option th:each="equipo : ${equipos}"
+                    th:value="${equipo.id}"
+                    th:text="${equipo.nombre}"></option>
+        </select>
+
+        <label for="torneoId">Torneo:</label>
+        <select id="torneoId" name="torneoId" required>
+            <option value="" disabled selected>Selecciona un torneo</option>
+            <option th:each="torneo : ${torneos}"
+                    th:value="${torneo.id}"
+                    th:text="${torneo.deporte + ' - ' + torneo.ciudad}"></option>
+        </select>
+
+        <button type="submit" class="boton">Inscribir</button>
+    </form>
+
+    <a href="/inscripciones" class="boton-volver">← Volver a lista</a>
+<div th:replace="fragments/footer :: footer"></div>
+</body>
+</html>

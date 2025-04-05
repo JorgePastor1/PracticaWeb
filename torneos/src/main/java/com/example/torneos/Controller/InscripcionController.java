@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 @Controller
 @RequestMapping("/inscripciones")
@@ -37,12 +38,16 @@ public class InscripcionController {
     }
 
     @PostMapping
-    public String procesarInscripcion(@RequestParam Long equipoId, @RequestParam Long torneoId) {
+    public String procesarInscripcion(@RequestParam Long equipoId, @RequestParam Long torneoId, RedirectAttributes redirectAttributes) {
         Equipo equipo = equipoService.buscarPorId(equipoId);
         Torneo torneo = torneoService.buscarPorId(torneoId);
-        if (equipo != null && torneo != null) {
-            inscripcionService.inscribir(equipo, torneo);
+
+        if (equipo == null || torneo == null) {
+            redirectAttributes.addFlashAttribute("error", "El equipo o el torneo no son válidos.");
+            return "redirect:/inscripciones/nueva";
         }
+
+        inscripcionService.inscribir(equipo, torneo);
         return "redirect:/inscripciones";
     }
 }
