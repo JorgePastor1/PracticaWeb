@@ -1,14 +1,19 @@
 {
+    "version": "0.2.0",
     "configurations": [
-        {
-            "type": "java",
-            "name": "Spring Boot-TorneosApplication<torneos>",
-            "request": "launch",
-            "cwd": "${workspaceFolder}",
-            "mainClass": "com.example.torneos.TorneosApplication",
-            "projectName": "torneos",
-            "args": "",
-            "envFile": "${workspaceFolder}/.env"
-        }
+      
+      {
+        "type": "java",
+        "name": "Current File",
+        "request": "launch",
+        "mainClass": "${file}"
+      },
+      {
+        "type": "java",
+        "name": "TorneosApplication",
+        "request": "launch",
+        "mainClass": "com.example.torneos.TorneosApplication",
+        "projectName": "torneos"
+      }
     ]
-}
+  }
