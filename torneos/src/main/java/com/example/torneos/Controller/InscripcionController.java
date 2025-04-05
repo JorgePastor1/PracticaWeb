@@ -34,7 +34,7 @@ public class InscripcionController {
     public String mostrarFormulario(Model model) {
         model.addAttribute("equipos", equipoService.obtenerTodos());
         model.addAttribute("torneos", torneoService.obtenerTodos());
-        return "inscripciones/formulario";
+        return "inscripciones/crearinscripcion"; // <- actualizada la vista
     }
 
     @PostMapping
