@@ -31,3 +31,6 @@ build/
 
 ### VS Code ###
 .vscode/
+#Ignorar los settings y launch .json
+.vscode/settings.json
+.vscode/launch.json

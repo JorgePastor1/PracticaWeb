@@ -1,36 +1,36 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
-<head>
-    <meta charset="UTF-8">
-    <title>Lista de Inscripciones</title>
-    <link rel="stylesheet" href="/css/inscripciones.css">
-</head>
+<html xmlns:th="http://www.thymeleaf.org" lang="es">
+<head th:replace="fragments/header :: head('Lista de Inscripciones')"></head>
 <body>
-<div th:replace="fragments/header :: header"></div>
-<div class="container">
-    <h1>Lista de Inscripciones</h1>
-    <a href="/inscripciones/nueva" class="boton">+ Nueva Inscripción</a>
+    <div th:replace="fragments/header :: header"></div>
 
-    <table>
-        <thead>
-        <tr>
-            <th>ID</th>
-            <th>Equipo</th>
-            <th>Torneo</th>
-            <th>Fecha de Inscripción</th>
-            <th>Estado</th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr th:each="inscripcion : ${inscripciones}">
-            <td th:text="${inscripcion.id}"></td>
-            <td th:text="${inscripcion.equipo.nombre}"></td>
-            <td th:text="${inscripcion.torneo.deporte + ' - ' + inscripcion.torneo.ciudad}"></td>
-            <td th:text="${inscripcion.fechaInscripcion}"></td>
-            <td th:text="${inscripcion.estado}"></td>
-        </tr>
-        </tbody>
-    </table>
-<div th:replace="fragments/footer :: footer"></div>
+    <main>
+        <h1>Lista de Inscripciones</h1>
+
+        <div class="boton-crear">
+            <a href="/inscripciones/nueva" class="btn">+ Nueva Inscripción</a>
+        </div>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Equipo</th>
+                    <th>Torneo</th>
+                    <th>Fecha</th>
+                    <th>Estado</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="inscripcion : ${inscripciones}">
+                    <td th:text="${inscripcion.id}"></td>
+                    <td th:text="${inscripcion.equipo.nombre}"></td>
+                    <td th:text="${inscripcion.torneo.deporte + ' - ' + inscripcion.torneo.ciudad}"></td>
+                    <td th:text="${inscripcion.fechaInscripcion}"></td>
+                    <td th:text="${inscripcion.estado}"></td>
+                </tr>
+            </tbody>
+        </table>
+    </main>
 </body>
 </html>

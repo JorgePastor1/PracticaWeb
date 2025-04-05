@@ -1,88 +1,21 @@
-<!-- Fragmento de <head> -->
-    <head th:fragment="head(title)">
-        <meta charset="UTF-8">
-        <title th:text="${title}">Torneos 360</title>
-        <link rel="stylesheet" th:href="@{/css/estilos.css}">
-        <style>
-            /* Estilos específicos del navbar */
-            .navbar {
-                background-color: #2c3e50;
-                padding: 0.8rem 2rem;
-                display: flex;
-                justify-content: space-between;
-                align-items: center;
-                box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-            }
-    
-            .navbar .logo {
-                color: white;
-                font-size: 1.5rem;
-                font-weight: bold;
-                text-decoration: none;
-            }
-    
-            .navbar nav {
-                display: flex;
-                gap: 1rem;
-            }
-    
-            .navbar nav a {
-                color: white;
-                text-decoration: none;
-                padding: 8px 12px;
-                border-radius: 4px;
-                transition: background-color 0.3s;
-            }
-    
-            .navbar nav a:hover {
-                background-color: #1a252f;
-            }
-    
-            .navbar .menu-toggle {
-                display: none;
-            }
-    
-            @media (max-width: 768px) {
-                .navbar nav {
-                    display: none;
-                    flex-direction: column;
-                    background-color: #2c3e50;
-                    position: absolute;
-                    top: 60px;
-                    right: 0;
-                    width: 200px;
-                    padding: 1rem;
-                }
-    
-                .navbar nav.show {
-                    display: flex;
-                }
-    
-                .navbar .menu-toggle {
-                    display: block;
-                    background: none;
-                    border: none;
-                    color: white;
-                    font-size: 1.5rem;
-                    cursor: pointer;
-                }
-            }
-        </style>
-    </head>
-    
-    <!-- Fragmento de cabecera -->
-    <header th:fragment="header">
-        <div class="navbar">
-            <a th:href="@{/}" class="logo">Torneos 360</a>
-            <button class="menu-toggle" onclick="document.querySelector('.navbar nav').classList.toggle('show')">☰</button>
-            <nav>
-                <a th:href="@{/}">Inicio</a>
-                <a th:href="@{/equipos}">Equipos</a>
-                <a th:href="@{/torneos}">Torneos</a>
-                <a th:href="@{/inscripciones}">Inscripciones</a>
-                <a th:href="@{/equipos/nuevo}">Nuevo Equipo</a>
-                <a th:href="@{/torneos/nuevo}">Nuevo Torneo</a>
-            </nav>
-        </div>
-    </header>
-    
+<!-- Fragmento de head y cabecera -->
+<head th:fragment="head(title)">
+    <meta charset="UTF-8">
+    <title th:text="${title}">Torneos 360</title>
+    <link rel="stylesheet" th:href="@{/css/estilos.css}">
+</head>
+
+<header th:fragment="header">
+    <div class="navbar">
+        <a th:href="@{/}" class="logo">Torneos 360</a>
+        <button class="menu-toggle" onclick="document.querySelector('.navbar nav').classList.toggle('show')">☰</button>
+        <nav>
+            <a th:href="@{/}">Inicio</a>
+            <a th:href="@{/equipos}">Equipos</a>
+            <a th:href="@{/torneos}">Torneos</a>
+            <a th:href="@{/inscripciones}">Inscripciones</a>
+            <a th:href="@{/equipos/nuevo}">Nuevo Equipo</a>
+            <a th:href="@{/torneos/nuevo}">Nuevo Torneo</a>
+        </nav>
+    </div>
+</header>
