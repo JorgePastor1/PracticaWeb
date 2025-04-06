@@ -3,61 +3,70 @@ package com.example.torneos.Controller;
 import com.example.torneos.Service.EquipoService;
 import com.example.torneos.model.Equipo;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.server.ResponseStatusException;
 
-@Controller
-@RequestMapping("/equipos")
+import java.util.List;
+
+@RestController
+@RequestMapping("/api/equipos")
 public class EquipoController {
 
     @Autowired
     private EquipoService equipoService;
 
-    // Display list of teams
+    // Obtener todos los equipos
     @GetMapping
-    public String listarEquipos(Model model) {
-        model.addAttribute("equipos", equipoService.obtenerTodos());
-        return "ListaEquipos"; // Returns the view for displaying the list
+    public List<Equipo> listarEquipos() {
+        return equipoService.obtenerTodos();
     }
 
-    // Show form to create a new team
-    @GetMapping("/nuevo")
-    public String mostrarFormulario(Model model) {
-        model.addAttribute("equipo", new Equipo());
-        return "FormularioEquipo"; // Returns the form view for a new team
+    // Obtener un equipo específico por ID
+    @GetMapping("/{id}")
+    public Equipo obtenerEquipo(@PathVariable Long id) {
+        return equipoService.buscarPorId(id);
     }
 
-    // Process form to save a new team
+    // Crear un nuevo equipo
     @PostMapping
-    public String guardarEquipo(@ModelAttribute Equipo equipo) {
-        equipoService.guardar(equipo);
-        return "redirect:/equipos"; // Redirect to the team list after saving
+    public Equipo crearEquipo(@RequestBody Equipo equipo) {
+        return equipoService.guardar(equipo);
     }
 
-    // Show form to edit an existing team by ID
-    @GetMapping("/editar/{id}")
-    public String mostrarFormularioEdicion(@PathVariable Long id, Model model) {
-        Equipo equipo = equipoService.buscarPorId(id);
-        if (equipo != null) {
-            model.addAttribute("equipo", equipo);
-            return "FormularioEditarEquipo"; // Returns the edit form view
-        } else {
-            return "redirect:/equipos"; // Redirect if team not found
+    // Actualizar parcialmente un equipo (PATCH)
+    @PatchMapping("/{id}")
+    public Equipo actualizarEquipo(@PathVariable Long id, @RequestBody Equipo equipo) {
+        Equipo equipoExistente = equipoService.buscarPorId(id);
+        if (equipoExistente == null) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Equipo no encontrado");
         }
+
+        // Actualizamos solo los campos que fueron enviados en la solicitud PATCH
+        if (equipo.getNombre() != null) {
+            equipoExistente.setNombre(equipo.getNombre());
+        }
+        if (equipo.getCiudad() != null) {
+            equipoExistente.setCiudad(equipo.getCiudad());
+        }
+        if (equipo.getCategoria() != null) {
+            equipoExistente.setCategoria(equipo.getCategoria());
+        }
+        if (equipo.getNumJugadores() > 0) {
+            equipoExistente.setNumJugadores(equipo.getNumJugadores());
+        }
+        if (equipo.getNombreCapitan() != null) {
+            equipoExistente.setNombreCapitan(equipo.getNombreCapitan());
+        }
+
+        // Guardamos los cambios
+        equipoService.guardar(equipoExistente);
+        return equipoExistente;  // Retornamos el equipo actualizado en formato JSON
     }
 
-    // Process the team update form
-    @PostMapping("/actualizar")
-    public String actualizarEquipo(@ModelAttribute Equipo equipo) {
-        equipoService.actualizar(equipo);
-        return "redirect:/equipos"; // Redirect to team list after update
-    }
-
-    // Delete a team by ID
-    @GetMapping("/eliminar/{id}")
-    public String eliminarEquipo(@PathVariable Long id) {
+    // Eliminar un equipo
+    @DeleteMapping("/{id}")
+    public void eliminarEquipo(@PathVariable Long id) {
         equipoService.eliminar(id);
-        return "redirect:/equipos"; // Redirect to team list after deletion
     }
 }
