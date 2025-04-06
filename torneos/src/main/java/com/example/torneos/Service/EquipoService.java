@@ -14,7 +14,7 @@ public class EquipoService {
     private Long siguienteId = 1L;
 
     public EquipoService() {
-        equipos.add(new Equipo(siguienteId++, "Los Tigres", "Juvenil", "Barcelona", 11, "Carlos Pérez"));
+        equipos.add(new Equipo(siguienteId++, "Los Tigres", "Juvenil", "Barcelona", 11));
     }
 
     public List<Equipo> obtenerTodos() {

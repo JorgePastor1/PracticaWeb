@@ -9,20 +9,18 @@ public class Equipo {
     private String categoria;      // Category (e.g., U18, amateur, etc.)
     private String ciudad;         // City the team is from
     private int numJugadores;      // Number of players
-    private String nombreCapitan;  // Name of the captain
 
     // Default constructor (needed for frameworks like Spring)
     public Equipo() {
     }
 
     // Parameterized constructor for easier object creation
-    public Equipo(Long id, String nombre, String categoria, String ciudad, int numJugadores, String nombreCapitan) {
+    public Equipo(Long id, String nombre, String categoria, String ciudad, int numJugadores) {
         this.id = id;
         this.nombre = nombre;
         this.categoria = categoria;
         this.ciudad = ciudad;
         this.numJugadores = numJugadores;
-        this.nombreCapitan = nombreCapitan;
     }
 
     // Getters and setters for each field
@@ -67,14 +65,6 @@ public class Equipo {
         this.numJugadores = numJugadores;
     }
 
-    public String getNombreCapitan() {
-        return nombreCapitan;
-    }
-
-    public void setNombreCapitan(String nombreCapitan) {
-        this.nombreCapitan = nombreCapitan;
-    }
-
     // String representation of the object, useful for debugging/logging
     @Override
     public String toString() {
@@ -83,8 +73,7 @@ public class Equipo {
                 ", nombre='" + nombre + '\'' +
                 ", categoria='" + categoria + '\'' +
                 ", ciudad='" + ciudad + '\'' +
-                ", numJugadores=" + numJugadores +
-                ", nombreCapitan='" + nombreCapitan + '\'' +
+                ", numJugadores=" + numJugadores + '\'' +
                 '}';
     }
 }
