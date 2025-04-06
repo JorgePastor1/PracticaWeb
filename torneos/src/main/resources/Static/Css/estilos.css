@@ -1,10 +1,22 @@
+/* Fondo animado moderno */
 body {
     font-family: 'Segoe UI', sans-serif;
-    background-color: #f9f9f9;
     margin: 0;
     padding: 0;
+
+    background: linear-gradient(-45deg, #c2e9fb, #a1c4fd, #d4fc79, #96e6a1);
+    background-size: 400% 400%;
+    animation: gradientBG 15s ease infinite;
 }
 
+/* Animación de fondo */
+@keyframes gradientBG {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+/* NAVBAR */
 .navbar {
     background-color: #2c3e50;
     padding: 0.8rem 2rem;
@@ -42,6 +54,7 @@ body {
     display: none;
 }
 
+/* NAVBAR RESPONSIVO */
 @media (max-width: 768px) {
     .navbar nav {
         display: none;
@@ -66,4 +79,14 @@ body {
         font-size: 1.5rem;
         cursor: pointer;
     }
+}
+
+/* MAIN: fondo blanco, centrado y con sombra */
+main {
+    background: rgba(255, 255, 255, 0.95);
+    padding: 40px;
+    max-width: 1000px;
+    margin: 50px auto;
+    border-radius: 20px;
+    box-shadow: 0 8px 24px rgba(0,0,0,0.1);
 }

@@ -2,41 +2,73 @@
 <html xmlns:th="http://www.thymeleaf.org" lang="es">
 <head th:replace="fragments/header :: head('Inicio - Torneos 360')"></head>
 <body>
-    <div th:replace="fragments/header :: header"></div>
 
-    <main style="max-width: 900px; margin: 40px auto; background: white; padding: 40px; border-radius: 10px; box-shadow: 0 4px 10px rgba(0,0,0,0.05);">
-        <h2>Bienvenido a Torneos 360</h2>
-        <p>Esta plataforma te permite gestionar torneos deportivos de forma sencilla y eficiente. A continuación, te explicamos qué puedes hacer:</p>
+<!-- Navbar -->
+<div th:replace="fragments/header :: header"></div>
 
-        <section style="margin-top: 30px;">
-            <h3>🏆 Crear Torneos</h3>
-            <p>Desde la opción <strong><a th:href="@{/torneos/nuevo}">"Nuevo Torneo"</a></strong> puedes registrar torneos indicando la fecha, deporte, ciudad, coste de inscripción y más.</p>
-        </section>
+<!-- Contenido principal -->
+<main class="container my-5">
+    <div class="text-center mb-5">
+        <h1 class="display-4 text-primary">Bienvenido a Torneos 360</h1>
+        <p class="lead">Organiza torneos, gestiona equipos e inscripciones con estilo y eficiencia.</p>
+    </div>
 
-        <section style="margin-top: 30px;">
-            <h3>👥 Añadir Equipos</h3>
-            <p>En la sección <strong><a th:href="@{/equipos/nuevo}">"Nuevo Equipo"</a></strong> puedes dar de alta equipos, incluyendo su nombre, categoría, ciudad, número de jugadores y el nombre del capitán.</p>
-        </section>
+    <div class="row g-4">
+        <!-- Crear Torneos -->
+        <div class="col-md-6">
+            <div class="card shadow-sm h-100 border-0">
+                <div class="card-body">
+                    <h3 class="card-title text-success"><i class="fas fa-trophy me-2"></i>Crear Torneos</h3>
+                    <p class="card-text">Registra nuevos torneos con fecha, ciudad, deporte y coste de inscripción.</p>
+                    <a th:href="@{/torneos/nuevo}" class="btn btn-success">Nuevo Torneo</a>
+                </div>
+            </div>
+        </div>
 
-        <section style="margin-top: 30px;">
-            <h3>📝 Inscribir Equipos en Torneos</h3>
-            <p>Usa <strong><a th:href="@{/inscripciones/nueva}">"Inscribir Equipo"</a></strong> para vincular un equipo a un torneo existente. Se registrará la fecha de inscripción y su estado.</p>
-        </section>
+        <!-- Añadir Equipos -->
+        <div class="col-md-6">
+            <div class="card shadow-sm h-100 border-0">
+                <div class="card-body">
+                    <h3 class="card-title text-info"><i class="fas fa-users me-2"></i>Añadir Equipos</h3>
+                    <p class="card-text">Da de alta equipos incluyendo nombre, ciudad, categoría y capitán.</p>
+                    <a th:href="@{/equipos/nuevo}" class="btn btn-info text-white">Nuevo Equipo</a>
+                </div>
+            </div>
+        </div>
 
-        <section style="margin-top: 30px;">
-            <h3>📋 Ver Listas</h3>
-            <ul>
-                <li><a th:href="@{/equipos}">Lista de Equipos</a> — Visualiza todos los equipos registrados.</li>
-                <li><a th:href="@{/torneos}">Lista de Torneos</a> — Consulta los torneos creados, con sus detalles.</li>
-                <li><a th:href="@{/inscripciones}">Lista de Inscripciones</a> — Revisa qué equipos están inscritos en qué torneos.</li>
-            </ul>
-        </section>
+        <!-- Inscripciones -->
+        <div class="col-md-6">
+            <div class="card shadow-sm h-100 border-0">
+                <div class="card-body">
+                    <h3 class="card-title text-warning"><i class="fas fa-pen-to-square me-2"></i>Inscribir Equipos</h3>
+                    <p class="card-text">Vincula equipos a torneos y gestiona sus estados y fechas.</p>
+                    <a th:href="@{/inscripciones/nueva}" class="btn btn-warning text-white">Inscribir Equipo</a>
+                </div>
+            </div>
+        </div>
 
-        <section style="margin-top: 40px;">
-            <p>¡Explora las funcionalidades desde el menú superior y empieza a organizar tus torneos de forma profesional!</p>
-        </section>
-    </main>
+        <!-- Ver Listas -->
+        <div class="col-md-6">
+            <div class="card shadow-sm h-100 border-0">
+                <div class="card-body">
+                    <h3 class="card-title text-secondary"><i class="fas fa-list-check me-2"></i>Listados</h3>
+                    <ul class="list-unstyled">
+                        <li><a th:href="@{/equipos}">Lista de Equipos</a></li>
+                        <li><a th:href="@{/torneos}">Lista de Torneos</a></li>
+                        <li><a th:href="@{/inscripciones}">Lista de Inscripciones</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
 
-    <div th:replace="fragments/footer :: footer"></div>
+    <div class="text-center mt-5">
+        <p class="text-muted">Explora todas las funcionalidades desde el menú superior. <br> ¡Haz que tus torneos brillen!</p>
+    </div>
+</main>
+
+<!-- Footer (si tienes uno) -->
+<div th:replace="fragments/footer :: footer"></div>
+
 </body>
 </html>
