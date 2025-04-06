@@ -30,7 +30,9 @@
                     <td th:text="${equipo.numJugadores}" style="padding: 10px;"></td>
                     <td th:text="${equipo.nombreCapitan}" style="padding: 10px;"></td>
                     <td style="padding: 10px;">
+                        <!-- Enlace para editar el equipo -->
                         <a th:href="@{'/equipos/editar/' + ${equipo.id}}" style="margin-right: 10px; color: #2980b9;">Editar</a>
+                        <!-- Enlace para eliminar el equipo -->
                         <a th:href="@{'/equipos/eliminar/' + ${equipo.id}}" 
                            onclick="return confirm('¿Estás seguro de que deseas eliminar este equipo?');" 
                            style="color: red;">Eliminar</a>
