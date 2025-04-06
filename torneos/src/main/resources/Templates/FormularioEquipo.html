@@ -1,7 +1,8 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" lang="es">
 <head th:replace="fragments/header :: head('Nuevo Equipo')"></head>
-<body>
+<body style="margin: 0; background: linear-gradient(-45deg, #2c3e50, #ffffff); font-family: sans-serif;">
+
 <div th:replace="fragments/header :: header"></div>
 
 <main style="max-width: 800px; margin: 40px auto; background: white; padding: 40px; border-radius: 10px;">
@@ -23,10 +24,11 @@
         <label for="nombreCapitan">Nombre del capitán:</label><br>
         <input type="text" id="nombreCapitan" th:field="*{nombreCapitan}" required><br><br>
 
-        <button type="submit">Guardar Equipo</button>
+        <button type="submit" style="background-color: #2c3e50; color: white; padding: 10px 20px; border: none; border-radius: 5px; cursor: pointer;">
+            Guardar Equipo</button>
     </form>
 
-    <p style="margin-top: 20px;"><a th:href="@{/equipos}">← Volver a la lista de equipos</a></p>
+    <p style="margin-top: 20px;"><a th:href="@{/equipos}" style="text-decoration: none; color: #2980b9;">← Ver la lista de equipos</a></p>
 </main>
 
 <div th:replace="fragments/footer :: footer"></div>
