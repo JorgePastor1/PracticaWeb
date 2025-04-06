@@ -13,24 +13,32 @@ public class Torneo {
     private String ciudad;                   // City where the tournament takes place
     private List<Equipo> equipos;            // List of registered teams
     private double costeInscripcion;         // Registration cost per team
-    private String clasificacion;            // Optional: current ranking or classification
+    private String nombre;                  //Name of tournament
 
     // Default constructor (required for frameworks and serialization)
     public Torneo() {
     }
 
     // Parameterized constructor for creating fully initialized instances
-    public Torneo(Long id, LocalDate fecha, String deporte, String ciudad, List<Equipo> equipos, double costeInscripcion, String clasificacion) {
+    public Torneo(Long id, LocalDate fecha, String deporte, String ciudad, List<Equipo> equipos, double costeInscripcion, String nombre) {
         this.id = id;
         this.fecha = fecha;
         this.deporte = deporte;
         this.ciudad = ciudad;
         this.equipos = equipos;
         this.costeInscripcion = costeInscripcion;
-        this.clasificacion = clasificacion;
+        this.nombre = nombre;
     }
 
     // Getters and Setters
+
+    public String getNombre(){
+        return nombre;
+    }
+
+    public void setNombre(String nombre){
+        this.nombre = nombre;
+    }
 
     public Long getId() {
         return id;
@@ -80,25 +88,19 @@ public class Torneo {
         this.costeInscripcion = costeInscripcion;
     }
 
-    public String getClasificacion() {
-        return clasificacion;
-    }
-
-    public void setClasificacion(String clasificacion) {
-        this.clasificacion = clasificacion;
-    }
 
     // Custom string representation of the tournament
     @Override
     public String toString() {
         return "Torneo{" +
                 "id=" + id +
+                ", nombre=" + nombre +
                 ", fecha=" + fecha +
                 ", deporte='" + deporte + '\'' +
                 ", ciudad='" + ciudad + '\'' +
                 ", equipos=" + equipos +
                 ", costeInscripcion=" + costeInscripcion +
-                ", clasificacion='" + clasificacion + '\'' +
+                '\'' +
                 '}';
     }
 }

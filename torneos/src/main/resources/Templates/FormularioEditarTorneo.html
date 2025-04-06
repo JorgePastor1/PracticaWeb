@@ -14,6 +14,9 @@
         <label for="fecha">Fecha:</label><br>
         <input type="date" id="fecha" th:field="*{fecha}" required><br><br>
 
+        <label for="nombre">Nombre:</label><br>
+        <input type="text" id="nombre" th:field="*{nombre}" required><br><br>
+
         <label for="deporte">Deporte:</label><br>
         <input type="text" id="deporte" th:field="*{deporte}" required><br><br>
 
@@ -22,9 +25,6 @@
 
         <label for="costeInscripcion">Coste de Inscripción (€):</label><br>
         <input type="number" id="costeInscripcion" th:field="*{costeInscripcion}" min="0" step="0.01" required><br><br>
-
-        <label for="clasificacion">Clasificación:</label><br>
-        <input type="text" id="clasificacion" th:field="*{clasificacion}" value="Sin clasificar"><br><br>
 
         <button type="submit" style="background-color: #2c3e50; color: white; padding: 10px 20px; border: none; border-radius: 5px; cursor: pointer;">Actualizar Torneo</button>
     </form>

@@ -14,50 +14,50 @@ public class EquipoController {
     @Autowired
     private EquipoService equipoService;
 
-    // Display list of teams
+    // Mostrar lista de equipos
     @GetMapping
     public String listarEquipos(Model model) {
         model.addAttribute("equipos", equipoService.obtenerTodos());
-        return "ListaEquipos"; // Returns the view for displaying the list
+        return "ListaEquipos";
     }
 
-    // Show form to create a new team
+    // Mostrar formulario para crear un nuevo equipo
     @GetMapping("/nuevo")
     public String mostrarFormulario(Model model) {
         model.addAttribute("equipo", new Equipo());
-        return "FormularioEquipo"; // Returns the form view for a new team
+        return "FormularioEquipo";
     }
 
-    // Process form to save a new team
+    // Procesar formulario para guardar equipo
     @PostMapping
     public String guardarEquipo(@ModelAttribute Equipo equipo) {
         equipoService.guardar(equipo);
-        return "redirect:/equipos"; // Redirect to the team list after saving
+        return "redirect:/equipos";
     }
 
-    // Show form to edit an existing team by ID
     @GetMapping("/editar/{id}")
     public String mostrarFormularioEdicion(@PathVariable Long id, Model model) {
         Equipo equipo = equipoService.buscarPorId(id);
         if (equipo != null) {
             model.addAttribute("equipo", equipo);
-            return "FormularioEditarEquipo"; // Returns the edit form view
+            return "FormularioEditarEquipo";
         } else {
-            return "redirect:/equipos"; // Redirect if team not found
+            return "redirect:/equipos";
         }
     }
 
-    // Process the team update form
+
+    // Procesar edición del equipo
     @PostMapping("/actualizar")
     public String actualizarEquipo(@ModelAttribute Equipo equipo) {
         equipoService.actualizar(equipo);
-        return "redirect:/equipos"; // Redirect to team list after update
+        return "redirect:/equipos";
     }
 
-    // Delete a team by ID
+    // Eliminar equipo por ID
     @GetMapping("/eliminar/{id}")
     public String eliminarEquipo(@PathVariable Long id) {
         equipoService.eliminar(id);
-        return "redirect:/equipos"; // Redirect to team list after deletion
+        return "redirect:/equipos";
     }
 }
