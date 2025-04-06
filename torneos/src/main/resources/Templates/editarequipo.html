@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="es">
+<head th:replace="fragments/header :: head('Editar Equipo')"></head>
+<body style="margin: 0; background: linear-gradient(-45deg, #2c3e50, #ffffff); font-family: sans-serif;">
+
+<div class="wrapper">
+    <div th:replace="fragments/header :: header"></div>
+
+    <main class="container my-5">
+        <h2>Editar Equipo</h2>
+
+        <form id="editForm" method="POST">
+            <input type="hidden" id="equipoId" name="id" th:value="${equipo.id}">
+            
+            <label for="nombre">Nombre:</label>
+            <input type="text" id="nombre" name="nombre" th:value="${equipo.nombre}" required>
+            
+            <label for="ciudad">Ciudad:</label>
+            <input type="text" id="ciudad" name="ciudad" th:value="${equipo.ciudad}">
+            
+            <button type="submit">Actualizar</button>
+        </form>
+    </main>
+</div>
+
+<div th:replace="fragments/footer :: footer"></div>
+
+<script>
+document.getElementById('editForm').addEventListener('submit', function(event) {
+    event.preventDefault();
+
+    const id = document.getElementById('equipoId').value;
+    const nombre = document.getElementById('nombre').value;
+    const ciudad = document.getElementById('ciudad').value;
+
+    fetch(/api/equipos/$,{id}, {
+        method: 'PATCH',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ nombre, ciudad })
+    })
+    .then(response => response.json())
+    .then(data => {
+        alert('Equipo actualizado');
+        window.location.href = '/equipos';  // Redirige a la lista de equipos
+    })
+    .catch(error => {
+        console.error('Error:', error);
+    });
+});
+</script>
+
+</body>
+</html>
