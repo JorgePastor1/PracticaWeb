@@ -21,14 +21,6 @@
   <div class="filters" style="display: flex; flex-wrap: wrap; gap: 1rem; margin-bottom: 2rem;">
     <input type="text" id="filtroNombre" placeholder="Buscar por nombre..."
            style="padding: 0.5rem; border-radius: 8px; border: 1px solid #ccc; flex: 1; min-width: 150px;" />
-    
-    <select id="filtroCategoria" style="padding: 0.5rem; border-radius: 8px; border: 1px solid #ccc; flex: 1; min-width: 150px;">
-      <option value="">Categoría</option>
-      <option value="Infantil">Infantil</option>
-      <option value="Cadete">Cadete</option>
-      <option value="Juvenil">Juvenil</option>
-      <option value="Senior">Senior</option>
-    </select>
 
     <select id="filtroDeporte" style="padding: 0.5rem; border-radius: 8px; border: 1px solid #ccc; flex: 1; min-width: 150px;">
       <option value="">Deporte</option>
@@ -42,6 +34,15 @@
       <option value="España">España</option>
       <option value="Francia">Francia</option>
       <option value="Portugal">Portugal</option>
+    </select>
+
+    <select id="filtroCiudad" style="padding: 0.5rem; border-radius: 8px; border: 1px solid #ccc; flex: 1; min-width: 150px;">
+      <option value="">Ciudad</option>
+      <option value="Madrid">Madrid</option>
+      <option value="Barcelona">Barcelona</option>
+      <option value="Lisboa">Lisboa</option>
+      <option value="Oporto">Oporto</option>
+      <option value="París">París</option>
     </select>
   </div>
 
@@ -57,32 +58,32 @@
 <!-- SCRIPT -->
 <script>
   const torneos = [
-    { nombre: 'Copa Primavera', categoria: 'Infantil', deporte: 'Fútbol', pais: 'España' },
-    { nombre: 'Torneo de Verano', categoria: 'Juvenil', deporte: 'Baloncesto', pais: 'España' },
-    { nombre: 'Liga Local', categoria: 'Senior', deporte: 'Fútbol', pais: 'Portugal' },
-    { nombre: 'Volei Playa', categoria: 'Juvenil', deporte: 'Voleibol', pais: 'España' },
-    { nombre: 'Campeonato Cadete', categoria: 'Cadete', deporte: 'Fútbol', pais: 'Francia' },
-    { nombre: 'Open Junior', categoria: 'Cadete', deporte: 'Baloncesto', pais: 'Portugal' },
+    { nombre: 'Copa Primavera', deporte: 'Fútbol', pais: 'España', ciudad: 'Madrid' },
+    { nombre: 'Torneo de Verano', deporte: 'Baloncesto', pais: 'España', ciudad: 'Barcelona' },
+    { nombre: 'Liga Local', deporte: 'Fútbol', pais: 'Portugal', ciudad: 'Oporto' },
+    { nombre: 'Volei Playa', deporte: 'Voleibol', pais: 'España', ciudad: 'Barcelona' },
+    { nombre: 'Campeonato Cadete', deporte: 'Fútbol', pais: 'Francia', ciudad: 'París' },
+    { nombre: 'Open Junior', deporte: 'Baloncesto', pais: 'Portugal', ciudad: 'Lisboa' },
   ];
 
   const lista = document.getElementById('listaTorneos');
   const filtroNombre = document.getElementById('filtroNombre');
-  const filtroCategoria = document.getElementById('filtroCategoria');
   const filtroDeporte = document.getElementById('filtroDeporte');
   const filtroPais = document.getElementById('filtroPais');
+  const filtroCiudad = document.getElementById('filtroCiudad');
 
   function mostrarTorneos() {
     lista.innerHTML = '';
     const nombre = filtroNombre.value.toLowerCase();
-    const categoria = filtroCategoria.value;
     const deporte = filtroDeporte.value;
     const pais = filtroPais.value;
+    const ciudad = filtroCiudad.value;
 
     const filtrados = torneos.filter(t =>
       t.nombre.toLowerCase().includes(nombre) &&
-      (categoria === '' || t.categoria === categoria) &&
       (deporte === '' || t.deporte === deporte) &&
-      (pais === '' || t.pais === pais)
+      (pais === '' || t.pais === pais) &&
+      (ciudad === '' || t.ciudad === ciudad)
     );
 
     if (filtrados.length === 0) {
@@ -106,7 +107,7 @@
       div.innerHTML = `
         <div>
           <strong>${t.nombre}</strong><br/>
-          Categoría: ${t.categoria} | Deporte: ${t.deporte} | País: ${t.pais}
+          Deporte: ${t.deporte} | País: ${t.pais} | Ciudad: ${t.ciudad}
         </div>
         <div style="display: flex; gap: 0.5rem;">
           <button style="background-color: #2c3e50; color: white; padding: 0.5rem 1rem; border: none; border-radius: 8px;">Ver inscritos</button>
@@ -118,9 +119,9 @@
   }
 
   filtroNombre.addEventListener('input', mostrarTorneos);
-  filtroCategoria.addEventListener('change', mostrarTorneos);
   filtroDeporte.addEventListener('change', mostrarTorneos);
   filtroPais.addEventListener('change', mostrarTorneos);
+  filtroCiudad.addEventListener('change', mostrarTorneos);
 
   mostrarTorneos(); // Mostrar todos al inicio
 </script>
