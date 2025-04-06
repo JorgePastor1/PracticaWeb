@@ -1,53 +1,55 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" lang="es">
-<head th:replace="fragments/header :: head('Lista de Equipos')"></head>
-<body style="margin: 0; background: linear-gradient(-45deg, #2c3e50, #ffffff); font-family: sans-serif;">
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Lista de Equipos</title>
+    <style>
+        table, th, td {
+            border: 1px solid black;
+            border-collapse: collapse;
+            padding: 8px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Equipos Registrados</h1>
+    <table id="equiposTable">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Nombre</th>
+                <th>Ciudad</th>
+            </tr>
+        </thead>
+        <tbody>
+            <!-- Aquí se insertarán los equipos con JS -->
+        </tbody>
+    </table>
 
-<div class="wrapper">
-    <div th:replace="fragments/header :: header"></div>
-
-    <main class="container my-5 equipos-container">
-        <h2>Lista de Equipos Registrados</h2>
-
-        <table style="width: 100%; border-collapse: collapse; margin-top: 20px;">
-            <thead style="background-color: #2c3e50; color: white;">
-                <tr>
-                    <th style="padding: 10px;">ID</th>
-                    <th style="padding: 10px;">Nombre</th>
-                    <th style="padding: 10px;">Categoría</th>
-                    <th style="padding: 10px;">Ciudad</th>
-                    <th style="padding: 10px;">Jugadores</th>
-                    <th style="padding: 10px;">Capitán</th>
-                    <th style="padding: 10px;">Acciones</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr th:each="equipo : ${equipos}" style="border-bottom: 1px solid #ccc;">
-                    <td th:text="${equipo.id}" style="padding: 10px;"></td>
-                    <td th:text="${equipo.nombre}" style="padding: 10px;"></td>
-                    <td th:text="${equipo.categoria}" style="padding: 10px;"></td>
-                    <td th:text="${equipo.ciudad}" style="padding: 10px;"></td>
-                    <td th:text="${equipo.numJugadores}" style="padding: 10px;"></td>
-                    <td th:text="${equipo.nombreCapitan}" style="padding: 10px;"></td>
-                    <td style="padding: 10px;">
-                        <a th:href="@{'/equipos/editar/' + ${equipo.id}}" style="margin-right: 10px; color: #2980b9;">Editar</a>
-                        <a th:href="@{'/equipos/eliminar/' + ${equipo.id}}" 
-                           onclick="return confirm('¿Estás seguro de que deseas eliminar este equipo?');" 
-                           style="color: red;">Eliminar</a>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
-
-        <div style="margin-top: 30px;">
-            <a th:href="@{/equipos/nuevo}" style="background-color: #2c3e50; color: white; padding: 10px 20px; border-radius: 5px; text-decoration: none;">
-                + Registrar nuevo equipo
-            </a>
-        </div>
-    </main>
-</div>
-
-<div th:replace="fragments/footer :: footer"></div>
-
+    <script>
+        fetch('/api/equipos')
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error("Error al obtener los equipos");
+                }
+                return response.json();
+            })
+            .then(data => {
+                const tbody = document.querySelector("#equiposTable tbody");
+                data.forEach(equipo => {
+                    const row = document.createElement("tr");
+                    row.innerHTML = `
+                        <td>${equipo.id}</td>
+                        <td>${equipo.nombre}</td>
+                        <td>${equipo.ciudad}</td>
+                    `;
+                    tbody.appendChild(row);
+                });
+            })
+            .catch(error => {
+                console.error(error);
+                document.body.innerHTML += "<p style='color:red;'>Error cargando los equipos.</p>";
+            });
+    </script>
 </body>
 </html>
