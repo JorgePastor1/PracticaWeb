@@ -20,11 +20,11 @@ public class EquipoService {
         return equipos;
     }
 
-    public void guardar(Equipo equipo) {
-        equipo.setId(siguienteId++);
-        equipos.add(equipo);
+    public Equipo guardar(Equipo equipo) {
+        equipo.setId(siguienteId++); 
+        equipos.add(equipo); 
+        return equipo;  
     }
-
     public Equipo buscarPorId(Long id) {
         return equipos.stream()
                 .filter(e -> e.getId().equals(id))
