@@ -8,7 +8,7 @@
     body {
       margin: 0;
       font-family: Arial, sans-serif;
-      background: linear-gradient(to right,, #2c3e50, #ffffff);
+      background: linear-gradient(to right, #74ebd5, #ACB6E5);
     }
 
     header, footer {
@@ -108,122 +108,121 @@
 </head>
 <body>
 
-  <!-- HEADER -->
-  <header>
-    <div style="display: flex; justify-content: space-between; align-items: center;">
-      <h2 style="margin: 0; font-size: 1.5rem;">Torneos 360</h2>
-      <nav>
-        <a href="index.html">Inicio</a>
-        <a href="torneos.html">Torneos</a>
-        <a href="inscripcion.html">Inscripción</a>
-        <a href="ayuda.html">Ayuda</a>
-        <a href="contacto.html">Contacto</a>
-      </nav>
-    </div>
-  </header>
+<!-- HEADER -->
+<div th:replace="fragments/header :: header"></div>
 
-  <!-- MAIN -->
-  <main>
-    <h1>Inscripción a Torneos</h1>
+<!-- MAIN -->
+<main style="max-width: 1200px; margin: 40px auto; background: white; padding: 40px; border-radius: 10px;">
 
-    <div class="filters">
-      <input type="text" id="filtroNombre" placeholder="Buscar por nombre..." />
-      
-      <select id="filtroCategoria">
-        <option value="">Categoría</option>
-        <option value="Infantil">Infantil</option>
-        <option value="Cadete">Cadete</option>
-        <option value="Juvenil">Juvenil</option>
-        <option value="Senior">Senior</option>
-      </select>
+  <h1 style="text-align: center; margin-bottom: 2rem;">Inscripción a Torneos</h1>
 
-      <select id="filtroDeporte">
-        <option value="">Deporte</option>
-        <option value="Fútbol">Fútbol</option>
-        <option value="Baloncesto">Baloncesto</option>
-        <option value="Voleibol">Voleibol</option>
-      </select>
+  <!-- FILTROS -->
+  <div class="filters" style="display: flex; flex-wrap: wrap; gap: 1rem; margin-bottom: 2rem;">
+    <input type="text" id="filtroNombre" placeholder="Buscar por nombre..."
+           style="padding: 0.5rem; border-radius: 8px; border: 1px solid #ccc; flex: 1; min-width: 150px;" />
+    
+    <select id="filtroCategoria" style="padding: 0.5rem; border-radius: 8px; border: 1px solid #ccc; flex: 1; min-width: 150px;">
+      <option value="">Categoría</option>
+      <option value="Infantil">Infantil</option>
+      <option value="Cadete">Cadete</option>
+      <option value="Juvenil">Juvenil</option>
+      <option value="Senior">Senior</option>
+    </select>
 
-      <select id="filtroPais">
-        <option value="">País</option>
-        <option value="España">España</option>
-        <option value="Francia">Francia</option>
-        <option value="Portugal">Portugal</option>
-      </select>
-    </div>
+    <select id="filtroDeporte" style="padding: 0.5rem; border-radius: 8px; border: 1px solid #ccc; flex: 1; min-width: 150px;">
+      <option value="">Deporte</option>
+      <option value="Fútbol">Fútbol</option>
+      <option value="Baloncesto">Baloncesto</option>
+      <option value="Voleibol">Voleibol</option>
+    </select>
 
-    <div id="listaTorneos">
-      <!-- Aquí se mostrarán los torneos -->
-    </div>
-  </main>
+    <select id="filtroPais" style="padding: 0.5rem; border-radius: 8px; border: 1px solid #ccc; flex: 1; min-width: 150px;">
+      <option value="">País</option>
+      <option value="España">España</option>
+      <option value="Francia">Francia</option>
+      <option value="Portugal">Portugal</option>
+    </select>
+  </div>
 
-  <!-- FOOTER -->
-  <footer>
-    <div>
-      <p>&copy; 2025 Torneos 360. Todos los derechos reservados.</p>
-      <p>Desarrollado por tu equipo de confianza 😎</p>
-    </div>
-  </footer>
+  <!-- LISTA TORNEOS -->
+  <div id="listaTorneos">
+    <!-- Torneos aparecerán aquí -->
+  </div>
+</main>
 
-  <!-- SCRIPT -->
-  <script>
-    const torneos = [
-      { nombre: 'Copa Primavera', categoria: 'Infantil', deporte: 'Fútbol', pais: 'España' },
-      { nombre: 'Torneo de Verano', categoria: 'Juvenil', deporte: 'Baloncesto', pais: 'España' },
-      { nombre: 'Liga Local', categoria: 'Senior', deporte: 'Fútbol', pais: 'Portugal' },
-      { nombre: 'Volei Playa', categoria: 'Juvenil', deporte: 'Voleibol', pais: 'España' },
-      { nombre: 'Campeonato Cadete', categoria: 'Cadete', deporte: 'Fútbol', pais: 'Francia' },
-      { nombre: 'Open Junior', categoria: 'Cadete', deporte: 'Baloncesto', pais: 'Portugal' },
-    ];
+<!-- FOOTER -->
+<div th:replace="fragments/footer :: footer"></div>
 
-    const lista = document.getElementById('listaTorneos');
-    const filtroNombre = document.getElementById('filtroNombre');
-    const filtroCategoria = document.getElementById('filtroCategoria');
-    const filtroDeporte = document.getElementById('filtroDeporte');
-    const filtroPais = document.getElementById('filtroPais');
+<!-- SCRIPT -->
+<script>
+  const torneos = [
+    { nombre: 'Copa Primavera', categoria: 'Infantil', deporte: 'Fútbol', pais: 'España' },
+    { nombre: 'Torneo de Verano', categoria: 'Juvenil', deporte: 'Baloncesto', pais: 'España' },
+    { nombre: 'Liga Local', categoria: 'Senior', deporte: 'Fútbol', pais: 'Portugal' },
+    { nombre: 'Volei Playa', categoria: 'Juvenil', deporte: 'Voleibol', pais: 'España' },
+    { nombre: 'Campeonato Cadete', categoria: 'Cadete', deporte: 'Fútbol', pais: 'Francia' },
+    { nombre: 'Open Junior', categoria: 'Cadete', deporte: 'Baloncesto', pais: 'Portugal' },
+  ];
 
-    function mostrarTorneos() {
-      lista.innerHTML = '';
-      const nombre = filtroNombre.value.toLowerCase();
-      const categoria = filtroCategoria.value;
-      const deporte = filtroDeporte.value;
-      const pais = filtroPais.value;
+  const lista = document.getElementById('listaTorneos');
+  const filtroNombre = document.getElementById('filtroNombre');
+  const filtroCategoria = document.getElementById('filtroCategoria');
+  const filtroDeporte = document.getElementById('filtroDeporte');
+  const filtroPais = document.getElementById('filtroPais');
 
-      const filtrados = torneos.filter(t =>
-        t.nombre.toLowerCase().includes(nombre) &&
-        (categoria === '' || t.categoria === categoria) &&
-        (deporte === '' || t.deporte === deporte) &&
-        (pais === '' || t.pais === pais)
-      );
+  function mostrarTorneos() {
+    lista.innerHTML = '';
+    const nombre = filtroNombre.value.toLowerCase();
+    const categoria = filtroCategoria.value;
+    const deporte = filtroDeporte.value;
+    const pais = filtroPais.value;
 
-      if (filtrados.length === 0) {
-        lista.innerHTML = '<p>No se encontraron torneos.</p>';
-        return;
-      }
+    const filtrados = torneos.filter(t =>
+      t.nombre.toLowerCase().includes(nombre) &&
+      (categoria === '' || t.categoria === categoria) &&
+      (deporte === '' || t.deporte === deporte) &&
+      (pais === '' || t.pais === pais)
+    );
 
-      filtrados.forEach(t => {
-        const div = document.createElement('div');
-        div.className = 'torneo';
-        div.innerHTML = `
-          <div class="torneo-info">
-            <strong>${t.nombre}</strong><br/>
-            Categoría: ${t.categoria} | Deporte: ${t.deporte} | País: ${t.pais}
-          </div>
-          <div class="torneo-buttons">
-            <button class="ver">Ver inscritos</button>
-            <button class="inscribir">Inscribir equipo</button>
-          </div>
-        `;
-        lista.appendChild(div);
-      });
+    if (filtrados.length === 0) {
+      lista.innerHTML = '<p>No se encontraron torneos.</p>';
+      return;
     }
 
-    filtroNombre.addEventListener('input', mostrarTorneos);
-    filtroCategoria.addEventListener('change', mostrarTorneos);
-    filtroDeporte.addEventListener('change', mostrarTorneos);
-    filtroPais.addEventListener('change', mostrarTorneos);
+    filtrados.forEach(t => {
+      const div = document.createElement('div');
+      div.className = 'torneo';
+      div.style = `
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 1rem;
+        border: 1px solid #ddd;
+        border-radius: 10px;
+        margin-bottom: 1rem;
+        background-color: #f8f9fa;
+      `;
+      div.innerHTML = `
+        <div>
+          <strong>${t.nombre}</strong><br/>
+          Categoría: ${t.categoria} | Deporte: ${t.deporte} | País: ${t.pais}
+        </div>
+        <div style="display: flex; gap: 0.5rem;">
+          <button style="background-color: #2c3e50; color: white; padding: 0.5rem 1rem; border: none; border-radius: 8px;">Ver inscritos</button>
+          <button style="background-color: #28A745; color: white; padding: 0.5rem 1rem; border: none; border-radius: 8px;">Inscribir equipo</button>
+        </div>
+      `;
+      lista.appendChild(div);
+    });
+  }
 
-    mostrarTorneos(); // Mostrar todos al inicio
-  </script>
+  filtroNombre.addEventListener('input', mostrarTorneos);
+  filtroCategoria.addEventListener('change', mostrarTorneos);
+  filtroDeporte.addEventListener('change', mostrarTorneos);
+  filtroPais.addEventListener('change', mostrarTorneos);
+
+  mostrarTorneos(); // Mostrar todos al inicio
+</script>
+
 </body>
 </html>
