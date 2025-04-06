@@ -90,3 +90,23 @@ main {
     border-radius: 20px;
     box-shadow: 0 8px 24px rgba(0,0,0,0.1);
 }
+
+/* NUEVOS ESTILOS APLICADOS */
+
+/* Color de texto general */
+body, main, p, h1, h2, h3, h4, h5, h6, li, a, .card-text {
+    color: #2c3e50;
+}
+
+/* Evitar que iconos pierdan su color original */
+i {
+    color: inherit !important;
+}
+
+/* Estilo del título principal */
+.display-4.text-primary {
+    color: #2c3e50 !important;
+    text-transform: uppercase;
+    font-weight: 800;
+    letter-spacing: 1px;
+}
