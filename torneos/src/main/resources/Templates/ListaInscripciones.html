@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="es">
+<head th:replace="fragments/header :: head('Lista de Inscripciones')"></head>
+<body style="margin: 0; background: linear-gradient(-45deg, #2c3e50, #ffffff);">
+
+<div class="wrapper">
+    <div th:replace="fragments/header :: header"></div>
+
+    <main style="max-width: 1300px; margin: 40px auto; padding: 20px; background: white; border-radius: 10px;">
+        <h2>Lista de Inscripciones</h2>
+        <table style="width: 100%; border-collapse: collapse; margin-top: 20px;">
+            <thead style="background-color: #2c3e50; color: white;">
+                <tr>
+                    <th style="padding: 10px;">ID</th>
+                    <th style="padding: 10px;">Equipo</th>
+                    <th style="padding: 10px;">Torneo</th>
+                    <th style="padding: 10px;">Fecha</th>
+                    <th style="padding: 10px;">Estado</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="inscripcion : ${inscripciones}" style="border-bottom: 1px solid #ccc;">
+                    <td th:text="${inscripcion.id}" style="padding: 10px;"></td>
+                    <td th:text="${inscripcion.equipo.nombre}" style="padding: 10px;"></td>
+                    <td th:text="${inscripcion.torneo.nombre}" style="padding: 10px;"></td>
+                    <td th:text="${inscripcion.fecha}" style="padding: 10px;"></td>
+                    <td th:text="${inscripcion.estado}" style="padding: 10px;"></td>
+                </tr>
+            </tbody>
+        </table>
+
+        <!-- Si necesitas un botón de acción, descomenta esto:
+        <div style="margin-top: 30px;">
+            <a th:href="@{/inscripciones/nueva}" style="background-color: #2c3e50; color: white; padding: 10px 20px; border-radius: 5px; text-decoration: none;">
+                + Nueva inscripción
+            </a>
+        </div>
+        -->
+    </main>
+</div>
+
+<div th:replace="fragments/footer :: footer"></div>
+
+</body>
+</html>
