@@ -15,7 +15,7 @@ public class TorneoService {
 
     public TorneoService() {
         torneos.add(new Torneo(
-                siguienteId++, LocalDate.of(2025, 5, 15), "Fútbol", "Madrid", new ArrayList<>(), 100.0, "Sin clasificar", "Torneo de Invierno"
+                siguienteId++, LocalDate.of(2025, 5, 15), "Fútbol", "Madrid", new ArrayList<>(), 100.0, "Torneo de Invierno"
         ));
     }
 
