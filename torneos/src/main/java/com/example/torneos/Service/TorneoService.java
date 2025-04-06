@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 @Service
 public class TorneoService {
@@ -23,10 +24,11 @@ public class TorneoService {
         return torneos;
     }
 
-    public void guardar(Torneo torneo) {
+    public Torneo guardar(Torneo torneo) {
         torneo.setId(siguienteId++);
         torneo.setEquipos(new ArrayList<>());
         torneos.add(torneo);
+        return torneo;
     }
 
     public Torneo buscarPorId(Long id) {
@@ -34,13 +36,14 @@ public class TorneoService {
     }
 
     // ✅ Método para actualizar torneo
-    public void actualizar(Torneo torneoActualizado) {
+    public Torneo actualizar(Torneo torneoActualizado) {
         for (int i = 0; i < torneos.size(); i++) {
             if (torneos.get(i).getId().equals(torneoActualizado.getId())) {
                 torneos.set(i, torneoActualizado);
-                return;
+                return torneoActualizado;
             }
         }
+        return torneoActualizado;
     }
 
     // ❌ Método para eliminar torneo
@@ -58,14 +61,8 @@ public class TorneoService {
                 case "nombre":
                     torneo.setNombre((String) value);
                     break;
-                case "categoria":
-                    torneo.setCategoria((String) value);
-                    break;
-                case "lugar":
-                    torneo.setLugar((String) value);
-                    break;
                 case "fecha":
-                    torneo.setFecha((String) value);
+                    torneo.setFecha((LocalDate) value);
                     break;
                 default:
                     break;
