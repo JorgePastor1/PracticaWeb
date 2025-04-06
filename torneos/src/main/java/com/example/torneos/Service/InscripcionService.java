@@ -68,7 +68,7 @@ public class InscripcionService {
                     // Aquí podrías enlazar con el torneo si lo necesitas
                     break;
                 case "fechaInscripcion":
-                    inscripcion.setFechaInscripcion((String) value);
+                    inscripcion.setFechaInscripcion((LocalDate) value);
                     break;
                 default:
                     break;
