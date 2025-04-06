@@ -11,6 +11,28 @@
       background: linear-gradient(to right, #74ebd5, #ACB6E5);
     }
 
+    header, footer {
+      background: linear-gradient(to right, #74ebd5, #ACB6E5);
+      padding: 1rem 0;
+    }
+
+    header div, footer div {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 1rem;
+    }
+
+    header nav {
+      display: flex;
+      gap: 1rem;
+    }
+
+    header a {
+      text-decoration: none;
+      color: black;
+      font-weight: bold;
+    }
+
     main {
       max-width: 1200px;
       margin: 50px auto;
@@ -76,25 +98,57 @@
       background-color: #28A745;
       color: white;
     }
+
+    footer p {
+      margin: 0.2rem 0;
+      text-align: center;
+      font-size: 0.9rem;
+    }
   </style>
 </head>
 <body>
+
+  <!-- HEADER -->
+  <header>
+    <div style="display: flex; justify-content: space-between; align-items: center;">
+      <h2 style="margin: 0; font-size: 1.5rem;">Torneos 360</h2>
+      <nav>
+        <a href="index.html">Inicio</a>
+        <a href="torneos.html">Torneos</a>
+        <a href="inscripcion.html">Inscripción</a>
+        <a href="ayuda.html">Ayuda</a>
+        <a href="contacto.html">Contacto</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- MAIN -->
   <main>
     <h1>Inscripción a Torneos</h1>
 
     <div class="filters">
       <input type="text" id="filtroNombre" placeholder="Buscar por nombre..." />
+      
       <select id="filtroCategoria">
         <option value="">Categoría</option>
         <option value="Infantil">Infantil</option>
+        <option value="Cadete">Cadete</option>
         <option value="Juvenil">Juvenil</option>
         <option value="Senior">Senior</option>
       </select>
+
       <select id="filtroDeporte">
         <option value="">Deporte</option>
         <option value="Fútbol">Fútbol</option>
         <option value="Baloncesto">Baloncesto</option>
         <option value="Voleibol">Voleibol</option>
+      </select>
+
+      <select id="filtroPais">
+        <option value="">País</option>
+        <option value="España">España</option>
+        <option value="Francia">Francia</option>
+        <option value="Portugal">Portugal</option>
       </select>
     </div>
 
@@ -103,29 +157,43 @@
     </div>
   </main>
 
+  <!-- FOOTER -->
+  <footer>
+    <div>
+      <p>&copy; 2025 Torneos 360. Todos los derechos reservados.</p>
+      <p>Desarrollado por tu equipo de confianza 😎</p>
+    </div>
+  </footer>
+
+  <!-- SCRIPT -->
   <script>
     const torneos = [
-      { nombre: 'Copa Primavera', categoria: 'Infantil', deporte: 'Fútbol' },
-      { nombre: 'Torneo de Verano', categoria: 'Juvenil', deporte: 'Baloncesto' },
-      { nombre: 'Liga Local', categoria: 'Senior', deporte: 'Fútbol' },
-      { nombre: 'Volei Playa', categoria: 'Juvenil', deporte: 'Voleibol' },
+      { nombre: 'Copa Primavera', categoria: 'Infantil', deporte: 'Fútbol', pais: 'España' },
+      { nombre: 'Torneo de Verano', categoria: 'Juvenil', deporte: 'Baloncesto', pais: 'España' },
+      { nombre: 'Liga Local', categoria: 'Senior', deporte: 'Fútbol', pais: 'Portugal' },
+      { nombre: 'Volei Playa', categoria: 'Juvenil', deporte: 'Voleibol', pais: 'España' },
+      { nombre: 'Campeonato Cadete', categoria: 'Cadete', deporte: 'Fútbol', pais: 'Francia' },
+      { nombre: 'Open Junior', categoria: 'Cadete', deporte: 'Baloncesto', pais: 'Portugal' },
     ];
 
     const lista = document.getElementById('listaTorneos');
     const filtroNombre = document.getElementById('filtroNombre');
     const filtroCategoria = document.getElementById('filtroCategoria');
     const filtroDeporte = document.getElementById('filtroDeporte');
+    const filtroPais = document.getElementById('filtroPais');
 
     function mostrarTorneos() {
       lista.innerHTML = '';
       const nombre = filtroNombre.value.toLowerCase();
       const categoria = filtroCategoria.value;
       const deporte = filtroDeporte.value;
+      const pais = filtroPais.value;
 
       const filtrados = torneos.filter(t =>
         t.nombre.toLowerCase().includes(nombre) &&
         (categoria === '' || t.categoria === categoria) &&
-        (deporte === '' || t.deporte === deporte)
+        (deporte === '' || t.deporte === deporte) &&
+        (pais === '' || t.pais === pais)
       );
 
       if (filtrados.length === 0) {
@@ -139,7 +207,7 @@
         div.innerHTML = `
           <div class="torneo-info">
             <strong>${t.nombre}</strong><br/>
-            Categoría: ${t.categoria} | Deporte: ${t.deporte}
+            Categoría: ${t.categoria} | Deporte: ${t.deporte} | País: ${t.pais}
           </div>
           <div class="torneo-buttons">
             <button class="ver">Ver inscritos</button>
@@ -153,6 +221,7 @@
     filtroNombre.addEventListener('input', mostrarTorneos);
     filtroCategoria.addEventListener('change', mostrarTorneos);
     filtroDeporte.addEventListener('change', mostrarTorneos);
+    filtroPais.addEventListener('change', mostrarTorneos);
 
     mostrarTorneos(); // Mostrar todos al inicio
   </script>
