@@ -52,4 +52,29 @@ public class InscripcionService {
             inscripcion.setFechaInscripcion(fechaInscripcion);
         }
     }
+    public Inscripcion actualizarParcial(Long id, Map<String, Object> updates) {
+        Inscripcion inscripcion = buscarPorId(id);
+        if (inscripcion == null) {
+            return null;
+        }
+
+        updates.forEach((key, value) -> {
+            switch (key) {
+                case "equipo":
+                    // Aquí podrías enlazar con el equipo si lo necesitas
+                    break;
+                case "torneo":
+                    // Aquí podrías enlazar con el torneo si lo necesitas
+                    break;
+                case "fechaInscripcion":
+                    inscripcion.setFechaInscripcion((String) value);
+                    break;
+                default:
+                    break;
+            }
+        });
+
+        return inscripcion;
+    }
+
 }

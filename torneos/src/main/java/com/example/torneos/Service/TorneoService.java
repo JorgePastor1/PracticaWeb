@@ -47,4 +47,32 @@ public class TorneoService {
     public void eliminar(Long id) {
         torneos.removeIf(t -> t.getId().equals(id));
     }
+    public Torneo actualizarParcial(Long id, Map<String, Object> updates) {
+        Torneo torneo = buscarPorId(id);
+        if (torneo == null) {
+            return null;
+        }
+
+        updates.forEach((key, value) -> {
+            switch (key) {
+                case "nombre":
+                    torneo.setNombre((String) value);
+                    break;
+                case "categoria":
+                    torneo.setCategoria((String) value);
+                    break;
+                case "lugar":
+                    torneo.setLugar((String) value);
+                    break;
+                case "fecha":
+                    torneo.setFecha((String) value);
+                    break;
+                default:
+                    break;
+            }
+        });
+
+        return torneo;
+    }
+
 }
