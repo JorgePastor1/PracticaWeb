@@ -3,19 +3,23 @@ package com.example.torneos.model;
 import java.time.LocalDate;
 import java.util.List;
 
+// Model class representing a tournament
 public class Torneo {
 
-    private Long id;
-    private LocalDate fecha;
-    private String deporte;
-    private String ciudad;
-    private List<Equipo> equipos;
-    private double costeInscripcion;
-    private String clasificacion;
+    // Fields
+    private Long id;                          // Unique identifier for the tournament
+    private LocalDate fecha;                 // Date of the tournament
+    private String deporte;                  // Type of sport (e.g., football, basketball)
+    private String ciudad;                   // City where the tournament takes place
+    private List<Equipo> equipos;            // List of registered teams
+    private double costeInscripcion;         // Registration cost per team
+    private String clasificacion;            // Optional: current ranking or classification
 
+    // Default constructor (required for frameworks and serialization)
     public Torneo() {
     }
 
+    // Parameterized constructor for creating fully initialized instances
     public Torneo(Long id, LocalDate fecha, String deporte, String ciudad, List<Equipo> equipos, double costeInscripcion, String clasificacion) {
         this.id = id;
         this.fecha = fecha;
@@ -26,7 +30,7 @@ public class Torneo {
         this.clasificacion = clasificacion;
     }
 
-    // Getters y Setters
+    // Getters and Setters
 
     public Long getId() {
         return id;
@@ -84,6 +88,7 @@ public class Torneo {
         this.clasificacion = clasificacion;
     }
 
+    // Custom string representation of the tournament
     @Override
     public String toString() {
         return "Torneo{" +

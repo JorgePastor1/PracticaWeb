@@ -1,17 +1,21 @@
 package com.example.torneos.model;
 
+// Model class representing a team (Equipo)
 public class Equipo {
 
+    // Fields representing team properties
     private Long id;
-    private String nombre;
-    private String categoria;
-    private String ciudad;
-    private int numJugadores;
-    private String nombreCapitan;
+    private String nombre;         // Team name
+    private String categoria;      // Category (e.g., U18, amateur, etc.)
+    private String ciudad;         // City the team is from
+    private int numJugadores;      // Number of players
+    private String nombreCapitan;  // Name of the captain
 
+    // Default constructor (needed for frameworks like Spring)
     public Equipo() {
     }
 
+    // Parameterized constructor for easier object creation
     public Equipo(Long id, String nombre, String categoria, String ciudad, int numJugadores, String nombreCapitan) {
         this.id = id;
         this.nombre = nombre;
@@ -21,7 +25,7 @@ public class Equipo {
         this.nombreCapitan = nombreCapitan;
     }
 
-    // Getters y Setters
+    // Getters and setters for each field
 
     public Long getId() {
         return id;
@@ -71,8 +75,7 @@ public class Equipo {
         this.nombreCapitan = nombreCapitan;
     }
 
-    // Método toString
-
+    // String representation of the object, useful for debugging/logging
     @Override
     public String toString() {
         return "Equipo{" +
