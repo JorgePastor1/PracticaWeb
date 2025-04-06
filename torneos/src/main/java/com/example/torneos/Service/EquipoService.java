@@ -21,9 +21,10 @@ public class EquipoService {
         return equipos;
     }
 
-    public void guardar(Equipo equipo) {
+    public Equipo guardar(Equipo equipo) {
         equipo.setId(siguienteId++);
         equipos.add(equipo);
+        return equipo;
     }
 
     public Equipo buscarPorId(Long id) {
@@ -33,13 +34,14 @@ public class EquipoService {
                 .orElse(null);
     }
 
-    public void actualizar(Equipo equipoActualizado) {
+    public Equipo actualizar(Equipo equipoActualizado) {
         for (int i = 0; i < equipos.size(); i++) {
             if (equipos.get(i).getId().equals(equipoActualizado.getId())) {
                 equipos.set(i, equipoActualizado);
-                return;
+                return equipoActualizado;
             }
         }
+        return equipoActualizado;
     }
 
     public void eliminar(Long id) {
