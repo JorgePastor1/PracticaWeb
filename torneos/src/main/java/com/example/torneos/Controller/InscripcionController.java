@@ -5,11 +5,15 @@ import com.example.torneos.Service.InscripcionService;
 import com.example.torneos.Service.TorneoService;
 import com.example.torneos.model.Equipo;
 import com.example.torneos.model.Torneo;
+import com.example.torneos.model.Inscripcion;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
+import java.time.LocalDate;
 
 @Controller
 @RequestMapping("/inscripciones")
@@ -34,7 +38,7 @@ public class InscripcionController {
     public String mostrarFormulario(Model model) {
         model.addAttribute("equipos", equipoService.obtenerTodos());
         model.addAttribute("torneos", torneoService.obtenerTodos());
-        return "inscripciones/crearinscripcion"; // <- actualizada la vista
+        return "inscripciones/formulario";
     }
 
     @PostMapping
@@ -49,5 +53,30 @@ public class InscripcionController {
 
         inscripcionService.inscribir(equipo, torneo);
         return "redirect:/inscripciones";
+    }
+
+    @GetMapping("/{id}/editar")
+    public String mostrarFormularioEdicion(@PathVariable Long id, Model model) {
+        Inscripcion inscripcion = inscripcionService.buscarPorId(id);
+        model.addAttribute("inscripcion", inscripcion);
+        model.addAttribute("equipos", equipoService.obtenerTodos());
+        model.addAttribute("torneos", torneoService.obtenerTodos());
+        return "inscripciones/editar";
+    }
+
+    @PostMapping("/{id}/editar")
+    public String guardarCambios(@PathVariable Long id,
+                                  @RequestParam Long equipoId,
+                                  @RequestParam Long torneoId,
+                                  @RequestParam String estado,
+                                  @RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate fecha,
+                                  RedirectAttributes redirectAttributes) {
+        try {
+            inscripcionService.actualizar(id, equipoId, torneoId, estado, fecha);
+            return "redirect:/inscripciones";
+        } catch (Exception e) {
+            redirectAttributes.addFlashAttribute("error", "No se pudo actualizar la inscripción.");
+            return "redirect:/inscripciones/" + id + "/editar";
+        }
     }
 }
