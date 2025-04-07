@@ -35,17 +35,16 @@ public class EquipoController {
         return "redirect:/equipos";
     }
 
+    // Mostrar formulario para editar
     @GetMapping("/editar/{id}")
     public String mostrarFormularioEdicion(@PathVariable Long id, Model model) {
         Equipo equipo = equipoService.buscarPorId(id);
         if (equipo != null) {
             model.addAttribute("equipo", equipo);
             return "FormularioEditarEquipo";
-        } else {
-            return "redirect:/equipos";
         }
+        return "redirect:/equipos";
     }
-
 
     // Procesar edición del equipo
     @PostMapping("/actualizar")
@@ -54,7 +53,7 @@ public class EquipoController {
         return "redirect:/equipos";
     }
 
-    // Eliminar equipo por ID
+    // Eliminar equipo
     @GetMapping("/eliminar/{id}")
     public String eliminarEquipo(@PathVariable Long id) {
         equipoService.eliminar(id);
