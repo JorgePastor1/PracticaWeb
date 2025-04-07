@@ -71,7 +71,7 @@ public class InscripcionService {
         return inscripcion;
     }
 
-    // ✅ NUEVO: Método para guardar desde el controlador REST
+    // Método para guardar desde el controlador REST
     public Inscripcion guardar(Inscripcion inscripcion) {
         inscripcion.setId(siguienteId++);
         if (inscripcion.getFechaInscripcion() == null) {
@@ -84,7 +84,7 @@ public class InscripcionService {
         return inscripcion;
     }
 
-    // ✅ NUEVO: Método eliminar
+    // Método eliminar
     public void eliminar(Long id) {
         inscripciones.removeIf(i -> i.getId().equals(id));
     }
