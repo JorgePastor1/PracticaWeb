@@ -16,7 +16,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import java.time.LocalDate;
 
 @Controller
-@RequestMapping("/inscripciones") // Base path for all the endpoints in this controller
+@RequestMapping("/inscripciones")
 public class InscripcionController {
 
     @Autowired
@@ -28,62 +28,63 @@ public class InscripcionController {
     @Autowired
     private TorneoService torneoService;
 
-    // Display all registrations
     @GetMapping
     public String listarInscripciones(Model model) {
         model.addAttribute("inscripciones", inscripcionService.obtenerTodas());
-        return "inscripciones/lista"; // View to list all inscriptions
+        return "inscripciones/lista";
     }
 
-    // Show form to create a new registration
     @GetMapping("/nueva")
     public String mostrarFormulario(Model model) {
-        model.addAttribute("equipos", equipoService.obtenerTodos()); // Add list of teams to model
-        model.addAttribute("torneos", torneoService.obtenerTodos()); // Add list of tournaments to model
-        return "inscripciones/formulario"; // View to render the registration form
+        model.addAttribute("equipos", equipoService.obtenerTodos());
+        model.addAttribute("torneos", torneoService.obtenerTodos());
+        return "inscripciones/formulario";
     }
 
-    // Process registration form
     @PostMapping
     public String procesarInscripcion(@RequestParam Long equipoId, @RequestParam Long torneoId, RedirectAttributes redirectAttributes) {
         Equipo equipo = equipoService.buscarPorId(equipoId);
         Torneo torneo = torneoService.buscarPorId(torneoId);
 
-        // If either team or tournament does not exist, show error and redirect
         if (equipo == null || torneo == null) {
             redirectAttributes.addFlashAttribute("error", "El equipo o el torneo no son válidos.");
             return "redirect:/inscripciones/nueva";
         }
 
-        // Register the team in the tournament
         inscripcionService.inscribir(equipo, torneo);
-        return "redirect:/inscripciones"; // Redirect to the list of registrations
+        return "redirect:/inscripciones";
     }
 
-    // Show form to edit an existing registration
     @GetMapping("/{id}/editar")
     public String mostrarFormularioEdicion(@PathVariable Long id, Model model) {
         Inscripcion inscripcion = inscripcionService.buscarPorId(id);
         model.addAttribute("inscripcion", inscripcion);
         model.addAttribute("equipos", equipoService.obtenerTodos());
         model.addAttribute("torneos", torneoService.obtenerTodos());
-        return "inscripciones/editar"; // View to edit registration
+        return "inscripciones/editar";
     }
 
-    // Process update of a registration
     @PostMapping("/{id}/editar")
     public String guardarCambios(@PathVariable Long id,
-                                  @RequestParam Long equipoId,
-                                  @RequestParam Long torneoId,
-                                  @RequestParam String estado,
-                                  @RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate fecha,
-                                  RedirectAttributes redirectAttributes) {
+                                 @RequestParam Long equipoId,
+                                 @RequestParam Long torneoId,
+                                 @RequestParam String estado,
+                                 @RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate fecha,
+                                 RedirectAttributes redirectAttributes) {
         try {
-            // Try updating the registration
-            inscripcionService.actualizar(id, equipoId, torneoId, estado, fecha);
-            return "redirect:/inscripciones"; // Success: redirect to list
+            Equipo equipo = equipoService.buscarPorId(equipoId);
+            Torneo torneo = torneoService.buscarPorId(torneoId);
+
+            Inscripcion inscripcion = new Inscripcion();
+            inscripcion.setId(id);
+            inscripcion.setEquipo(equipo);
+            inscripcion.setTorneo(torneo);
+            inscripcion.setEstado(estado);
+            inscripcion.setFechaInscripcion(fecha);
+
+            inscripcionService.actualizar(inscripcion);
+            return "redirect:/inscripciones";
         } catch (Exception e) {
-            // If update fails, show error and return to edit form
             redirectAttributes.addFlashAttribute("error", "No se pudo actualizar la inscripción.");
             return "redirect:/inscripciones/" + id + "/editar";
         }

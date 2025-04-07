@@ -38,21 +38,17 @@ public class InscripcionService {
                 .orElse(null);
     }
 
-    public void actualizar(Long id, Long equipoId, Long torneoId, String estado, LocalDate fechaInscripcion) {
-        Inscripcion inscripcion = buscarPorId(id);
-        if (inscripcion != null) {
-            Equipo equipo = new Equipo();
-            equipo.setId(equipoId);
-
-            Torneo torneo = new Torneo();
-            torneo.setId(torneoId);
-
-            inscripcion.setEquipo(equipo);
-            inscripcion.setTorneo(torneo);
-            inscripcion.setEstado(estado);
-            inscripcion.setFechaInscripcion(fechaInscripcion);
+    public Inscripcion actualizar(Inscripcion inscripcionActualizada) {
+        Inscripcion original = buscarPorId(inscripcionActualizada.getId());
+        if (original != null) {
+            original.setEquipo(inscripcionActualizada.getEquipo());
+            original.setTorneo(inscripcionActualizada.getTorneo());
+            original.setFechaInscripcion(inscripcionActualizada.getFechaInscripcion());
+            original.setEstado(inscripcionActualizada.getEstado());
         }
+        return original;
     }
+
     public Inscripcion actualizarParcial(Long id, Map<String, Object> updates) {
         Inscripcion inscripcion = buscarPorId(id);
         if (inscripcion == null) {
@@ -61,14 +57,11 @@ public class InscripcionService {
 
         updates.forEach((key, value) -> {
             switch (key) {
-                case "equipo":
-                    // Aquí podrías enlazar con el equipo si lo necesitas
-                    break;
-                case "torneo":
-                    // Aquí podrías enlazar con el torneo si lo necesitas
+                case "estado":
+                    inscripcion.setEstado((String) value);
                     break;
                 case "fechaInscripcion":
-                    inscripcion.setFechaInscripcion((LocalDate) value);
+                    inscripcion.setFechaInscripcion(LocalDate.parse((String) value));
                     break;
                 default:
                     break;
@@ -78,4 +71,21 @@ public class InscripcionService {
         return inscripcion;
     }
 
+    // ✅ NUEVO: Método para guardar desde el controlador REST
+    public Inscripcion guardar(Inscripcion inscripcion) {
+        inscripcion.setId(siguienteId++);
+        if (inscripcion.getFechaInscripcion() == null) {
+            inscripcion.setFechaInscripcion(LocalDate.now());
+        }
+        if (inscripcion.getEstado() == null) {
+            inscripcion.setEstado("pendiente");
+        }
+        inscripciones.add(inscripcion);
+        return inscripcion;
+    }
+
+    // ✅ NUEVO: Método eliminar
+    public void eliminar(Long id) {
+        inscripciones.removeIf(i -> i.getId().equals(id));
+    }
 }
