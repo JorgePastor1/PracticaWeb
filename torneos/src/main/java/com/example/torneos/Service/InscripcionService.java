@@ -16,10 +16,12 @@ public class InscripcionService {
     private final List<Inscripcion> inscripciones = new ArrayList<>();
     private Long siguienteId = 1L;
 
+    // Obtener todas las inscripciones registradas
     public List<Inscripcion> obtenerTodas() {
         return inscripciones;
     }
 
+    // Crear nueva inscripción con estado 'pendiente' y fecha actual
     public void inscribir(Equipo equipo, Torneo torneo) {
         Inscripcion inscripcion = new Inscripcion();
         inscripcion.setId(siguienteId++);
@@ -31,6 +33,7 @@ public class InscripcionService {
         inscripciones.add(inscripcion);
     }
 
+    // Buscar inscripción por ID
     public Inscripcion buscarPorId(Long id) {
         return inscripciones.stream()
                 .filter(inscripcion -> inscripcion.getId().equals(id))
@@ -38,17 +41,18 @@ public class InscripcionService {
                 .orElse(null);
     }
 
-    public Inscripcion actualizar(Inscripcion inscripcionActualizada) {
-        Inscripcion original = buscarPorId(inscripcionActualizada.getId());
-        if (original != null) {
-            original.setEquipo(inscripcionActualizada.getEquipo());
-            original.setTorneo(inscripcionActualizada.getTorneo());
-            original.setFechaInscripcion(inscripcionActualizada.getFechaInscripcion());
-            original.setEstado(inscripcionActualizada.getEstado());
+    // Actualizar todos los campos de una inscripción existente
+    public void actualizar(Inscripcion inscripcionActualizada) {
+        Inscripcion inscripcion = buscarPorId(inscripcionActualizada.getId());
+        if (inscripcion != null) {
+            inscripcion.setEquipo(inscripcionActualizada.getEquipo());
+            inscripcion.setTorneo(inscripcionActualizada.getTorneo());
+            inscripcion.setEstado(inscripcionActualizada.getEstado());
+            inscripcion.setFechaInscripcion(inscripcionActualizada.getFechaInscripcion());
         }
-        return original;
     }
 
+    // Actualización parcial (PATCH)
     public Inscripcion actualizarParcial(Long id, Map<String, Object> updates) {
         Inscripcion inscripcion = buscarPorId(id);
         if (inscripcion == null) {
@@ -57,35 +61,16 @@ public class InscripcionService {
 
         updates.forEach((key, value) -> {
             switch (key) {
-                case "estado":
-                    inscripcion.setEstado((String) value);
-                    break;
                 case "fechaInscripcion":
-                    inscripcion.setFechaInscripcion(LocalDate.parse((String) value));
+                    inscripcion.setFechaInscripcion(LocalDate.parse(value.toString()));
                     break;
-                default:
+                case "estado":
+                    inscripcion.setEstado(value.toString());
                     break;
+                // Puedes extender con más campos si es necesario
             }
         });
 
         return inscripcion;
-    }
-
-    // Método para guardar desde el controlador REST
-    public Inscripcion guardar(Inscripcion inscripcion) {
-        inscripcion.setId(siguienteId++);
-        if (inscripcion.getFechaInscripcion() == null) {
-            inscripcion.setFechaInscripcion(LocalDate.now());
-        }
-        if (inscripcion.getEstado() == null) {
-            inscripcion.setEstado("pendiente");
-        }
-        inscripciones.add(inscripcion);
-        return inscripcion;
-    }
-
-    // Método eliminar
-    public void eliminar(Long id) {
-        inscripciones.removeIf(i -> i.getId().equals(id));
     }
 }

@@ -2,21 +2,17 @@ package com.example.torneos.model;
 
 import java.time.LocalDate;
 
-// Model class representing a registration (Inscripcion) of a team to a tournament
 public class Inscripcion {
 
-    // Fields
-    private Long id;                          // Unique ID for the registration
-    private Equipo equipo;                    // Team being registered
-    private Torneo torneo;                    // Tournament to which the team is registering
-    private LocalDate fechaInscripcion;       // Date of registration
-    private String estado;                    // Status: e.g., pending, confirmed, rejected, etc.
+    private Long id;
+    private Equipo equipo;
+    private Torneo torneo;
+    private LocalDate fechaInscripcion;
+    private String estado; // Ej: pendiente, aceptado, rechazado...
 
-    // Default constructor (required by frameworks like Spring)
     public Inscripcion() {
     }
 
-    // Parameterized constructor for easier instantiation
     public Inscripcion(Long id, Equipo equipo, Torneo torneo, LocalDate fechaInscripcion, String estado) {
         this.id = id;
         this.equipo = equipo;
@@ -25,7 +21,7 @@ public class Inscripcion {
         this.estado = estado;
     }
 
-    // Getters and setters
+    // Getters y setters
 
     public Long getId() {
         return id;
@@ -67,13 +63,12 @@ public class Inscripcion {
         this.estado = estado;
     }
 
-    // String representation of the registration for logging or debugging
     @Override
     public String toString() {
         return "Inscripcion{" +
                 "id=" + id +
-                ", equipo=" + equipo.getNombre() +
-                ", torneo=" + torneo.getDeporte() + " - " + torneo.getCiudad() +
+                ", equipo=" + (equipo != null ? equipo.getNombre() : "null") +
+                ", torneo=" + (torneo != null ? torneo.getNombre() : "null") +
                 ", fechaInscripcion=" + fechaInscripcion +
                 ", estado='" + estado + '\'' +
                 '}';

@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="es">
+<head th:replace="fragments/header :: head('Equipos inscritos')"></head>
+<body style="margin: 0; background: #f4f4f4; font-family: sans-serif;">
+
+<div th:replace="fragments/header :: header"></div>
+
+<main style="max-width: 900px; margin: 40px auto; background: white; padding: 30px; border-radius: 10px;">
+    <h2>Equipos inscritos en <span th:text="${torneo.nombre}">Nombre Torneo</span></h2>
+
+    <table style="width: 100%; border-collapse: collapse; margin-top: 20px;">
+        <thead style="background-color: #2c3e50; color: white;">
+            <tr>
+                <th style="padding: 10px;">Nombre del equipo</th>
+                <th style="padding: 10px;">Ciudad</th>
+                <th style="padding: 10px;">Categoría</th>
+                <th style="padding: 10px;">Fecha inscripción</th>
+                <th style="padding: 10px;">Estado</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="inscripcion : ${inscripciones}" style="border-bottom: 1px solid #ccc;">
+                <td th:text="${inscripcion.equipo.nombre}" style="padding: 10px;"></td>
+                <td th:text="${inscripcion.equipo.ciudad}" style="padding: 10px;"></td>
+                <td th:text="${inscripcion.equipo.categoria}" style="padding: 10px;"></td>
+                <td th:text="${inscripcion.fechaInscripcion}" style="padding: 10px;"></td>
+                <td th:text="${inscripcion.estado}" style="padding: 10px;"></td>
+            </tr>
+        </tbody>
+    </table>
+
+    <p style="margin-top: 20px;"><a th:href="@{/inscripciones}" style="text-decoration: none; color: #2980b9;">← Volver a lista de torneos</a></p>
+</main>
+
+<div th:replace="fragments/footer :: footer"></div>
+</body>
+</html>

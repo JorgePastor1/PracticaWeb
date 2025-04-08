@@ -4,8 +4,8 @@ import com.example.torneos.Service.EquipoService;
 import com.example.torneos.Service.InscripcionService;
 import com.example.torneos.Service.TorneoService;
 import com.example.torneos.model.Equipo;
-import com.example.torneos.model.Torneo;
 import com.example.torneos.model.Inscripcion;
+import com.example.torneos.model.Torneo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Controller;
@@ -30,33 +30,62 @@ public class InscripcionController {
     @Autowired
     private TorneoService torneoService;
 
-    // Muestra los torneos disponibles (ListaInscripciones.html)
+    // Muestra todos los torneos disponibles (ListaInscripciones.html)
     @GetMapping
     public String mostrarTorneosDisponibles(Model model) {
         List<Torneo> torneos = torneoService.obtenerTodos();
-        if (torneos == null)
-            torneos = new ArrayList<>();
-        model.addAttribute("torneos", torneoService.obtenerTodos());
+        if (torneos == null) torneos = new ArrayList<>();
+        model.addAttribute("torneos", torneos);
         return "ListaInscripciones";
+    }
+
+    // Muestra formulario para inscribir equipo en un torneo (FormularioInscripciones.html)
+    @GetMapping("/nueva")
+    public String mostrarFormularioInscripcion(@RequestParam("torneoId") Long torneoId, Model model) {
+        Torneo torneo = torneoService.buscarPorId(torneoId);
+        if (torneo == null) {
+            return "redirect:/inscripciones";
+        }
+
+        model.addAttribute("torneo", torneo);
+        model.addAttribute("equipos", equipoService.obtenerTodos());
+        return "FormularioInscripciones";
     }
 
     // Procesa la inscripción
     @PostMapping
-    public String procesarInscripcion(@RequestParam Long equipoId, @RequestParam Long torneoId,
-            RedirectAttributes redirectAttributes) {
+    public String procesarInscripcion(@RequestParam Long equipoId, @RequestParam Long torneoId, RedirectAttributes redirectAttributes) {
         Equipo equipo = equipoService.buscarPorId(equipoId);
         Torneo torneo = torneoService.buscarPorId(torneoId);
 
         if (equipo == null || torneo == null) {
             redirectAttributes.addFlashAttribute("error", "El equipo o el torneo no son válidos.");
-            return "redirect:/inscripciones/nueva";
+            return "redirect:/inscripciones/nueva?torneoId=" + torneoId;
         }
 
         inscripcionService.inscribir(equipo, torneo);
         return "redirect:/inscripciones";
     }
 
-    // Formulario para editar inscripción
+    // Muestra los equipos inscritos en un torneo (MostrarInscripciones.html)
+    @GetMapping("/torneo/{id}")
+    public String mostrarInscripcionesPorTorneo(@PathVariable Long id, Model model) {
+        Torneo torneo = torneoService.buscarPorId(id);
+        if (torneo == null) {
+            return "redirect:/inscripciones";
+        }
+
+        List<Inscripcion> inscripciones = inscripcionService.obtenerTodas()
+                .stream()
+                .filter(i -> i.getTorneo().getId().equals(id))
+                .toList();
+
+        model.addAttribute("torneo", torneo);
+        model.addAttribute("inscripciones", inscripciones);
+        return "MostrarInscripciones";
+    }
+
+    // (Opcional) Edición de inscripción
     @GetMapping("/{id}/editar")
     public String mostrarFormularioEdicion(@PathVariable Long id, Model model) {
         Inscripcion inscripcion = inscripcionService.buscarPorId(id);
@@ -66,14 +95,13 @@ public class InscripcionController {
         return "inscripciones/editar";
     }
 
-    // Guarda los cambios en una inscripción
     @PostMapping("/{id}/editar")
     public String guardarCambios(@PathVariable Long id,
-            @RequestParam Long equipoId,
-            @RequestParam Long torneoId,
-            @RequestParam String estado,
-            @RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate fecha,
-            RedirectAttributes redirectAttributes) {
+                                 @RequestParam Long equipoId,
+                                 @RequestParam Long torneoId,
+                                 @RequestParam String estado,
+                                 @RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate fecha,
+                                 RedirectAttributes redirectAttributes) {
         try {
             Equipo equipo = equipoService.buscarPorId(equipoId);
             Torneo torneo = torneoService.buscarPorId(torneoId);
