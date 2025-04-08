@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="es">
+<head th:replace="fragments/header :: head('Nueva Inscripción')"></head>
+<body style="margin: 0; background: #f4f4f4; font-family: sans-serif;">
+
+<div th:replace="fragments/header :: header"></div>
+
+<main style="max-width: 700px; margin: 40px auto; background: white; padding: 30px; border-radius: 10px;">
+    <h2>Inscribir Equipo en Torneo</h2>
+
+    <form th:action="@{/inscripciones}" method="post">
+        <label for="equipoId">Equipo:</label><br>
+        <select id="equipoId" name="equipoId" required>
+            <option value="">-- Selecciona un equipo --</option>
+            <option th:each="equipo : ${equipos}" th:value="${equipo.id}" th:text="${equipo.nombre}">Equipo</option>
+        </select><br><br>
+
+        <label for="torneoId">Torneo:</label><br>
+        <select id="torneoId" name="torneoId" required>
+            <option value="">-- Selecciona un torneo --</option>
+            <option th:each="torneo : ${torneos}" th:value="${torneo.id}" th:text="${torneo.nombre}">Torneo</option>
+        </select><br><br>
+
+        <button type="submit" style="background-color: #2c3e50; color: white; padding: 10px 20px; border: none; border-radius: 5px; cursor: pointer;">
+            Inscribir</button>
+    </form>
+
+    <p style="margin-top: 20px;"><a th:href="@{/inscripciones}" style="text-decoration: none; color: #2980b9;">← Ver inscripciones</a></p>
+</main>
+
+<div th:replace="fragments/footer :: footer"></div>
+</body>
+</html>

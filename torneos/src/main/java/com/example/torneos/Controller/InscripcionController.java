@@ -28,17 +28,18 @@ public class InscripcionController {
     @Autowired
     private TorneoService torneoService;
 
+    // ✅ MOSTRAR LISTA DE TORNEOS EN lista.html
     @GetMapping
-    public String listarInscripciones(Model model) {
-        model.addAttribute("inscripciones", inscripcionService.obtenerTodas());
-        return "inscripciones/lista";
+    public String mostrarTorneosDisponibles(Model model) {
+        model.addAttribute("torneos", torneoService.obtenerTodos());
+        return "ListaInscripciones"; // <- este es tu archivo lista.html
     }
 
     @GetMapping("/nueva")
     public String mostrarFormulario(Model model) {
         model.addAttribute("equipos", equipoService.obtenerTodos());
         model.addAttribute("torneos", torneoService.obtenerTodos());
-        return "inscripciones/formulario";
+        return "inscripciones/FormularioInscripciones";
     }
 
     @PostMapping
