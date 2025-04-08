@@ -30,16 +30,17 @@ public class InscripcionController {
     @Autowired
     private TorneoService torneoService;
 
-    // Muestra todos los torneos disponibles (ListaInscripciones.html)
+    // ✅ Este método soluciona el error: carga la vista con los torneos
     @GetMapping
     public String mostrarTorneosDisponibles(Model model) {
         List<Torneo> torneos = torneoService.obtenerTodos();
-        if (torneos == null) torneos = new ArrayList<>();
+        if (torneos == null)
+            torneos = new ArrayList<>();
         model.addAttribute("torneos", torneos);
         return "ListaInscripciones";
     }
 
-    // Muestra formulario para inscribir equipo en un torneo (FormularioInscripciones.html)
+    // Formulario para inscribir un equipo a un torneo
     @GetMapping("/nueva")
     public String mostrarFormularioInscripcion(@RequestParam("torneoId") Long torneoId, Model model) {
         Torneo torneo = torneoService.buscarPorId(torneoId);
@@ -52,9 +53,10 @@ public class InscripcionController {
         return "FormularioInscripciones";
     }
 
-    // Procesa la inscripción
+    // Procesar la inscripción
     @PostMapping
-    public String procesarInscripcion(@RequestParam Long equipoId, @RequestParam Long torneoId, RedirectAttributes redirectAttributes) {
+    public String procesarInscripcion(@RequestParam Long equipoId, @RequestParam Long torneoId,
+            RedirectAttributes redirectAttributes) {
         Equipo equipo = equipoService.buscarPorId(equipoId);
         Torneo torneo = torneoService.buscarPorId(torneoId);
 
@@ -67,7 +69,7 @@ public class InscripcionController {
         return "redirect:/inscripciones";
     }
 
-    // Muestra los equipos inscritos en un torneo (MostrarInscripciones.html)
+    // Mostrar equipos inscritos en un torneo
     @GetMapping("/torneo/{id}")
     public String mostrarInscripcionesPorTorneo(@PathVariable Long id, Model model) {
         Torneo torneo = torneoService.buscarPorId(id);
@@ -85,7 +87,7 @@ public class InscripcionController {
         return "MostrarInscripciones";
     }
 
-    // (Opcional) Edición de inscripción
+    // (Opcional) Editar inscripción
     @GetMapping("/{id}/editar")
     public String mostrarFormularioEdicion(@PathVariable Long id, Model model) {
         Inscripcion inscripcion = inscripcionService.buscarPorId(id);
@@ -97,11 +99,11 @@ public class InscripcionController {
 
     @PostMapping("/{id}/editar")
     public String guardarCambios(@PathVariable Long id,
-                                 @RequestParam Long equipoId,
-                                 @RequestParam Long torneoId,
-                                 @RequestParam String estado,
-                                 @RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate fecha,
-                                 RedirectAttributes redirectAttributes) {
+            @RequestParam Long equipoId,
+            @RequestParam Long torneoId,
+            @RequestParam String estado,
+            @RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate fecha,
+            RedirectAttributes redirectAttributes) {
         try {
             Equipo equipo = equipoService.buscarPorId(equipoId);
             Torneo torneo = torneoService.buscarPorId(torneoId);

@@ -16,8 +16,7 @@ public class TorneoService {
 
     public TorneoService() {
         torneos.add(new Torneo(
-                siguienteId++, LocalDate.of(2025, 5, 15), "Fútbol", "Madrid", new ArrayList<>(), 100.0, "Torneo de Invierno"
-        ));
+                siguienteId++, "Torneo de Invierno", "Madrid", LocalDate.of(2025, 5, 15), "Fútbol"));
     }
 
     public List<Torneo> obtenerTodos() {
@@ -26,7 +25,6 @@ public class TorneoService {
 
     public Torneo guardar(Torneo torneo) {
         torneo.setId(siguienteId++);
-        torneo.setEquipos(new ArrayList<>());
         torneos.add(torneo);
         return torneo;
     }
@@ -35,7 +33,6 @@ public class TorneoService {
         return torneos.stream().filter(t -> t.getId().equals(id)).findFirst().orElse(null);
     }
 
-    // ✅ Método para actualizar torneo
     public Torneo actualizar(Torneo torneoActualizado) {
         for (int i = 0; i < torneos.size(); i++) {
             if (torneos.get(i).getId().equals(torneoActualizado.getId())) {
@@ -46,10 +43,10 @@ public class TorneoService {
         return torneoActualizado;
     }
 
-    // ❌ Método para eliminar torneo
     public void eliminar(Long id) {
         torneos.removeIf(t -> t.getId().equals(id));
     }
+
     public Torneo actualizarParcial(Long id, Map<String, Object> updates) {
         Torneo torneo = buscarPorId(id);
         if (torneo == null) {
@@ -61,8 +58,14 @@ public class TorneoService {
                 case "nombre":
                     torneo.setNombre((String) value);
                     break;
+                case "lugar":
+                    torneo.setLugar((String) value);
+                    break;
                 case "fecha":
-                    torneo.setFecha((LocalDate) value);
+                    torneo.setFecha(LocalDate.parse((String) value));
+                    break;
+                case "categoria":
+                    torneo.setCategoria((String) value);
                     break;
                 default:
                     break;
@@ -71,5 +74,4 @@ public class TorneoService {
 
         return torneo;
     }
-
 }
