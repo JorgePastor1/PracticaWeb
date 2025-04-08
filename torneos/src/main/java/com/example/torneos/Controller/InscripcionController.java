@@ -14,6 +14,8 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
 @Controller
 @RequestMapping("/inscripciones")
@@ -28,22 +30,20 @@ public class InscripcionController {
     @Autowired
     private TorneoService torneoService;
 
-    // ✅ MOSTRAR LISTA DE TORNEOS EN lista.html
+    // Muestra los torneos disponibles (ListaInscripciones.html)
     @GetMapping
     public String mostrarTorneosDisponibles(Model model) {
+        List<Torneo> torneos = torneoService.obtenerTodos();
+        if (torneos == null)
+            torneos = new ArrayList<>();
         model.addAttribute("torneos", torneoService.obtenerTodos());
-        return "ListaInscripciones"; // <- este es tu archivo lista.html
+        return "ListaInscripciones";
     }
 
-    @GetMapping("/nueva")
-    public String mostrarFormulario(Model model) {
-        model.addAttribute("equipos", equipoService.obtenerTodos());
-        model.addAttribute("torneos", torneoService.obtenerTodos());
-        return "inscripciones/FormularioInscripciones";
-    }
-
+    // Procesa la inscripción
     @PostMapping
-    public String procesarInscripcion(@RequestParam Long equipoId, @RequestParam Long torneoId, RedirectAttributes redirectAttributes) {
+    public String procesarInscripcion(@RequestParam Long equipoId, @RequestParam Long torneoId,
+            RedirectAttributes redirectAttributes) {
         Equipo equipo = equipoService.buscarPorId(equipoId);
         Torneo torneo = torneoService.buscarPorId(torneoId);
 
@@ -56,6 +56,7 @@ public class InscripcionController {
         return "redirect:/inscripciones";
     }
 
+    // Formulario para editar inscripción
     @GetMapping("/{id}/editar")
     public String mostrarFormularioEdicion(@PathVariable Long id, Model model) {
         Inscripcion inscripcion = inscripcionService.buscarPorId(id);
@@ -65,13 +66,14 @@ public class InscripcionController {
         return "inscripciones/editar";
     }
 
+    // Guarda los cambios en una inscripción
     @PostMapping("/{id}/editar")
     public String guardarCambios(@PathVariable Long id,
-                                 @RequestParam Long equipoId,
-                                 @RequestParam Long torneoId,
-                                 @RequestParam String estado,
-                                 @RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate fecha,
-                                 RedirectAttributes redirectAttributes) {
+            @RequestParam Long equipoId,
+            @RequestParam Long torneoId,
+            @RequestParam String estado,
+            @RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate fecha,
+            RedirectAttributes redirectAttributes) {
         try {
             Equipo equipo = equipoService.buscarPorId(equipoId);
             Torneo torneo = torneoService.buscarPorId(torneoId);

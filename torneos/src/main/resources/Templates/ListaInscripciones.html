@@ -1,84 +1,44 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" lang="es">
-<head th:replace="fragments/header :: head('Inscripción a Torneos')"></head>
-<body style="margin: 0; background: linear-gradient(-45deg, #2c3e50, #ffffff); font-family: sans-serif;">
+<head th:replace="fragments/header :: head('Lista de Inscripciones')"></head>
+<body style="margin: 0; background: linear-gradient(-45deg, #2c3e50, #ffffff);">
 
-<style>
-  html, body {
-    height: 100%;
-  }
-</style>
+<div class="wrapper">
+    <div th:replace="fragments/header :: header"></div>
 
-<!-- HEADER -->
-<div th:replace="fragments/header :: header"></div>
+    <main style="max-width: 1300px; margin: 40px auto; padding: 40px; background: white; border-radius: 10px;">
+        <h2>Lista de Inscripciones</h2>
+        <table style="width: 100%; border-collapse: collapse; margin-top: 20px;">
+            <thead style="background-color: #2c3e50; color: white;">
+                <tr>
+                    <th style="padding: 10px;">ID</th>
+                    <th style="padding: 10px;">Nombre</th>
+                    <th style="padding: 10px;">Deporte</th>
+                    <th style="padding: 10px;">Ciudad</th>
+                    <th style="padding: 10px;">Coste Inscripción</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="torneo : ${torneo}" style="border-bottom: 1px solid #ccc;">
+                    <td th:text="${torneo.id}" style="padding: 10px;"></td>
+                    <td th:text="${torneo.nombre}" style="padding: 10px;"></td>
+                    <td th:text="${torneo.deporte}" style="padding: 10px;"></td>
+                    <td th:text="${torneo.ciudad}" style="padding: 10px;"></td>
+                    <td th:text="${torneo.costeInscripcion} + ' €'" style="padding: 10px;"></td>
+                    <td style="padding: 10px;">
+                        <a th:href="@{'/inscripciones/editar/' + ${inscripcion.id}}" style="margin-right: 10px; color: #2980b9;">Mostrar equipos</a>
+                        <a th:href="@{'/inscripciones/eliminar/' + ${inscripcion.id}}"
+                           onclick="return confirm('¿Estás seguro de que deseas añadir este equipo?');"
+                           style="color: red;">Inscribir Equipo</a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </main>
+</div>
 
-<!-- MAIN -->
-<main style="max-width: 1200px; margin: 40px auto; background: white; padding: 40px; border-radius: 10px;">
-
-  <h1 style="text-align: center; margin-bottom: 2rem;">Inscripción a Torneos</h1>
-
-  <!-- FILTROS -->
-  <div class="filters" style="display: flex; flex-wrap: wrap; gap: 1rem; margin-bottom: 2rem;">
-    <input type="text" id="filtroNombre" placeholder="Buscar por nombre..."
-           style="padding: 0.5rem; border-radius: 8px; border: 1px solid #ccc; flex: 1; min-width: 150px;" />
-    <input type="text" id="filtroCategoria" placeholder="Categoría..."
-           style="padding: 0.5rem; border-radius: 8px; border: 1px solid #ccc; flex: 1; min-width: 150px;" />
-    <input type="text" id="filtroLugar" placeholder="Lugar..."
-           style="padding: 0.5rem; border-radius: 8px; border: 1px solid #ccc; flex: 1; min-width: 150px;" />
-  </div>
-
-  <!-- LISTA TORNEOS -->
-  <div id="listaTorneos">
-    <div th:each="torneo : ${torneos}" class="torneo"
-         style="display: flex; justify-content: space-between; align-items: center;
-                padding: 1rem; border: 1px solid #ddd; border-radius: 10px; margin-bottom: 1rem;
-                background-color: #f8f9fa;"
-         th:attr="data-nombre=${torneo.nombre}, data-categoria=${torneo.categoria}, data-lugar=${torneo.lugar}">
-      <div>
-        <strong th:text="${torneo.nombre}">Nombre del torneo</strong><br/>
-        Categoría: <span th:text="${torneo.categoria}">Categoría</span> |
-        Lugar: <span th:text="${torneo.lugar}">Lugar</span> |
-        Fecha: <span th:text="${torneo.fecha}">Fecha</span>
-      </div>
-      <div style="display: flex; gap: 0.5rem;">
-        <a th:href="@{'/inscripciones/torneo/' + ${torneo.id}}" style="background-color: #2c3e50; color: white; padding: 0.5rem 1rem; border: none; border-radius: 8px; text-decoration: none;">Ver inscritos</a>
-        <a th:href="@{'/inscripciones/nueva?torneoId=' + ${torneo.id}}" style="background-color: #28A745; color: white; padding: 0.5rem 1rem; border: none; border-radius: 8px; text-decoration: none;">Inscribir equipo</a>
-      </div>
-    </div>
-  </div>
-</main>
-
-<!-- FOOTER -->
 <div th:replace="fragments/footer :: footer"></div>
-
-<!-- SCRIPT DE FILTRO -->
-<script>
-  const inputNombre = document.getElementById('filtroNombre');
-  const inputCategoria = document.getElementById('filtroCategoria');
-  const inputLugar = document.getElementById('filtroLugar');
-
-  function filtrarTorneos() {
-    const nombre = inputNombre.value.toLowerCase();
-    const categoria = inputCategoria.value.toLowerCase();
-    const lugar = inputLugar.value.toLowerCase();
-
-    document.querySelectorAll('.torneo').forEach(div => {
-      const n = div.dataset.nombre.toLowerCase();
-      const c = div.dataset.categoria.toLowerCase();
-      const l = div.dataset.lugar.toLowerCase();
-      const visible =
-        n.includes(nombre) &&
-        c.includes(categoria) &&
-        l.includes(lugar);
-
-      div.style.display = visible ? 'flex' : 'none';
-    });
-  }
-
-  inputNombre.addEventListener('input', filtrarTorneos);
-  inputCategoria.addEventListener('input', filtrarTorneos);
-  inputLugar.addEventListener('input', filtrarTorneos);
-</script>
 
 </body>
 </html>
+
