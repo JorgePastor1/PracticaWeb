@@ -8,6 +8,10 @@
 <main style="max-width: 700px; margin: 40px auto; background: white; padding: 30px; border-radius: 10px;">
     <h2>Editar Torneo</h2>
 
+    <div th:if="${error}" style="background-color: #ffe6e6; color: #a94442; padding: 10px; border-radius: 5px; margin-bottom: 15px;">
+        <strong th:text="${error}"></strong>
+    </div>
+
     <form th:action="@{/torneos/actualizar}" th:object="${torneo}" method="post">
         <input type="hidden" th:field="*{id}"/>
 

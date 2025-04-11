@@ -15,16 +15,14 @@
                 <th style="padding: 10px;">Ciudad</th>
                 <th style="padding: 10px;">Categoría</th>
                 <th style="padding: 10px;">Fecha inscripción</th>
-                <th style="padding: 10px;">Estado</th>
             </tr>
         </thead>
         <tbody>
             <tr th:each="inscripcion : ${inscripciones}" style="border-bottom: 1px solid #ccc;">
                 <td th:text="${inscripcion.equipo.nombre}" style="padding: 10px;"></td>
                 <td th:text="${inscripcion.equipo.ciudad}" style="padding: 10px;"></td>
-                <td th:text="${inscripcion.equipo.categoria}" style="padding: 10px;"></td>
+                <td th:text="${inscripcion.torneo.categoria}" style="padding: 10px;"></td>
                 <td th:text="${inscripcion.fechaInscripcion}" style="padding: 10px;"></td>
-                <td th:text="${inscripcion.estado}" style="padding: 10px;"></td>
             </tr>
         </tbody>
     </table>

@@ -28,7 +28,6 @@ public class InscripcionService {
         inscripcion.setEquipo(equipo);
         inscripcion.setTorneo(torneo);
         inscripcion.setFechaInscripcion(LocalDate.now());
-        inscripcion.setEstado("pendiente");
 
         inscripciones.add(inscripcion);
     }
@@ -47,7 +46,6 @@ public class InscripcionService {
         if (inscripcion != null) {
             inscripcion.setEquipo(inscripcionActualizada.getEquipo());
             inscripcion.setTorneo(inscripcionActualizada.getTorneo());
-            inscripcion.setEstado(inscripcionActualizada.getEstado());
             inscripcion.setFechaInscripcion(inscripcionActualizada.getFechaInscripcion());
         }
     }
@@ -63,9 +61,6 @@ public class InscripcionService {
             switch (key) {
                 case "fechaInscripcion":
                     inscripcion.setFechaInscripcion(LocalDate.parse(value.toString()));
-                    break;
-                case "estado":
-                    inscripcion.setEstado(value.toString());
                     break;
                 // Puedes extender con más campos si es necesario
             }

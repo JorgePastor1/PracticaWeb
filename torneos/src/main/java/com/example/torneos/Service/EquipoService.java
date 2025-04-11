@@ -14,7 +14,7 @@ public class EquipoService {
     private Long siguienteId = 1L;
 
     public EquipoService() {
-        equipos.add(new Equipo(siguienteId++, "Los Tigres", "Juvenil", "Barcelona", 11));
+        equipos.add(new Equipo(siguienteId++, "Los Tigres", "Barcelona", 11));
     }
 
     public List<Equipo> obtenerTodos() {
@@ -57,9 +57,6 @@ public class EquipoService {
             switch (key) {
                 case "nombre":
                     equipo.setNombre((String) value);
-                    break;
-                case "categoria":
-                    equipo.setCategoria((String) value);
                     break;
                 case "ciudad":
                     equipo.setCiudad((String) value);

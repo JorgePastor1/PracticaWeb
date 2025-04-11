@@ -112,7 +112,6 @@ public class InscripcionController {
             inscripcion.setId(id);
             inscripcion.setEquipo(equipo);
             inscripcion.setTorneo(torneo);
-            inscripcion.setEstado(estado);
             inscripcion.setFechaInscripcion(fecha);
 
             inscripcionService.actualizar(inscripcion);

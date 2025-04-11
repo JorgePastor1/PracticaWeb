@@ -6,7 +6,6 @@ public class Equipo {
     // Fields representing team properties
     private Long id;
     private String nombre;         // Team name
-    private String categoria;      // Category (e.g., U18, amateur, etc.)
     private String ciudad;         // City the team is from
     private int numJugadores;      // Number of players
 
@@ -15,10 +14,9 @@ public class Equipo {
     }
 
     // Parameterized constructor for easier object creation
-    public Equipo(Long id, String nombre, String categoria, String ciudad, int numJugadores) {
+    public Equipo(Long id, String nombre,  String ciudad, int numJugadores) {
         this.id = id;
         this.nombre = nombre;
-        this.categoria = categoria;
         this.ciudad = ciudad;
         this.numJugadores = numJugadores;
     }
@@ -39,14 +37,6 @@ public class Equipo {
 
     public void setNombre(String nombre) {
         this.nombre = nombre;
-    }
-
-    public String getCategoria() {
-        return categoria;
-    }
-
-    public void setCategoria(String categoria) {
-        this.categoria = categoria;
     }
 
     public String getCiudad() {
@@ -71,7 +61,6 @@ public class Equipo {
         return "Equipo{" +
                 "id=" + id +
                 ", nombre='" + nombre + '\'' +
-                ", categoria='" + categoria + '\'' +
                 ", ciudad='" + ciudad + '\'' +
                 ", numJugadores=" + numJugadores + '\'' +
                 '}';

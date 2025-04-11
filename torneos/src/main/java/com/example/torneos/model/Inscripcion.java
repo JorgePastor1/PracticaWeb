@@ -8,17 +8,15 @@ public class Inscripcion {
     private Equipo equipo;
     private Torneo torneo;
     private LocalDate fechaInscripcion;
-    private String estado; // Ej: pendiente, aceptado, rechazado...
 
     public Inscripcion() {
     }
 
-    public Inscripcion(Long id, Equipo equipo, Torneo torneo, LocalDate fechaInscripcion, String estado) {
+    public Inscripcion(Long id, Equipo equipo, Torneo torneo, LocalDate fechaInscripcion) {
         this.id = id;
         this.equipo = equipo;
         this.torneo = torneo;
         this.fechaInscripcion = fechaInscripcion;
-        this.estado = estado;
     }
 
     // Getters y setters
@@ -55,13 +53,7 @@ public class Inscripcion {
         this.fechaInscripcion = fechaInscripcion;
     }
 
-    public String getEstado() {
-        return estado;
-    }
 
-    public void setEstado(String estado) {
-        this.estado = estado;
-    }
 
     @Override
     public String toString() {
@@ -70,7 +62,7 @@ public class Inscripcion {
                 ", equipo=" + (equipo != null ? equipo.getNombre() : "null") +
                 ", torneo=" + (torneo != null ? torneo.getNombre() : "null") +
                 ", fechaInscripcion=" + fechaInscripcion +
-                ", estado='" + estado + '\'' +
+                '\'' +
                 '}';
     }
 }
