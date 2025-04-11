@@ -8,16 +8,18 @@ public class Torneo {
     private String nombre;
     private String lugar;
     private LocalDate fecha;
-    private String categoria; // ✅ Nuevo campo
+    private String deporte;
+    private String categoria;
 
     public Torneo() {
     }
 
-    public Torneo(Long id, String nombre, String lugar, LocalDate fecha, String categoria) {
+    public Torneo(Long id, String nombre, String lugar, LocalDate fecha, String deporte, String categoria) {
         this.id = id;
         this.nombre = nombre;
         this.lugar = lugar;
         this.fecha = fecha;
+        this.deporte = deporte;
         this.categoria = categoria;
     }
 
@@ -51,6 +53,14 @@ public class Torneo {
 
     public void setFecha(LocalDate fecha) {
         this.fecha = fecha;
+    }
+
+    public String getDeporte() {
+        return deporte;
+    }
+
+    public void setDeporte(String deporte) {
+        this.deporte = deporte;
     }
 
     public String getCategoria() {

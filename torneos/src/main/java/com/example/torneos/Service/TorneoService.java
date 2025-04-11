@@ -16,7 +16,7 @@ public class TorneoService {
 
     public TorneoService() {
         torneos.add(new Torneo(
-                siguienteId++, "Torneo de Invierno", "Madrid", LocalDate.of(2025, 5, 15), "Fútbol"));
+                siguienteId++, "Torneo de Invierno", "Madrid", LocalDate.of(2025, 5, 15), "Fútbol", "Juvenil"));
     }
 
     public List<Torneo> obtenerTodos() {
@@ -63,6 +63,9 @@ public class TorneoService {
                     break;
                 case "fecha":
                     torneo.setFecha(LocalDate.parse((String) value));
+                    break;
+                case "deporte":
+                    torneo.setDeporte((String) value);
                     break;
                 case "categoria":
                     torneo.setCategoria((String) value);
