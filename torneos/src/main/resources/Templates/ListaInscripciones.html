@@ -9,11 +9,25 @@
 
   <h1 style="text-align: center; margin-bottom: 2rem;">Inscripción a Torneos</h1>
 
+  <!-- FILTROS -->
+  <div class="filters" style="display: flex; flex-wrap: wrap; gap: 1rem; margin-bottom: 2rem;">
+    <input type="text" id="filtroNombre" placeholder="Buscar por nombre..."
+           style="padding: 0.5rem; border-radius: 8px; border: 1px solid #ccc; flex: 1; min-width: 150px;" />
+
+    <input type="text" id="filtroCategoria" placeholder="Categoría..."
+           style="padding: 0.5rem; border-radius: 8px; border: 1px solid #ccc; flex: 1; min-width: 150px;" />
+
+    <input type="text" id="filtroLugar" placeholder="Lugar..."
+           style="padding: 0.5rem; border-radius: 8px; border: 1px solid #ccc; flex: 1; min-width: 150px;" />
+  </div>
+
+  <!-- LISTA TORNEOS -->
   <div id="listaTorneos">
     <div th:each="torneo : ${torneos}" class="torneo"
          style="display: flex; justify-content: space-between; align-items: center;
                 padding: 1rem; border: 1px solid #ddd; border-radius: 10px; margin-bottom: 1rem;
-                background-color: #f8f9fa;">
+                background-color: #f8f9fa;"
+         th:attr="data-nombre=${torneo.nombre}, data-categoria=${torneo.categoria}, data-lugar=${torneo.lugar}">
       <div>
         <strong th:text="${torneo.nombre}">Nombre del torneo</strong><br/>
         Categoría: <span th:text="${torneo.categoria}">Categoría</span> |
@@ -30,5 +44,35 @@
 </main>
 
 <div th:replace="fragments/footer :: footer"></div>
+
+<!-- SCRIPT DE FILTRO -->
+<script>
+  const inputNombre = document.getElementById('filtroNombre');
+  const inputCategoria = document.getElementById('filtroCategoria');
+  const inputLugar = document.getElementById('filtroLugar');
+
+  function filtrarTorneos() {
+    const nombre = inputNombre.value.toLowerCase();
+    const categoria = inputCategoria.value.toLowerCase();
+    const lugar = inputLugar.value.toLowerCase();
+
+    document.querySelectorAll('.torneo').forEach(div => {
+      const n = div.dataset.nombre.toLowerCase();
+      const c = div.dataset.categoria.toLowerCase();
+      const l = div.dataset.lugar.toLowerCase();
+      const visible =
+        n.includes(nombre) &&
+        c.includes(categoria) &&
+        l.includes(lugar);
+
+      div.style.display = visible ? 'flex' : 'none';
+    });
+  }
+
+  inputNombre.addEventListener('input', filtrarTorneos);
+  inputCategoria.addEventListener('input', filtrarTorneos);
+  inputLugar.addEventListener('input', filtrarTorneos);
+</script>
+
 </body>
 </html>
