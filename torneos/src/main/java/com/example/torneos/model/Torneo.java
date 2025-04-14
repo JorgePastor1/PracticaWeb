@@ -1,27 +1,26 @@
 package com.example.torneos.model;
 
+import jakarta.persistence.*;
 import java.time.LocalDate;
+import java.util.List;
 
+@Entity
 public class Torneo {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private String nombre;
-    private String lugar;
+
     private LocalDate fecha;
     private String deporte;
+    private String lugar;
     private String categoria;
+    private String nombre;
 
-    public Torneo() {
-    }
+    @OneToMany(mappedBy = "torneo")
+    private List<Inscripcion> inscripciones;
 
-    public Torneo(Long id, String nombre, String lugar, LocalDate fecha, String deporte, String categoria) {
-        this.id = id;
-        this.nombre = nombre;
-        this.lugar = lugar;
-        this.fecha = fecha;
-        this.deporte = deporte;
-        this.categoria = categoria;
-    }
+    // Getters y setters
 
     public Long getId() {
         return id;
@@ -29,22 +28,6 @@ public class Torneo {
 
     public void setId(Long id) {
         this.id = id;
-    }
-
-    public String getNombre() {
-        return nombre;
-    }
-
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
-    }
-
-    public String getLugar() {
-        return lugar;
-    }
-
-    public void setLugar(String lugar) {
-        this.lugar = lugar;
     }
 
     public LocalDate getFecha() {
@@ -63,6 +46,14 @@ public class Torneo {
         this.deporte = deporte;
     }
 
+    public String getLugar() {
+        return lugar;
+    }
+
+    public void setLugar(String lugar) {
+        this.lugar = lugar;
+    }
+
     public String getCategoria() {
         return categoria;
     }
@@ -71,14 +62,19 @@ public class Torneo {
         this.categoria = categoria;
     }
 
-    @Override
-    public String toString() {
-        return "Torneo{" +
-                "id=" + id +
-                ", nombre='" + nombre + '\'' +
-                ", lugar='" + lugar + '\'' +
-                ", fecha=" + fecha +
-                ", categoria='" + categoria + '\'' +
-                '}';
+    public String getNombre() {
+        return nombre;
+    }
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+
+    public List<Inscripcion> getInscripciones() {
+        return inscripciones;
+    }
+
+    public void setInscripciones(List<Inscripcion> inscripciones) {
+        this.inscripciones = inscripciones;
     }
 }

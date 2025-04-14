@@ -1,19 +1,27 @@
 package com.example.torneos.model;
 
+import jakarta.persistence.*;
+
 import java.time.LocalDate;
 
+@Entity
 public class Inscripcion {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
+    @ManyToOne
     private Equipo equipo;
+
+    @ManyToOne
     private Torneo torneo;
+
     private LocalDate fechaInscripcion;
 
-    public Inscripcion() {
-    }
+    public Inscripcion() {}
 
-    public Inscripcion(Long id, Equipo equipo, Torneo torneo, LocalDate fechaInscripcion) {
-        this.id = id;
+    public Inscripcion(Equipo equipo, Torneo torneo, LocalDate fechaInscripcion) {
         this.equipo = equipo;
         this.torneo = torneo;
         this.fechaInscripcion = fechaInscripcion;
@@ -21,48 +29,15 @@ public class Inscripcion {
 
     // Getters y setters
 
-    public Long getId() {
-        return id;
-    }
+    public Long getId() { return id; }
+    public void setId(Long id) { this.id = id; }
 
-    public void setId(Long id) {
-        this.id = id;
-    }
+    public Equipo getEquipo() { return equipo; }
+    public void setEquipo(Equipo equipo) { this.equipo = equipo; }
 
-    public Equipo getEquipo() {
-        return equipo;
-    }
+    public Torneo getTorneo() { return torneo; }
+    public void setTorneo(Torneo torneo) { this.torneo = torneo; }
 
-    public void setEquipo(Equipo equipo) {
-        this.equipo = equipo;
-    }
-
-    public Torneo getTorneo() {
-        return torneo;
-    }
-
-    public void setTorneo(Torneo torneo) {
-        this.torneo = torneo;
-    }
-
-    public LocalDate getFechaInscripcion() {
-        return fechaInscripcion;
-    }
-
-    public void setFechaInscripcion(LocalDate fechaInscripcion) {
-        this.fechaInscripcion = fechaInscripcion;
-    }
-
-
-
-    @Override
-    public String toString() {
-        return "Inscripcion{" +
-                "id=" + id +
-                ", equipo=" + (equipo != null ? equipo.getNombre() : "null") +
-                ", torneo=" + (torneo != null ? torneo.getNombre() : "null") +
-                ", fechaInscripcion=" + fechaInscripcion +
-                '\'' +
-                '}';
-    }
+    public LocalDate getFechaInscripcion() { return fechaInscripcion; }
+    public void setFechaInscripcion(LocalDate fechaInscripcion) { this.fechaInscripcion = fechaInscripcion; }
 }

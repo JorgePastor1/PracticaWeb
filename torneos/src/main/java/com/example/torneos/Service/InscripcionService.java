@@ -1,71 +1,62 @@
 package com.example.torneos.Service;
 
+import com.example.torneos.Repository.InscripcionRepository;
 import com.example.torneos.model.Equipo;
 import com.example.torneos.model.Inscripcion;
 import com.example.torneos.model.Torneo;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 
 @Service
 public class InscripcionService {
 
-    private final List<Inscripcion> inscripciones = new ArrayList<>();
-    private Long siguienteId = 1L;
+    @Autowired
+    private InscripcionRepository inscripcionRepository;
 
-    // Obtener todas las inscripciones registradas
     public List<Inscripcion> obtenerTodas() {
-        return inscripciones;
+        return inscripcionRepository.findAll();
     }
 
-    // Crear nueva inscripción con estado 'pendiente' y fecha actual
-    public void inscribir(Equipo equipo, Torneo torneo) {
+    public Inscripcion guardar(Inscripcion inscripcion) {
+        return inscripcionRepository.save(inscripcion);
+    }
+
+    public Inscripcion buscarPorId(Long id) {
+        return inscripcionRepository.findById(id).orElse(null);
+    }
+
+    public void eliminar(Long id) {
+        inscripcionRepository.deleteById(id);
+    }
+
+    public Inscripcion inscribir(Equipo equipo, Torneo torneo) {
         Inscripcion inscripcion = new Inscripcion();
-        inscripcion.setId(siguienteId++);
         inscripcion.setEquipo(equipo);
         inscripcion.setTorneo(torneo);
         inscripcion.setFechaInscripcion(LocalDate.now());
-
-        inscripciones.add(inscripcion);
+        return inscripcionRepository.save(inscripcion);
     }
 
-    // Buscar inscripción por ID
-    public Inscripcion buscarPorId(Long id) {
-        return inscripciones.stream()
-                .filter(inscripcion -> inscripcion.getId().equals(id))
-                .findFirst()
-                .orElse(null);
+    public Inscripcion actualizar(Inscripcion inscripcion) {
+        return inscripcionRepository.save(inscripcion);
     }
 
-    // Actualizar todos los campos de una inscripción existente
-    public void actualizar(Inscripcion inscripcionActualizada) {
-        Inscripcion inscripcion = buscarPorId(inscripcionActualizada.getId());
-        if (inscripcion != null) {
-            inscripcion.setEquipo(inscripcionActualizada.getEquipo());
-            inscripcion.setTorneo(inscripcionActualizada.getTorneo());
-            inscripcion.setFechaInscripcion(inscripcionActualizada.getFechaInscripcion());
-        }
-    }
-
-    // Actualización parcial (PATCH)
     public Inscripcion actualizarParcial(Long id, Map<String, Object> updates) {
-        Inscripcion inscripcion = buscarPorId(id);
-        if (inscripcion == null) {
-            return null;
-        }
+        Optional<Inscripcion> optional = inscripcionRepository.findById(id);
+        if (optional.isEmpty()) return null;
+
+        Inscripcion inscripcion = optional.get();
 
         updates.forEach((key, value) -> {
             switch (key) {
-                case "fechaInscripcion":
-                    inscripcion.setFechaInscripcion(LocalDate.parse(value.toString()));
-                    break;
-                // Puedes extender con más campos si es necesario
-            }
-        });
+                case "fechaInscripcion" -> inscripcion.setFechaInscripcion(LocalDate.parse((String) value));
+        }});
 
-        return inscripcion;
+        return inscripcionRepository.save(inscripcion);
     }
 }

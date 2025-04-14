@@ -3,29 +3,29 @@
     "editor.minimap.enabled": false,
     "terminal.integrated.defaultProfile.windows": "CMD-directo",
     "terminal.integrated.profiles.windows": {
-      "CMD-directo": {
-        "path": "C:\\Windows\\System32\\cmd.exe"
-      }
+        "CMD-directo": {
+            "path": "C:\\Windows\\System32\\cmd.exe"
+        }
     },
     "java.debug.settings.console": "internalConsole",
     "java.configuration.runtimes": [
-      {
-        "name": "JavaSE-22",
-        "path": "C:\\Program Files\\Java\\jdk-22",
-        "default": true
-      }
+        {
+            "name": "JavaSE-22",
+            "path": "C:\\Program Files\\Java\\jdk-22",
+            "default": true
+        }
     ],
     "terminal.integrated.env.windows": {
-      "JAVA_HOME": "C:\\Program Files\\Java\\jdk-22",
-      "PATH": "C:\\Program Files\\Java\\jdk-22\\bin;${env:PATH}"
+        "JAVA_HOME": "C:\\Program Files\\Java\\jdk-22",
+        "PATH": "C:\\Program Files\\Java\\jdk-22\\bin;${env:PATH}"
     },
     "maven.terminal.customEnv": [
-      {
-        "environmentVariable": "JAVA_HOME",
-        "value": "C:\\Program Files\\Java\\jdk-22"
-      }
+        {
+            "environmentVariable": "JAVA_HOME",
+            "value": "C:\\Program Files\\Java\\jdk-22"
+        }
     ],
     "java.import.gradle.java.home": "C:\\Program Files\\Java\\jdk-22",
-    "java.compile.nullAnalysis.mode": "automatic"
-  }
-  
+    "java.compile.nullAnalysis.mode": "automatic",
+    "java.configuration.updateBuildConfiguration": "interactive"
+}

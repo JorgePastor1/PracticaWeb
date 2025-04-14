@@ -1,27 +1,23 @@
 package com.example.torneos.model;
 
-// Model class representing a team (Equipo)
+import jakarta.persistence.*;
+import java.util.List;
+
+@Entity
 public class Equipo {
 
-    // Fields representing team properties
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private String nombre;         // Team name
-    private String ciudad;         // City the team is from
-    private int numJugadores;      // Number of players
 
-    // Default constructor (needed for frameworks like Spring)
-    public Equipo() {
-    }
+    private String nombre;
+    private String ciudad;
+    private int numJugadores;
 
-    // Parameterized constructor for easier object creation
-    public Equipo(Long id, String nombre,  String ciudad, int numJugadores) {
-        this.id = id;
-        this.nombre = nombre;
-        this.ciudad = ciudad;
-        this.numJugadores = numJugadores;
-    }
+    @OneToMany(mappedBy = "equipo")
+    private List<Inscripcion> inscripciones;
 
-    // Getters and setters for each field
+    // Getters y setters
 
     public Long getId() {
         return id;
@@ -55,14 +51,11 @@ public class Equipo {
         this.numJugadores = numJugadores;
     }
 
-    // String representation of the object, useful for debugging/logging
-    @Override
-    public String toString() {
-        return "Equipo{" +
-                "id=" + id +
-                ", nombre='" + nombre + '\'' +
-                ", ciudad='" + ciudad + '\'' +
-                ", numJugadores=" + numJugadores + '\'' +
-                '}';
+    public List<Inscripcion> getInscripciones() {
+        return inscripciones;
+    }
+
+    public void setInscripciones(List<Inscripcion> inscripciones) {
+        this.inscripciones = inscripciones;
     }
 }
