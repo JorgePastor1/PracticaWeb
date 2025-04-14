@@ -4,6 +4,8 @@ import jakarta.persistence.*;
 import java.time.LocalDate;
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 @Entity
 public class Torneo {
 
@@ -18,6 +20,7 @@ public class Torneo {
     private String nombre;
 
     @OneToMany(mappedBy = "torneo")
+    @JsonManagedReference
     private List<Inscripcion> inscripciones;
 
     // Getters y setters

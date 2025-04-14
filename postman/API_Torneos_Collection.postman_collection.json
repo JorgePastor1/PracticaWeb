@@ -1,425 +1,512 @@
 {
     "info": {
-        "name": "API Torneos - CRUD + PATCH",
+        "name": "CRUD + PATCH - Torneos, Equipos, Inscripciones",
         "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
     },
     "item": [
         {
-            "name": "Equipos - GET all",
-            "request": {
-                "method": "GET",
-                "url": {
-                    "raw": "http://localhost:8080/api/equipos",
-                    "host": [
-                        "localhost"
-                    ],
-                    "port": "8080",
-                    "path": [
-                        "api",
-                        "equipos"
-                    ]
-                }
-            }
-        },
-        {
-            "name": "Equipos - GET by ID",
-            "request": {
-                "method": "GET",
-                "url": {
-                    "raw": "http://localhost:8080/api/equipos/1",
-                    "host": [
-                        "localhost"
-                    ],
-                    "port": "8080",
-                    "path": [
-                        "api",
-                        "equipos",
-                        "1"
-                    ]
-                }
-            }
-        },
-        {
-            "name": "Equipos - POST",
-            "request": {
-                "method": "POST",
-                "header": [
-                    {
-                        "key": "Content-Type",
-                        "value": "application/json"
-                    }
-                ],
-                "body": {
-                    "mode": "raw",
-                    "raw": "{\"nombre\": \"valor_nombre\", \"ciudad\": \"valor_ciudad\", \"numJugadores\": \"valor_numJugadores\" }"
+            "name": "Torneos",
+            "item": [
+                {
+                    "name": "GET Torneo",
+                    "request": {
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                            }
+                        ],
+                        "body": {},
+                        "url": {
+                            "raw": "http://localhost:8080/api/torneos",
+                            "host": [
+                                "localhost"
+                            ],
+                            "port": "8080",
+                            "path": [
+                                "api",
+                                "torneos"
+                            ]
+                        }
+                    },
+                    "response": []
                 },
-                "url": {
-                    "raw": "http://localhost:8080/api/equipos",
-                    "host": [
-                        "localhost"
-                    ],
-                    "port": "8080",
-                    "path": [
-                        "api",
-                        "equipos"
-                    ]
-                }
-            }
-        },
-        {
-            "name": "Equipos - PUT",
-            "request": {
-                "method": "PUT",
-                "header": [
-                    {
-                        "key": "Content-Type",
-                        "value": "application/json"
-                    }
-                ],
-                "body": {
-                    "mode": "raw",
-                    "raw": "{\"id\": 1, \"nombre\": \"valor_editado_nombre\", \"ciudad\": \"valor_editado_ciudad\", \"numJugadores\": \"valor_editado_numJugadores\" }"
+                {
+                    "name": "GET Torneo por ID",
+                    "request": {
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                            }
+                        ],
+                        "body": {},
+                        "url": {
+                            "raw": "http://localhost:8080/api/torneos/1",
+                            "host": [
+                                "localhost"
+                            ],
+                            "port": "8080",
+                            "path": [
+                                "api",
+                                "torneos",
+                                "1"
+                            ]
+                        }
+                    },
+                    "response": []
                 },
-                "url": {
-                    "raw": "http://localhost:8080/api/equipos/1",
-                    "host": [
-                        "localhost"
-                    ],
-                    "port": "8080",
-                    "path": [
-                        "api",
-                        "equipos",
-                        "1"
-                    ]
-                }
-            }
-        },
-        {
-            "name": "Equipos - PATCH",
-            "request": {
-                "method": "PATCH",
-                "header": [
-                    {
-                        "key": "Content-Type",
-                        "value": "application/json"
-                    }
-                ],
-                "body": {
-                    "mode": "raw",
-                    "raw": "{\"nombre\": \"actualizado_nombre\"}"
+                {
+                    "name": "POST Torneo",
+                    "request": {
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n  \"nombre\": \"nuevo\",\n  \"fecha\": \"YYYY-MM-DD\",\n  \"deporte\": \"nuevo\",\n  \"categoria\": \"nueva\",\n  \"lugar\": \"nuevo\"\n}"
+                        },
+                        "url": {
+                            "raw": "http://localhost:8080/api/torneos",
+                            "host": [
+                                "localhost"
+                            ],
+                            "port": "8080",
+                            "path": [
+                                "api",
+                                "torneos"
+                            ]
+                        }
+                    },
+                    "response": []
                 },
-                "url": {
-                    "raw": "http://localhost:8080/api/equipos/1",
-                    "host": [
-                        "localhost"
-                    ],
-                    "port": "8080",
-                    "path": [
-                        "api",
-                        "equipos",
-                        "1"
-                    ]
-                }
-            }
-        },
-        {
-            "name": "Equipos - DELETE",
-            "request": {
-                "method": "DELETE",
-                "url": {
-                    "raw": "http://localhost:8080/api/equipos/1",
-                    "host": [
-                        "localhost"
-                    ],
-                    "port": "8080",
-                    "path": [
-                        "api",
-                        "equipos",
-                        "1"
-                    ]
-                }
-            }
-        },
-        {
-            "name": "Torneos - GET all",
-            "request": {
-                "method": "GET",
-                "url": {
-                    "raw": "http://localhost:8080/api/torneos",
-                    "host": [
-                        "localhost"
-                    ],
-                    "port": "8080",
-                    "path": [
-                        "api",
-                        "torneos"
-                    ]
-                }
-            }
-        },
-        {
-            "name": "Torneos - GET by ID",
-            "request": {
-                "method": "GET",
-                "url": {
-                    "raw": "http://localhost:8080/api/torneos/1",
-                    "host": [
-                        "localhost"
-                    ],
-                    "port": "8080",
-                    "path": [
-                        "api",
-                        "torneos",
-                        "1"
-                    ]
-                }
-            }
-        },
-        {
-            "name": "Torneos - POST",
-            "request": {
-                "method": "POST",
-                "header": [
-                    {
-                        "key": "Content-Type",
-                        "value": "application/json"
-                    }
-                ],
-                "body": {
-                    "mode": "raw",
-                    "raw": "{\"nombre\": \"valor_nombre\", \"lugar\": \"valor_lugar\", \"fecha\": \"valor_fecha\", \"deporte\": \"valor_deporte\", \"categoria\": \"valor_categoria\" }"
+                {
+                    "name": "PUT Torneo",
+                    "request": {
+                        "method": "PUT",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n  \"nombre\": \"nuevo\",\n  \"fecha\": \"YYYY-MM-DD\",\n  \"deporte\": \"nuevo\",\n  \"categoria\": \"nueva\",\n  \"lugar\": \"nuevo\"\n}"
+                        },
+                        "url": {
+                            "raw": "http://localhost:8080/api/torneos/1",
+                            "host": [
+                                "localhost"
+                            ],
+                            "port": "8080",
+                            "path": [
+                                "api",
+                                "torneos",
+                                "1"
+                            ]
+                        }
+                    },
+                    "response": []
                 },
-                "url": {
-                    "raw": "http://localhost:8080/api/torneos",
-                    "host": [
-                        "localhost"
-                    ],
-                    "port": "8080",
-                    "path": [
-                        "api",
-                        "torneos"
-                    ]
-                }
-            }
-        },
-        {
-            "name": "Torneos - PUT",
-            "request": {
-                "method": "PUT",
-                "header": [
-                    {
-                        "key": "Content-Type",
-                        "value": "application/json"
-                    }
-                ],
-                "body": {
-                    "mode": "raw",
-                    "raw": "{\"id\": 1, \"nombre\": \"valor_editado_nombre\", \"lugar\": \"valor_editado_lugar\", \"fecha\": \"valor_editado_fecha\", \"deporte\": \"valor_editado_deporte\", \"categoria\": \"valor_editado_categoria\"}"
+                {
+                    "name": "PATCH Torneo",
+                    "request": {
+                        "method": "PATCH",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n  \"nombre\": \"nombre_nuevo\"\n}"
+                        },
+                        "url": {
+                            "raw": "http://localhost:8080/api/torneos/1",
+                            "host": [
+                                "localhost"
+                            ],
+                            "port": "8080",
+                            "path": [
+                                "api",
+                                "torneos",
+                                "1"
+                            ]
+                        }
+                    },
+                    "response": []
                 },
-                "url": {
-                    "raw": "http://localhost:8080/api/torneos/1",
-                    "host": [
-                        "localhost"
-                    ],
-                    "port": "8080",
-                    "path": [
-                        "api",
-                        "torneos",
-                        "1"
-                    ]
+                {
+                    "name": "DELETE Torneo",
+                    "request": {
+                        "method": "DELETE",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                            }
+                        ],
+                        "body": {},
+                        "url": {
+                            "raw": "http://localhost:8080/api/torneos/1",
+                            "host": [
+                                "localhost"
+                            ],
+                            "port": "8080",
+                            "path": [
+                                "api",
+                                "torneos",
+                                "1"
+                            ]
+                        }
+                    },
+                    "response": []
                 }
-            }
+            ]
         },
         {
-            "name": "Torneos - PATCH",
-            "request": {
-                "method": "PATCH",
-                "header": [
-                    {
-                        "key": "Content-Type",
-                        "value": "application/json"
-                    }
-                ],
-                "body": {
-                    "mode": "raw",
-                    "raw": "{\"nombre\": \"actualizado_nombre\"}"
+            "name": "Equipos",
+            "item": [
+                {
+                    "name": "GET Equipo",
+                    "request": {
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                            }
+                        ],
+                        "body": {},
+                        "url": {
+                            "raw": "http://localhost:8080/api/equipos",
+                            "host": [
+                                "localhost"
+                            ],
+                            "port": "8080",
+                            "path": [
+                                "api",
+                                "equipos"
+                            ]
+                        }
+                    },
+                    "response": []
                 },
-                "url": {
-                    "raw": "http://localhost:8080/api/torneos/1",
-                    "host": [
-                        "localhost"
-                    ],
-                    "port": "8080",
-                    "path": [
-                        "api",
-                        "torneos",
-                        "1"
-                    ]
-                }
-            }
-        },
-        {
-            "name": "Torneos - DELETE",
-            "request": {
-                "method": "DELETE",
-                "url": {
-                    "raw": "http://localhost:8080/api/torneos/1",
-                    "host": [
-                        "localhost"
-                    ],
-                    "port": "8080",
-                    "path": [
-                        "api",
-                        "torneos",
-                        "1"
-                    ]
-                }
-            }
-        },
-        {
-            "name": "Inscripciones - GET all",
-            "request": {
-                "method": "GET",
-                "header": [],
-                "url": {
-                    "raw": "http://localhost:8080/api/inscripciones",
-                    "protocol": "http",
-                    "host": [
-                        "localhost"
-                    ],
-                    "port": "8080",
-                    "path": [
-                        "api",
-                        "inscripciones"
-                    ]
-                }
-            }
-        },
-        {
-            "name": "Inscripciones - GET by ID",
-            "request": {
-                "method": "GET",
-                "header": [],
-                "url": {
-                    "raw": "http://localhost:8080/api/inscripciones/1",
-                    "protocol": "http",
-                    "host": [
-                        "localhost"
-                    ],
-                    "port": "8080",
-                    "path": [
-                        "api",
-                        "inscripciones",
-                        "1"
-                    ]
-                }
-            }
-        },
-        {
-            "name": "Inscripciones - POST",
-            "request": {
-                "method": "POST",
-                "header": [
-                    {
-                        "key": "Content-Type",
-                        "value": "application/json"
-                    }
-                ],
-                "body": {
-                    "mode": "raw",
-                    "raw": "{\n \"equipo\": {\n\"nombre\": \"valor_nombre\",\n \"ciudad\": \"valor_ciudad\",\n \"numJugadores\": \"valor_numJugadores\"\n},\n \"torneo\": {\n\"nombre\": \"valor_nombre\",\n \"lugar\": \"valor_lugar\",\n \"fecha\": \"valor_fecha\",\n \"deporte\": \"valor_deporte\",\n \"categoria\": \"valor_categoria\"\n},\n \"fechaInscricpion\" : \"valor_fecha\"\n}"
+                {
+                    "name": "GET Equipo por ID",
+                    "request": {
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                            }
+                        ],
+                        "body": {},
+                        "url": {
+                            "raw": "http://localhost:8080/api/equipos/1",
+                            "host": [
+                                "localhost"
+                            ],
+                            "port": "8080",
+                            "path": [
+                                "api",
+                                "equipos",
+                                "1"
+                            ]
+                        }
+                    },
+                    "response": []
                 },
-                "url": {
-                    "raw": "http://localhost:8080/api/inscripciones",
-                    "protocol": "http",
-                    "host": [
-                        "localhost"
-                    ],
-                    "port": "8080",
-                    "path": [
-                        "api",
-                        "inscripciones"
-                    ]
-                }
-            }
-        },
-        {
-            "name": "Inscripciones - PUT",
-            "request": {
-                "method": "PUT",
-                "header": [
-                    {
-                        "key": "Content-Type",
-                        "value": "application/json"
-                    }
-                ],
-                "body": {
-                    "mode": "raw",
-                    "raw": "{\n  \"equipo\": { \"id\": 1 },\n  \"torneo\": { \"id\": 1 }, \n  \"fechaInscripcion\": \"2025-05-22\"\n}"
+                {
+                    "name": "POST Equipo",
+                    "request": {
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n  \"nombre\": \"nuevo\",\n  \"ciudad\": \"nueva\",\n  \"numJugadores\": \"nuevo\"\n}"
+                        },
+                        "url": {
+                            "raw": "http://localhost:8080/api/equipos",
+                            "host": [
+                                "localhost"
+                            ],
+                            "port": "8080",
+                            "path": [
+                                "api",
+                                "equipos"
+                            ]
+                        }
+                    },
+                    "response": []
                 },
-                "url": {
-                    "raw": "http://localhost:8080/api/inscripciones/1",
-                    "protocol": "http",
-                    "host": [
-                        "localhost"
-                    ],
-                    "port": "8080",
-                    "path": [
-                        "api",
-                        "inscripciones",
-                        "1"
-                    ]
-                }
-            }
-        },
-        {
-            "name": "Inscricpiones - PATCH",
-            "request": {
-                "method": "PATCH",
-                "header": [
-                    {
-                        "key": "Content-Type",
-                        "value": "application/json"
-                    }
-                ],
-                "body": {
-                    "mode": "raw",
-                    "raw": "{\n  \"equipo\": \"edicion_equipo\"\n}"
+                {
+                    "name": "PUT Equipo",
+                    "request": {
+                        "method": "PUT",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n  \"nombre\": \"nuevo\",\n  \"ciudad\": \"nueva\",\n  \"numJugadores\": \"nuevo\"\n}"
+                        },
+                        "url": {
+                            "raw": "http://localhost:8080/api/equipos/1",
+                            "host": [
+                                "localhost"
+                            ],
+                            "port": "8080",
+                            "path": [
+                                "api",
+                                "equipos",
+                                "1"
+                            ]
+                        }
+                    },
+                    "response": []
                 },
-                "url": {
-                    "raw": "http://localhost:8080/api/inscripciones/1",
-                    "protocol": "http",
-                    "host": [
-                        "localhost"
-                    ],
-                    "port": "8080",
-                    "path": [
-                        "api",
-                        "inscripciones",
-                        "1"
-                    ]
+                {
+                    "name": "PATCH Equipo",
+                    "request": {
+                        "method": "PATCH",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n  \"nombre\": \"nuevo\"\n}"
+                        },
+                        "url": {
+                            "raw": "http://localhost:8080/api/equipos/1",
+                            "host": [
+                                "localhost"
+                            ],
+                            "port": "8080",
+                            "path": [
+                                "api",
+                                "equipos",
+                                "1"
+                            ]
+                        }
+                    },
+                    "response": []
+                },
+                {
+                    "name": "DELETE Equipo",
+                    "request": {
+                        "method": "DELETE",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                            }
+                        ],
+                        "body": {},
+                        "url": {
+                            "raw": "http://localhost:8080/api/equipos/1",
+                            "host": [
+                                "localhost"
+                            ],
+                            "port": "8080",
+                            "path": [
+                                "api",
+                                "equipos",
+                                "1"
+                            ]
+                        }
+                    },
+                    "response": []
                 }
-            }
+            ]
         },
         {
-            "name": "Inscripciones - DELETE",
-            "request": {
-                "method": "DELETE",
-                "header": [],
-                "url": {
-                    "raw": "http://localhost:8080/api/inscripciones/1",
-                    "protocol": "http",
-                    "host": [
-                        "localhost"
-                    ],
-                    "port": "8080",
-                    "path": [
-                        "api",
-                        "inscripciones",
-                        "1"
-                    ]
+            "name": "Inscripciones",
+            "item": [
+                {
+                    "name": "GET Inscripcion",
+                    "request": {
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                            }
+                        ],
+                        "body": {},
+                        "url": {
+                            "raw": "http://localhost:8080/api/inscripciones",
+                            "host": [
+                                "localhost"
+                            ],
+                            "port": "8080",
+                            "path": [
+                                "api",
+                                "inscripciones"
+                            ]
+                        }
+                    },
+                    "response": []
+                },
+                {
+                    "name": "GET Inscripcion por ID",
+                    "request": {
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                            }
+                        ],
+                        "body": {},
+                        "url": {
+                            "raw": "http://localhost:8080/api/inscripciones/1",
+                            "host": [
+                                "localhost"
+                            ],
+                            "port": "8080",
+                            "path": [
+                                "api",
+                                "inscripciones",
+                                "1"
+                            ]
+                        }
+                    },
+                    "response": []
+                },
+                {
+                    "name": "POST Inscripcion",
+                    "request": {
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n  \"equipo\": {\n    \"id\": 1\n  },\n  \"torneo\": {\n    \"id\": 1\n  },\n  \"fechaInscripcion\": \"YYYY-MM-DD\"\n}"
+                        },
+                        "url": {
+                            "raw": "http://localhost:8080/api/inscripciones",
+                            "host": [
+                                "localhost"
+                            ],
+                            "port": "8080",
+                            "path": [
+                                "api",
+                                "inscripciones"
+                            ]
+                        }
+                    },
+                    "response": []
+                },
+                {
+                    "name": "PUT Inscripcion",
+                    "request": {
+                        "method": "PUT",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n  \"equipo\": {\n    \"id\": 1\n  },\n  \"torneo\": {\n    \"id\": 1\n  },\n  \"fechaInscripcion\": \"YYYY-MM-DD\"\n}"
+                        },
+                        "url": {
+                            "raw": "http://localhost:8080/api/inscripciones/1",
+                            "host": [
+                                "localhost"
+                            ],
+                            "port": "8080",
+                            "path": [
+                                "api",
+                                "inscripciones",
+                                "1"
+                            ]
+                        }
+                    },
+                    "response": []
+                },
+                {
+                    "name": "PATCH Inscripcion",
+                    "request": {
+                        "method": "PATCH",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n  \"equipo\": {\n    \"id\": 1\n  }\n}"
+                        },
+                        "url": {
+                            "raw": "http://localhost:8080/api/inscripciones/1",
+                            "host": [
+                                "localhost"
+                            ],
+                            "port": "8080",
+                            "path": [
+                                "api",
+                                "inscripciones",
+                                "1"
+                            ]
+                        }
+                    },
+                    "response": []
+                },
+                {
+                    "name": "DELETE Inscripcion",
+                    "request": {
+                        "method": "DELETE",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                            }
+                        ],
+                        "body": {},
+                        "url": {
+                            "raw": "http://localhost:8080/api/inscripciones/1",
+                            "host": [
+                                "localhost"
+                            ],
+                            "port": "8080",
+                            "path": [
+                                "api",
+                                "inscripciones",
+                                "1"
+                            ]
+                        }
+                    },
+                    "response": []
                 }
-            }
+            ]
         }
     ]
 }

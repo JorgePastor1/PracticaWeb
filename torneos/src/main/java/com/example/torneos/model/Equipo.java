@@ -3,6 +3,8 @@ package com.example.torneos.model;
 import jakarta.persistence.*;
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 @Entity
 public class Equipo {
 
@@ -15,6 +17,7 @@ public class Equipo {
     private int numJugadores;
 
     @OneToMany(mappedBy = "equipo")
+    @JsonManagedReference
     private List<Inscripcion> inscripciones;
 
     // Getters y setters
