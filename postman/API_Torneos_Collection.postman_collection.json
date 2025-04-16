@@ -406,7 +406,7 @@
                         ],
                         "body": {
                             "mode": "raw",
-                            "raw": "{\n  \"equipo\": {\n    \"id\": 1\n  },\n  \"torneo\": {\n    \"id\": 1\n  },\n  \"fechaInscripcion\": \"YYYY-MM-DD\"\n}"
+                            "raw": "{\n \"fechaInscripcion\": \"AAAA-MM-DD\",\n  \"equipo\": \"id\": \"id\",\n  \"torneo\": \"id\": \"id\",\n}"
                         },
                         "url": {
                             "raw": "http://localhost:8080/api/inscripciones",
