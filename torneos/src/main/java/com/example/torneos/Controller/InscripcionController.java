@@ -7,13 +7,11 @@ import com.example.torneos.model.Equipo;
 import com.example.torneos.model.Inscripcion;
 import com.example.torneos.model.Torneo;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -87,38 +85,14 @@ public class InscripcionController {
         return "MostrarInscripciones";
     }
 
-    // (Opcional) Editar inscripción
-    @GetMapping("/{id}/editar")
-    public String mostrarFormularioEdicion(@PathVariable Long id, Model model) {
-        Inscripcion inscripcion = inscripcionService.buscarPorId(id);
-        model.addAttribute("inscripcion", inscripcion);
-        model.addAttribute("equipos", equipoService.obtenerTodos());
-        model.addAttribute("torneos", torneoService.obtenerTodos());
-        return "inscripciones/editar";
-    }
-
-    @PostMapping("/{id}/editar")
-    public String guardarCambios(@PathVariable Long id,
-            @RequestParam Long equipoId,
-            @RequestParam Long torneoId,
-            @RequestParam String estado,
-            @RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate fecha,
-            RedirectAttributes redirectAttributes) {
+    @GetMapping("/eliminar/{id}")
+    public String eliminarInscripcion(@PathVariable Long id, RedirectAttributes redirectAttributes) {
         try {
-            Equipo equipo = equipoService.buscarPorId(equipoId);
-            Torneo torneo = torneoService.buscarPorId(torneoId);
-
-            Inscripcion inscripcion = new Inscripcion();
-            inscripcion.setId(id);
-            inscripcion.setEquipo(equipo);
-            inscripcion.setTorneo(torneo);
-            inscripcion.setFechaInscripcion(fecha);
-
-            inscripcionService.actualizar(inscripcion);
-            return "redirect:/inscripciones";
+            inscripcionService.eliminar(id);
+            redirectAttributes.addFlashAttribute("mensaje", "Inscripción eliminada correctamente.");
         } catch (Exception e) {
-            redirectAttributes.addFlashAttribute("error", "No se pudo actualizar la inscripción.");
-            return "redirect:/inscripciones/" + id + "/editar";
+            redirectAttributes.addFlashAttribute("error", "No se pudo eliminar la inscripción.");
         }
+        return "redirect:/inscripciones";
     }
 }

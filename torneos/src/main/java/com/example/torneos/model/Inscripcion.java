@@ -1,10 +1,9 @@
 package com.example.torneos.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 
 import java.time.LocalDate;
-
-import com.fasterxml.jackson.annotation.JsonBackReference;
 
 @Entity
 public class Inscripcion {
@@ -13,28 +12,19 @@ public class Inscripcion {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    private LocalDate fechaInscripcion;
+
     @ManyToOne
-    @JoinColumn(name = "equipo_id")
-    @JsonBackReference
+    @JoinColumn(name = "equipo_id", nullable = false)
+    @JsonBackReference(value = "equipo-inscripciones")
     private Equipo equipo;
 
     @ManyToOne
-    @JoinColumn(name = "torneo_id")
-    @JsonBackReference
+    @JoinColumn(name = "torneo_id", nullable = false)
+    @JsonBackReference(value = "torneo-inscripciones")
     private Torneo torneo;
 
-    private LocalDate fechaInscripcion;
-
-    public Inscripcion() {
-    }
-
-    public Inscripcion(Equipo equipo, Torneo torneo, LocalDate fechaInscripcion) {
-        this.equipo = equipo;
-        this.torneo = torneo;
-        this.fechaInscripcion = fechaInscripcion;
-    }
-
-    // Getters y setters
+    // Getters y Setters
 
     public Long getId() {
         return id;
@@ -42,6 +32,14 @@ public class Inscripcion {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public LocalDate getFechaInscripcion() {
+        return fechaInscripcion;
+    }
+
+    public void setFechaInscripcion(LocalDate fechaInscripcion) {
+        this.fechaInscripcion = fechaInscripcion;
     }
 
     public Equipo getEquipo() {
@@ -58,13 +56,5 @@ public class Inscripcion {
 
     public void setTorneo(Torneo torneo) {
         this.torneo = torneo;
-    }
-
-    public LocalDate getFechaInscripcion() {
-        return fechaInscripcion;
-    }
-
-    public void setFechaInscripcion(LocalDate fechaInscripcion) {
-        this.fechaInscripcion = fechaInscripcion;
     }
 }

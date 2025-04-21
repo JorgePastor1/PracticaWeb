@@ -1,6 +1,8 @@
 package com.example.torneos.model;
 
 import jakarta.persistence.*;
+
+import java.util.ArrayList;
 import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonManagedReference;
@@ -16,9 +18,9 @@ public class Equipo {
     private String ciudad;
     private int numJugadores;
 
-    @OneToMany(mappedBy = "equipo")
-    @JsonManagedReference
-    private List<Inscripcion> inscripciones;
+    @OneToMany(mappedBy = "equipo", cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonManagedReference(value = "equipo-inscripciones")
+    private List<Inscripcion> inscripciones = new ArrayList<>();
 
     // Getters y setters
 

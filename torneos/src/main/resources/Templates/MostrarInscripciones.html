@@ -25,7 +25,7 @@
                 <td th:text="${inscripcion.torneo.categoria}" style="padding: 10px;"></td>
                 <td th:text="${inscripcion.fechaInscripcion}" style="padding: 10px;"></td>
                 <td style="padding: 10px;">
-                    <a th:href="@{'/inscirpciones/eliminar/' + ${inscripcion.id}}" 
+                    <a th:href="@{'/inscripciones/eliminar/' + ${inscripcion.id}}" 
                         onclick="return confirm('¿Estás seguro de que deseas eliminar este equipo?');" 
                         style="color: red;">Eliminar</a>
                     </td>
@@ -33,7 +33,7 @@
         </tbody>
     </table>
 
-    <p style="margin-top: 20px;"><a th:href="@{/inscripciones}" style="text-decoration: none; color: #2980b9;">← Volver a lista de torneos</a></p>
+    <p style="margin-top: 20px;"><a th:href="@{/inscripciones}" style="text-decoration: none; color: #2980b9;">← Volver a lista de inscripciones</a></p>
 </main>
 
 <div th:replace="fragments/footer :: footer"></div>

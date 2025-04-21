@@ -2,6 +2,7 @@ package com.example.torneos.model;
 
 import jakarta.persistence.*;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonManagedReference;
@@ -19,9 +20,9 @@ public class Torneo {
     private String categoria;
     private String nombre;
 
-    @OneToMany(mappedBy = "torneo")
-    @JsonManagedReference
-    private List<Inscripcion> inscripciones;
+    @OneToMany(mappedBy = "torneo", cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonManagedReference(value = "torneo-inscripciones")
+    private List<Inscripcion> inscripciones = new ArrayList<>();
 
     // Getters y setters
 
