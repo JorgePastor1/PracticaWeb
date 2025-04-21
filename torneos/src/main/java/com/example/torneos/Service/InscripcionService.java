@@ -1,6 +1,8 @@
 package com.example.torneos.Service;
 
+import com.example.torneos.Repository.EquipoRepository;
 import com.example.torneos.Repository.InscripcionRepository;
+import com.example.torneos.Repository.TorneoRepository;
 import com.example.torneos.model.Equipo;
 import com.example.torneos.model.Inscripcion;
 import com.example.torneos.model.Torneo;
@@ -10,7 +12,6 @@ import org.springframework.stereotype.Service;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Map;
-import java.util.Optional;
 
 @Service
 public class InscripcionService {
@@ -18,11 +19,30 @@ public class InscripcionService {
     @Autowired
     private InscripcionRepository inscripcionRepository;
 
+    @Autowired
+    private EquipoRepository equipoRepository;
+
+    @Autowired
+    private TorneoRepository torneoRepository;
+
     public List<Inscripcion> obtenerTodas() {
         return inscripcionRepository.findAll();
     }
 
     public Inscripcion guardar(Inscripcion inscripcion) {
+        // Buscar y asignar equipo por ID
+        Equipo equipo = equipoRepository.findById(inscripcion.getEquipo().getId())
+                .orElseThrow(
+                        () -> new RuntimeException("Equipo no encontrado"));
+
+        // Buscar y asignar torneo por ID
+        Torneo torneo = torneoRepository.findById(inscripcion.getTorneo().getId())
+                .orElseThrow(
+                        () -> new RuntimeException("Torneo no encontrado"));
+
+        inscripcion.setEquipo(equipo);
+        inscripcion.setTorneo(torneo);
+
         return inscripcionRepository.save(inscripcion);
     }
 
@@ -34,29 +54,18 @@ public class InscripcionService {
         inscripcionRepository.deleteById(id);
     }
 
-    public Inscripcion inscribir(Equipo equipo, Torneo torneo) {
-        Inscripcion inscripcion = new Inscripcion();
-        inscripcion.setEquipo(equipo);
-        inscripcion.setTorneo(torneo);
-        inscripcion.setFechaInscripcion(LocalDate.now());
-        return inscripcionRepository.save(inscripcion);
-    }
-
     public Inscripcion actualizar(Inscripcion inscripcion) {
         return inscripcionRepository.save(inscripcion);
     }
 
     public Inscripcion actualizarParcial(Long id, Map<String, Object> updates) {
-        Optional<Inscripcion> optional = inscripcionRepository.findById(id);
-        if (optional.isEmpty()) return null;
+        Inscripcion inscripcion = buscarPorId(id);
+        if (inscripcion == null)
+            return null;
 
-        Inscripcion inscripcion = optional.get();
-
-        updates.forEach((key, value) -> {
-            switch (key) {
-                case "fechaInscripcion" -> inscripcion.setFechaInscripcion(LocalDate.parse((String) value));
-        }});
-
+        if (updates.containsKey("fechaInscripcion")) {
+            inscripcion.setFechaInscripcion(LocalDate.parse((String) updates.get("fechaInscripcion")));
+        }
         return inscripcionRepository.save(inscripcion);
     }
 }

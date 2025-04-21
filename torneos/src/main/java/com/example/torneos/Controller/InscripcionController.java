@@ -3,16 +3,13 @@ package com.example.torneos.Controller;
 import com.example.torneos.Service.EquipoService;
 import com.example.torneos.Service.InscripcionService;
 import com.example.torneos.Service.TorneoService;
-import com.example.torneos.model.Equipo;
 import com.example.torneos.model.Inscripcion;
 import com.example.torneos.model.Torneo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Controller
@@ -28,71 +25,65 @@ public class InscripcionController {
     @Autowired
     private TorneoService torneoService;
 
-    // ✅ Este método soluciona el error: carga la vista con los torneos
-    @GetMapping
-    public String mostrarTorneosDisponibles(Model model) {
-        List<Torneo> torneos = torneoService.obtenerTodos();
-        if (torneos == null)
-            torneos = new ArrayList<>();
+    @GetMapping("")
+    public String mostrarInscripciones(Model model) {
+        List<Torneo> torneos = torneoService.obtenerTodos(); // Asegúrate de que esto no esté vacío
         model.addAttribute("torneos", torneos);
-        return "ListaInscripciones";
+        return "ListaInscripciones"; // o el nombre de tu HTML para inscripciones
     }
 
     // Formulario para inscribir un equipo a un torneo
     @GetMapping("/nueva")
-    public String mostrarFormularioInscripcion(@RequestParam("torneoId") Long torneoId, Model model) {
-        Torneo torneo = torneoService.buscarPorId(torneoId);
-        if (torneo == null) {
-            return "redirect:/inscripciones";
-        }
-
-        model.addAttribute("torneo", torneo);
+    public String mostrarFormulario(Model model, @RequestParam(name = "torneoId", required = false) Long torneoId) {
+        model.addAttribute("inscripcion", new Inscripcion());
         model.addAttribute("equipos", equipoService.obtenerTodos());
+        model.addAttribute("torneos", torneoService.obtenerTodos());
+        model.addAttribute("torneoSeleccionado", torneoId);
         return "FormularioInscripciones";
     }
 
     // Procesar la inscripción
     @PostMapping
-    public String procesarInscripcion(@RequestParam Long equipoId, @RequestParam Long torneoId,
-            RedirectAttributes redirectAttributes) {
-        Equipo equipo = equipoService.buscarPorId(equipoId);
-        Torneo torneo = torneoService.buscarPorId(torneoId);
-
-        if (equipo == null || torneo == null) {
-            redirectAttributes.addFlashAttribute("error", "El equipo o el torneo no son válidos.");
-            return "redirect:/inscripciones/nueva?torneoId=" + torneoId;
-        }
-
-        inscripcionService.inscribir(equipo, torneo);
+    public String guardarInscripcion(@ModelAttribute Inscripcion inscripcion) {
+        inscripcionService.guardar(inscripcion);
         return "redirect:/inscripciones";
     }
 
-    // Mostrar equipos inscritos en un torneo
-    @GetMapping("/torneo/{id}")
-    public String mostrarInscripcionesPorTorneo(@PathVariable Long id, Model model) {
-        Torneo torneo = torneoService.buscarPorId(id);
-        if (torneo == null) {
-            return "redirect:/inscripciones";
+    @GetMapping("/editar/{id}")
+    public String mostrarFormularioEditar(@PathVariable Long id, Model model) {
+        Inscripcion inscripcion = inscripcionService.buscarPorId(id);
+        if (inscripcion != null) {
+            model.addAttribute("inscripcion", inscripcion);
+            model.addAttribute("equipos", equipoService.obtenerTodos());
+            model.addAttribute("torneos", torneoService.obtenerTodos());
+            return "FormularioEditarInscripcion";
         }
-
-        List<Inscripcion> inscripciones = inscripcionService.obtenerTodas()
-                .stream()
-                .filter(i -> i.getTorneo().getId().equals(id))
-                .toList();
-
-        model.addAttribute("torneo", torneo);
-        model.addAttribute("inscripciones", inscripciones);
-        return "MostrarInscripciones";
+        return "redirect:/inscripciones";
     }
 
+    // Actualizar inscripción
+    @PostMapping("/actualizar")
+    public String actualizarInscripcion(@ModelAttribute Inscripcion inscripcion) {
+        inscripcionService.actualizar(inscripcion);
+        return "redirect:/inscripciones";
+    }
+
+    // Eliminar inscripción
     @GetMapping("/eliminar/{id}")
-    public String eliminarInscripcion(@PathVariable Long id, RedirectAttributes redirectAttributes) {
-        try {
-            inscripcionService.eliminar(id);
-            redirectAttributes.addFlashAttribute("mensaje", "Inscripción eliminada correctamente.");
-        } catch (Exception e) {
-            redirectAttributes.addFlashAttribute("error", "No se pudo eliminar la inscripción.");
-        }
+    public String eliminarInscripcion(@PathVariable Long id) {
+        inscripcionService.eliminar(id);
         return "redirect:/inscripciones";
+    }
+
+    // Mostrar inscripciones por torneo
+    @GetMapping("/torneo/{id}")
+    public String listarPorTorneo(@PathVariable Long id, Model model) {
+        Torneo torneo = torneoService.buscarPorId(id);
+        if (torneo != null) {
+            model.addAttribute("torneo", torneo);
+            model.addAttribute("inscripciones", torneo.getInscripciones());
+            return "MostrarInscripciones";
+        }
+        return "redirect:/torneos";
     }
 }

@@ -1,12 +1,9 @@
 package com.example.torneos.Controller;
 
-import com.example.torneos.Service.EquipoService;
 import com.example.torneos.Service.InscripcionService;
-import com.example.torneos.Service.TorneoService;
-import com.example.torneos.model.Equipo;
 import com.example.torneos.model.Inscripcion;
-import com.example.torneos.model.Torneo;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -19,12 +16,6 @@ public class InscripcionRestController {
     @Autowired
     private InscripcionService inscripcionService;
 
-    @Autowired
-    private EquipoService equipoService;
-
-    @Autowired
-    private TorneoService torneoService;
-
     // Obtener todas las inscripciones
     @GetMapping
     public List<Inscripcion> listarInscripciones() {
@@ -33,37 +24,44 @@ public class InscripcionRestController {
 
     // Obtener una inscripción por ID
     @GetMapping("/{id}")
-    public Inscripcion obtenerPorId(@PathVariable Long id) {
-        return inscripcionService.buscarPorId(id);
+    public ResponseEntity<Inscripcion> obtenerInscripcion(@PathVariable Long id) {
+        Inscripcion inscripcion = inscripcionService.buscarPorId(id);
+        if (inscripcion != null) {
+            return ResponseEntity.ok(inscripcion);
+        } else {
+            return ResponseEntity.notFound().build();
+        }
     }
 
     // Crear una inscripción a partir de IDs de equipo y torneo
     @PostMapping
-    public Inscripcion crearInscripcion(@RequestParam Long equipoId, @RequestParam Long torneoId) {
-        Equipo equipo = equipoService.buscarPorId(equipoId);
-        Torneo torneo = torneoService.buscarPorId(torneoId);
-
-        if (equipo != null && torneo != null) {
-            inscripcionService.inscribir(equipo, torneo);
-            // Buscamos la inscripción recién creada
-            List<Inscripcion> todas = inscripcionService.obtenerTodas();
-            return todas.get(todas.size() - 1); // última añadida
-        } else {
-            return null; // o lanzar excepción
+    public ResponseEntity<Inscripcion> crearInscripcion(@RequestBody Inscripcion inscripcion) {
+        try {
+            Inscripcion creada = inscripcionService.guardar(inscripcion);
+            return ResponseEntity.ok(creada);
+        } catch (Exception e) {
+            return ResponseEntity.badRequest().build();
         }
     }
 
     // Actualización completa
     @PutMapping("/{id}")
-    public Inscripcion actualizar(@PathVariable Long id, @RequestBody Inscripcion inscripcion) {
+    public ResponseEntity<Inscripcion> actualizarInscripcion(
+            @PathVariable Long id,
+            @RequestBody Inscripcion inscripcion) {
         inscripcion.setId(id);
-        inscripcionService.actualizar(inscripcion);
-        return inscripcionService.buscarPorId(id);
+        return ResponseEntity.ok(inscripcionService.actualizar(inscripcion));
     }
 
     // Actualización parcial
     @PatchMapping("/{id}")
-    public Inscripcion patch(@PathVariable Long id, @RequestBody Map<String, Object> updates) {
+    public Inscripcion actualizarParcial(@PathVariable Long id, @RequestBody Map<String, Object> updates) {
         return inscripcionService.actualizarParcial(id, updates);
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> eliminar(@PathVariable Long id) {
+        inscripcionService.eliminar(id);
+        return ResponseEntity.noContent().build();
     }
 }
