@@ -17,7 +17,12 @@
         <input type="text" id="nombre" th:field="*{nombre}" required><br><br>
 
         <label for="deporte">Deporte:</label><br>
-        <input type="text" id="deporte" th:field="*{deporte}" required><br><br>
+        <select id="deporte" th:field="*{deporte}" required>
+            <option value="">-- Selecciona un deporte --</option>
+            <option value="futbol">Fútbol</option>
+            <option value="baloncesto">Baloncesto</option>
+            <option value="tenis">Tenis</option>
+        </select><br><br>
 
         <label for="categoria">Categoría:</label><br>
         <input type="text" id="categoria" th:field="*{categoria}" required><br><br>
@@ -29,10 +34,15 @@
         <input type="date" id="fecha" th:field="*{fecha}" required><br><br>
 
         <button type="submit" style="background-color: #2c3e50; color: white; padding: 10px 20px; border: none; border-radius: 5px; cursor: pointer;">
-            Guardar Torneo</button>
+            Guardar Torneo
+        </button>
     </form>
 
-    <p style="margin-top: 20px;"><a th:href="@{/torneos}" style="text-decoration: none; color: #2980b9;">← Ver la lista de torneos</a></p>
+    <p style="margin-top: 20px;">
+        <a th:href="@{/torneos}" style="text-decoration: none; color: #2980b9;">
+            ← Ver la lista de torneos
+        </a>
+    </p>
 </main>
 
 <div th:replace="fragments/footer :: footer"></div>
