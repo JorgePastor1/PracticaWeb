@@ -14,7 +14,7 @@
 
     <form th:action="@{/torneos}" th:object="${torneo}" method="post">
         <label for="nombre">Nombre del torneo:</label><br>
-        <input type="text" id="nombre" th:field="*{nombre}" required><br><br>
+        <input type="text" id="nombre" th:field="*{nombre}" required minlength="1"><br><br>
 
         <label for="deporte">Deporte:</label><br>
         <select id="deporte" th:field="*{deporte}" required>
@@ -33,7 +33,7 @@
             <option value="veteranos">Veteranos</option>
         </select><br><br>
 
-        <label for="lugar">Lugar:</label><br>
+        <label for="lugar">Ciudad:</label><br>
         <input type="text" id="lugar" th:field="*{lugar}" required><br><br>
 
         <label for="fecha">Fecha:</label><br>
