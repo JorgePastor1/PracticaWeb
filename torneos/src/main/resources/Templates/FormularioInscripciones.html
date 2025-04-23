@@ -10,6 +10,15 @@
 
     <form th:action="@{/inscripciones}" method="post">
 
+        <!-- Filtro de deporte -->
+        <label for="deporte">Selecciona un deporte:</label><br>
+        <select id="deporte" name="deporte" required>
+            <option value="">-- Selecciona un deporte --</option>
+            <option value="futbol">Fútbol</option>
+            <option value="baloncesto">Baloncesto</option>
+            <option value="tenis">Tenis</option>
+        </select><br><br>
+
         <!-- Selección de torneo -->
         <label for="torneoId">Selecciona un torneo:</label><br>
         <select id="torneoId" name="torneoId" required>
