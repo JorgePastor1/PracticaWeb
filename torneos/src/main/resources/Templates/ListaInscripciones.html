@@ -14,44 +14,55 @@
     <input type="text" id="filtroNombre" placeholder="Buscar por nombre..."
            style="padding: 0.5rem; border-radius: 8px; border: 1px solid #ccc; flex: 1; min-width: 150px;" />
 
-    <input type="text" id="filtroDeporte" placeholder="Deporte..."
-           style="padding: 0.5rem; border-radius: 8px; border: 1px solid #ccc; flex: 1; min-width: 150px;" />
+    <!-- SELECT DE DEPORTE -->
+    <select id="filtroDeporte"
+            style="padding: 0.5rem; border-radius: 8px; border: 1px solid #ccc; flex: 1; min-width: 150px;">
+      <option value="">Deporte...</option>
+      <option value="futbol">Fútbol</option>
+      <option value="baloncesto">Baloncesto</option>
+      <option value="tenis">Tenis</option>
+    </select>
 
-    <input type="text" id="filtroCategoria" placeholder="Categoría..."
-           style="padding: 0.5rem; border-radius: 8px; border: 1px solid #ccc; flex: 1; min-width: 150px;" />
+    <!-- SELECT DE CATEGORÍA -->
+    <select id="filtroCategoria"
+            style="padding: 0.5rem; border-radius: 8px; border: 1px solid #ccc; flex: 1; min-width: 150px;">
+      <option value="">Categoría...</option>
+      <option value="cadete">Cadete</option>
+      <option value="juvenil">Juvenil</option>
+      <option value="senior">Senior</option>
+      <option value="veteranos">Veteranos</option>
+    </select>
 
     <input type="text" id="filtroLugar" placeholder="Lugar..."
            style="padding: 0.5rem; border-radius: 8px; border: 1px solid #ccc; flex: 1; min-width: 150px;" />
   </div>
 
   <!-- LISTA TORNEOS -->
-<div id="listaTorneos">
+  <div id="listaTorneos">
     <div th:each="torneo : ${torneos}" class="torneo"
-    style="display: flex; justify-content: space-between; align-items: center;
-            padding: 1rem; border: 1px solid #ddd; border-radius: 10px; margin-bottom: 1rem;
-            background-color: #f8f9fa;"
-    th:attr="data-nombre=${torneo.nombre}, data-deporte=${torneo.deporte}, data-categoria=${torneo.categoria}, data-lugar=${torneo.lugar}">
+         style="display: flex; justify-content: space-between; align-items: center;
+                padding: 1rem; border: 1px solid #ddd; border-radius: 10px; margin-bottom: 1rem;
+                background-color: #f8f9fa;"
+         th:attr="data-nombre=${torneo.nombre}, data-deporte=${torneo.deporte}, data-categoria=${torneo.categoria}, data-lugar=${torneo.lugar}">
 
-    <div style="margin-right: 2rem;">
-    <strong th:text="${torneo.nombre}">Nombre del torneo</strong><br/>
-    Deporte: <span th:text="${torneo.deporte}">Deporte</span> |
-    Categoría: <span th:text="${torneo.categoria}">Categoría</span> |
-    Lugar: <span th:text="${torneo.lugar}">Lugar</span> |
-    Fecha: <span th:text="${torneo.fecha}">Fecha</span>
+      <div style="margin-right: 2rem;">
+        <strong th:text="${torneo.nombre}">Nombre del torneo</strong><br/>
+        Deporte: <span th:text="${torneo.deporte}">Deporte</span> |
+        Categoría: <span th:text="${torneo.categoria}">Categoría</span> |
+        Lugar: <span th:text="${torneo.lugar}">Lugar</span> |
+        Fecha: <span th:text="${torneo.fecha}">Fecha</span>
+      </div>
+
+      <div style="display: flex; gap: 0.5rem;">
+        <a th:href="@{'/inscripciones/torneo/' + ${torneo.id}}"
+           style="background-color: #2c3e50; color: white; padding: 0.5rem 1rem;
+                  border-radius: 8px; text-decoration: none;">Mostrar equipos inscritos</a>
+        <a th:href="@{'/inscripciones/nueva?torneoId=' + ${torneo.id}}"
+           style="background-color: #28A745; color: white; padding: 0.5rem 1rem;
+                  border-radius: 8px; text-decoration: none;">Inscribir equipo</a>
+      </div>
     </div>
-
-    <div style="display: flex; gap: 0.5rem;">
-    <a th:href="@{'/inscripciones/torneo/' + ${torneo.id}}"
-        style="background-color: #2c3e50; color: white; padding: 0.5rem 1rem;
-            border-radius: 8px; text-decoration: none;">Mostrar equipos inscritos</a>
-    <a th:href="@{'/inscripciones/nueva?torneoId=' + ${torneo.id}}"
-        style="background-color: #28A745; color: white; padding: 0.5rem 1rem;
-            border-radius: 8px; text-decoration: none;">Inscribir equipo</a>
-    </div>
-</div>
-
-
-</div>
+  </div>
 
 </main>
 
