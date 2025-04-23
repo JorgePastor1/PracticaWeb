@@ -9,15 +9,23 @@
     <h2>Inscribir Equipo en Torneo</h2>
 
     <form th:action="@{/inscripciones}" method="post">
-        <!-- ID del torneo (oculto) -->
-        <input type="hidden" name="torneoId" th:value="${torneo.id}" />
 
-        <p><strong>Torneo:</strong> <span th:text="${torneo.nombre}">Nombre del torneo</span></p>
+        <!-- Selección de torneo -->
+        <label for="torneoId">Selecciona un torneo:</label><br>
+        <select id="torneoId" name="torneoId" required>
+            <option value="">-- Selecciona un torneo --</option>
+            <option th:each="torneo : ${torneos}" 
+                    th:value="${torneo.id}" 
+                    th:text="${torneo.nombre}"></option>
+        </select><br><br>
 
+        <!-- Selección de equipo -->
         <label for="equipoId">Selecciona un equipo:</label><br>
         <select id="equipoId" name="equipoId" required>
             <option value="">-- Selecciona un equipo --</option>
-            <option th:each="equipo : ${equipos}" th:value="${equipo.id}" th:text="${equipo.nombre}"></option>
+            <option th:each="equipo : ${equipos}" 
+                    th:value="${equipo.id}" 
+                    th:text="${equipo.nombre}"></option>
         </select><br><br>
 
         <button type="submit" style="background-color: #2c3e50; color: white; padding: 10px 20px; border: none; border-radius: 5px;">
@@ -25,9 +33,14 @@
         </button>
     </form>
 
-    <p style="margin-top: 20px;"><a th:href="@{/inscripciones}" style="text-decoration: none; color: #2980b9;">← Volver a lista de torneos</a></p>
+    <p style="margin-top: 20px;">
+        <a th:href="@{/inscripciones}" style="text-decoration: none; color: #2980b9;">
+            ← Volver a lista de inscripciones
+        </a>
+    </p>
 </main>
 
 <div th:replace="fragments/footer :: footer"></div>
+
 </body>
 </html>
