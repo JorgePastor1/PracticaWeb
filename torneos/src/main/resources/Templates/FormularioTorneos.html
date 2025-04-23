@@ -25,7 +25,13 @@
         </select><br><br>
 
         <label for="categoria">Categoría:</label><br>
-        <input type="text" id="categoria" th:field="*{categoria}" required><br><br>
+        <select id="categoria" th:field="*{categoria}" required>
+            <option value="">-- Selecciona una categoría --</option>
+            <option value="cadete">Cadete</option>
+            <option value="juvenil">Juvenil</option>
+            <option value="senior">Senior</option>
+            <option value="veteranos">Veteranos</option>
+        </select><br><br>
 
         <label for="lugar">Lugar:</label><br>
         <input type="text" id="lugar" th:field="*{lugar}" required><br><br>
