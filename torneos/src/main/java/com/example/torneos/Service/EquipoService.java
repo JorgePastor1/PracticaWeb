@@ -1,19 +1,25 @@
 package com.example.torneos.Service;
 
 import com.example.torneos.Repository.EquipoRepository;
+import com.example.torneos.Repository.TorneoRepository;
 import com.example.torneos.model.Equipo;
+import com.example.torneos.model.Torneo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class EquipoService {
 
     @Autowired
     private EquipoRepository equipoRepository;
+
+    @Autowired
+    private TorneoRepository torneoRepository;
 
     public List<Equipo> obtenerTodos() {
         return equipoRepository.findAll();
@@ -51,5 +57,25 @@ public class EquipoService {
         });
 
         return equipoRepository.save(equipo);
+    }
+
+    // ✅ NUEVO MÉTODO: devuelve los equipos NO inscritos en el torneo
+    public List<Equipo> obtenerEquiposDisponibles(Long torneoId) {
+        Optional<Torneo> torneoOpt = torneoRepository.findById(torneoId);
+        if (torneoOpt.isEmpty()) {
+            return List.of(); // torneo no encontrado
+        }
+
+        Torneo torneo = torneoOpt.get();
+
+        // IDs de equipos ya inscritos
+        List<Long> idsInscritos = torneo.getInscripciones().stream()
+                .map(inscripcion -> inscripcion.getEquipo().getId())
+                .collect(Collectors.toList());
+
+        // Devuelve los equipos que NO están inscritos
+        return equipoRepository.findAll().stream()
+                .filter(equipo -> !idsInscritos.contains(equipo.getId()))
+                .collect(Collectors.toList());
     }
 }

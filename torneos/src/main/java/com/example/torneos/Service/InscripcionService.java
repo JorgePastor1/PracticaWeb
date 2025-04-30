@@ -29,21 +29,34 @@ public class InscripcionService {
         return inscripcionRepository.findAll();
     }
 
+    // ✅ Usado en formulario completo (con objeto Inscripcion)
     public Inscripcion guardar(Inscripcion inscripcion) {
-        // Buscar y asignar equipo por ID
         Equipo equipo = equipoRepository.findById(inscripcion.getEquipo().getId())
-                .orElseThrow(
-                        () -> new RuntimeException("Equipo no encontrado"));
+                .orElseThrow(() -> new RuntimeException("Equipo no encontrado"));
 
-        // Buscar y asignar torneo por ID
         Torneo torneo = torneoRepository.findById(inscripcion.getTorneo().getId())
-                .orElseThrow(
-                        () -> new RuntimeException("Torneo no encontrado"));
+                .orElseThrow(() -> new RuntimeException("Torneo no encontrado"));
 
         inscripcion.setEquipo(equipo);
         inscripcion.setTorneo(torneo);
 
         return inscripcionRepository.save(inscripcion);
+    }
+
+    // ✅ Usado en formulario simplificado (solo ids)
+    public void inscribirEquipoEnTorneo(Long equipoId, Long torneoId) {
+        Equipo equipo = equipoRepository.findById(equipoId)
+                .orElseThrow(() -> new RuntimeException("Equipo no encontrado"));
+
+        Torneo torneo = torneoRepository.findById(torneoId)
+                .orElseThrow(() -> new RuntimeException("Torneo no encontrado"));
+
+        Inscripcion inscripcion = new Inscripcion();
+        inscripcion.setEquipo(equipo);
+        inscripcion.setTorneo(torneo);
+        inscripcion.setFechaInscripcion(LocalDate.now()); // puedes ajustar la fecha si lo deseas
+
+        inscripcionRepository.save(inscripcion);
     }
 
     public Inscripcion buscarPorId(Long id) {

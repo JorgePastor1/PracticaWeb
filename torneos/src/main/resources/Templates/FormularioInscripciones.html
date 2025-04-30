@@ -6,37 +6,12 @@
 <div th:replace="fragments/header :: header"></div>
 
 <main style="max-width: 700px; margin: 40px auto; background: white; padding: 30px; border-radius: 10px;">
-    <h2>Inscribir Equipo en Torneo</h2>
+    <h2 th:text="'Inscribir equipo en: ' + ${torneo.nombre}">Inscribir equipo</h2>
 
     <form th:action="@{/inscripciones}" method="post">
 
-        <!-- Filtro de deporte -->
-        <label for="deporte">Selecciona un deporte:</label><br>
-        <select id="deporte" name="deporte" required>
-            <option value="">-- Selecciona un deporte --</option>
-            <option value="futbol">Fútbol</option>
-            <option value="baloncesto">Baloncesto</option>
-            <option value="tenis">Tenis</option>
-        </select><br><br>
-
-        <!-- Filtro de categoría -->
-        <label for="categoria">Selecciona una categoría:</label><br>
-        <select id="categoria" name="categoria" required>
-            <option value="">-- Selecciona una categoría --</option>
-            <option value="cadete">Cadete</option>
-            <option value="juvenil">Juvenil</option>
-            <option value="senior">Senior</option>
-            <option value="veteranos">Veteranos</option>
-        </select><br><br>
-
-        <!-- Selección de torneo -->
-        <label for="torneoId">Selecciona un torneo:</label><br>
-        <select id="torneoId" name="torneoId" required>
-            <option value="">-- Selecciona un torneo --</option>
-            <option th:each="torneo : ${torneos}" 
-                    th:value="${torneo.id}" 
-                    th:text="${torneo.nombre}"></option>
-        </select><br><br>
+        <!-- Campo oculto para enviar el ID del torneo -->
+        <input type="hidden" name="torneoId" th:value="${torneo.id}" />
 
         <!-- Selección de equipo -->
         <label for="equipoId">Selecciona un equipo:</label><br>
